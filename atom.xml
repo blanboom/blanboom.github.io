@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blanboom.org/"/>
-  <updated>2017-11-30T14:48:33.915Z</updated>
+  <updated>2017-11-30T14:50:07.008Z</updated>
   <id>https://blanboom.org/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://blanboom.org/2017/airterminal/"/>
     <id>https://blanboom.org/2017/airterminal/</id>
     <published>2017-11-30T14:04:00.000Z</published>
-    <updated>2017-11-30T14:48:33.915Z</updated>
+    <updated>2017-11-30T14:50:07.008Z</updated>
     
     <content type="html"><![CDATA[<p>AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。</p>
 <p>经历了 Apple 谜一样的审核流程（等待审核状态持续了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal 已在 App Store 上架，下载链接：<a href="https://itunes.apple.com/cn/app/id1296588408" target="_blank" rel="external">https://itunes.apple.com/cn/app/id1296588408</a></p>
@@ -44,7 +44,7 @@
 </ul>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
 <li>由于 Raspberry Pi 3 的板载蓝牙目前不支持串口透传，目前 AirTerminal 不能直接支持 Raspberry Pi 3 上的板载蓝牙。</li>
-<li>DFRobot 的 <a href="http://www.dfrobot.com.cn/goods-1065.html" target="_blank" rel="external">USB BLE Link</a> (<a href="https://www.dfrobot.com/product-1220.html" target="_blank" rel="external">Bluno Link</a>)会将 USB 串口输入的数据，通过 USB 串口原路返回输出。所以 AirTerminal 和 USB BLE Link 配合使用会出现异常。</li>
+<li>DFRobot 的 <a href="http://www.dfrobot.com.cn/goods-1065.html" target="_blank" rel="external">USB BLE Link</a> (<a href="https://www.dfrobot.com/product-1220.html" target="_blank" rel="external">Bluno Link</a>) 会将 USB 串口输入的数据，通过 USB 串口原路返回输出。所以 AirTerminal 和 USB BLE Link 配合使用会出现异常。</li>
 <li>提高串口波特率，可以带来更好的使用体验。</li>
 </ol>
 ]]></content>
