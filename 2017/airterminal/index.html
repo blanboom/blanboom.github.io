@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AirTerminal: 用于Raspberry Pi等设备的蓝牙终端 | Blanboom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。
+经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AirTerminal: 用于Raspberry Pi等设备的蓝牙终端">
+<meta property="og:url" content="https://blanboom.org/2017/airterminal/index.html">
+<meta property="og:site_name" content="Blanboom">
+<meta property="og:description" content="AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。
+经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal">
+<meta property="og:image" content="https://blanboom.org/images/2017/10/airterm.png">
+<meta property="og:updated_time" content="2017-11-30T14:08:02.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AirTerminal: 用于Raspberry Pi等设备的蓝牙终端">
+<meta name="twitter:description" content="AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。
+经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal">
+<meta name="twitter:image" content="https://blanboom.org/images/2017/10/airterm.png">
+  
+  <link rel="alternative" href="/atom.xml" title="Blanboom" type="application/atom+xml">
+  
+  
+  <link rel="amphtml" href="https://blanboom.org/2017/airterminal/amp/index.html">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#0075be">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-40682162-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blanboom</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blanboom.org"></form>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    var number_of_banners = 30;
+    var randnum = Math.floor(Math.random() * number_of_banners + 1);
+    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner" + randnum + ".jpg)";
+    
+</script>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-airterminal" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/airterminal/" class="article-date">
+  <time datetime="2017-11-30T14:04:00.000Z" itemprop="datePublished">2017-11-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/软件与工具/">软件与工具</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      AirTerminal: 用于Raspberry Pi等设备的蓝牙终端
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。</p>
+<p>经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal 已在 App Store 上架，可使用此链接下载：<a href="https://itunes.apple.com/cn/app/id1296588408" target="_blank" rel="external">https://itunes.apple.com/cn/app/id1296588408</a></p>
+<p><img src="/images/2017/10/airterm.png" alt="AirTerminal with screenfetch"></p>
+<a id="more"></a>
+<p>在我大学毕业之前，只有一台旧笔记本电脑，在图书馆或实验室等比较安静的地方，有时候 CPU 比较忙，风扇突然狂转，发出比较大的噪音，影响到周围的同学。</p>
+<p>那时候刚好有了一个平板，打算用 Raspberry Pi Zero 加上锂电池，做一个能够随身携带的小电脑，无线连接到平板后，在平板上使用 Raspberry Pi 的 Linux 环境，以取代自己的笔记本。</p>
+<p>由于学校网络的限制，平板和 Raspberry Pi 无法同时连接到 Wi-Fi, 也就没有办法使用 SSH 等工具。这时候就有了做一个 App，使平板通过蓝牙与 Raspberry Pi 连接的想法。</p>
+<p>毕业之后，已经不再有这种需求，这时候主要是以调试工具的目的进行 AirTerminal 的开发，以便于使 iPad/iPhone 连接无法访问网络的嵌入式设备，或在网络故障时，通过 AirTerminal 进行应急操作。</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ul>
+<li>使用 iPad 连接一个迷你 Linux 设备，代替电脑进行使用</li>
+<li>对嵌入式设备进行开发和调试</li>
+<li>在设备发生故障，网络连接、SSH 不可用时，使用 AirTerminal 和蓝牙串口透传模块，对设备进行应急处理</li>
+</ul>
+<h1 id="功能与特色"><a href="#功能与特色" class="headerlink" title="功能与特色"></a>功能与特色</h1><ul>
+<li>全功能终端，支持 bash, vim, top, tmux 等程序</li>
+<li>支持外接键盘与蓝牙键盘</li>
+<li>内置 ESC, TAB, CTL, 方向键等常用按键</li>
+<li>内置 “Fit” 按键，可通过该按键自动输入 stty 命令，调整终端大小</li>
+<li>支持主模式 (central) 和从模式 (peripheral)</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
+<li>由于 Raspberry Pi 3 的板载蓝牙目前不支持串口透传，目前 AirTerminal 不能直接支持 Raspberry Pi 3 上的板载蓝牙。</li>
+<li>DFRobot 的 <a href="http://www.dfrobot.com.cn/goods-1065.html" target="_blank" rel="external">USB BLE Link</a> (<a href="https://www.dfrobot.com/product-1220.html" target="_blank" rel="external">Bluno Link</a>)会将 USB 串口输入的数据，通过 USB 串口原路返回输出。所以 AirTerminal 和 USB BLE Link 配合使用会出现异常。</li>
+<li>提高串口波特率，可以带来更好的使用体验。</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blanboom.org/2017/airterminal/" data-id="cjamk4dir0037218ioutooonk" class="article-share-link">Share</a>
+      
+        <a href="https://blanboom.org/2017/airterminal/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AirTerminal/">AirTerminal</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BLE/">BLE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/终端/">终端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/蓝牙/">蓝牙</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/plex-on-rt1900ac/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/电子与制作/">电子与制作</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件与工具/">软件与工具</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/51/" style="font-size: 10px;">51</a> <a href="/tags/AirTerminal/" style="font-size: 10px;">AirTerminal</a> <a href="/tags/Allegro/" style="font-size: 10px;">Allegro</a> <a href="/tags/AppleScript/" style="font-size: 12.5px;">AppleScript</a> <a href="/tags/Arduino/" style="font-size: 20px;">Arduino</a> <a href="/tags/Arduino库/" style="font-size: 10px;">Arduino库</a> <a href="/tags/BLE/" style="font-size: 12.5px;">BLE</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DIY/" style="font-size: 10px;">DIY</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Famicom/" style="font-size: 10px;">Famicom</a> <a href="/tags/GNU/" style="font-size: 10px;">GNU</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HackerRemote/" style="font-size: 10px;">HackerRemote</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kindle/" style="font-size: 10px;">Kindle</a> <a href="/tags/LED/" style="font-size: 12.5px;">LED</a> <a href="/tags/LEGO/" style="font-size: 10px;">LEGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIDI/" style="font-size: 10px;">MIDI</a> <a href="/tags/MPU-6050/" style="font-size: 10px;">MPU-6050</a> <a href="/tags/MakeyMakey/" style="font-size: 10px;">MakeyMakey</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/NES/" style="font-size: 10px;">NES</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/OmniFocus/" style="font-size: 12.5px;">OmniFocus</a> <a href="/tags/POV/" style="font-size: 10px;">POV</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Plex/" style="font-size: 10px;">Plex</a> <a href="/tags/Prezi/" style="font-size: 10px;">Prezi</a> <a href="/tags/RT1900ac/" style="font-size: 10px;">RT1900ac</a> <a href="/tags/STM32/" style="font-size: 12.5px;">STM32</a> <a href="/tags/Synology/" style="font-size: 10px;">Synology</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/上海创客嘉年华/" style="font-size: 10px;">上海创客嘉年华</a> <a href="/tags/中国/" style="font-size: 10px;">中国</a> <a href="/tags/主题/" style="font-size: 10px;">主题</a> <a href="/tags/人工智能/" style="font-size: 10px;">人工智能</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/创客/" style="font-size: 10px;">创客</a> <a href="/tags/创客空间/" style="font-size: 10px;">创客空间</a> <a href="/tags/创意/" style="font-size: 15px;">创意</a> <a href="/tags/单片机/" style="font-size: 17.5px;">单片机</a> <a href="/tags/历史/" style="font-size: 10px;">历史</a> <a href="/tags/图/" style="font-size: 10px;">图</a> <a href="/tags/多任务/" style="font-size: 12.5px;">多任务</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源软件/" style="font-size: 10px;">开源软件</a> <a href="/tags/按键/" style="font-size: 10px;">按键</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/摇摇棒/" style="font-size: 10px;">摇摇棒</a> <a href="/tags/教育/" style="font-size: 10px;">教育</a> <a href="/tags/新车间/" style="font-size: 10px;">新车间</a> <a href="/tags/时钟/" style="font-size: 17.5px;">时钟</a> <a href="/tags/智力题/" style="font-size: 10px;">智力题</a> <a href="/tags/有限状态机/" style="font-size: 10px;">有限状态机</a> <a href="/tags/演示文稿/" style="font-size: 10px;">演示文稿</a> <a href="/tags/物联网/" style="font-size: 10px;">物联网</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/生态系统/" style="font-size: 10px;">生态系统</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/生物/" style="font-size: 10px;">生物</a> <a href="/tags/电子/" style="font-size: 12.5px;">电子</a> <a href="/tags/电子书/" style="font-size: 10px;">电子书</a> <a href="/tags/电赛/" style="font-size: 10px;">电赛</a> <a href="/tags/睡眠/" style="font-size: 10px;">睡眠</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/科普/" style="font-size: 10px;">科普</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/群晖/" style="font-size: 10px;">群晖</a> <a href="/tags/蓝牙/" style="font-size: 15px;">蓝牙</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/调度器/" style="font-size: 10px;">调度器</a> <a href="/tags/路由器/" style="font-size: 10px;">路由器</a> <a href="/tags/辉光管/" style="font-size: 12.5px;">辉光管</a> <a href="/tags/阅读/" style="font-size: 10px;">阅读</a> <a href="/tags/陀螺仪/" style="font-size: 10px;">陀螺仪</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a> <a href="/tags/风力摆/" style="font-size: 10px;">风力摆</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Apps</h3>
+    <div class="widget">
+    <ul>
+        <li>
+            <a href="https://itunes.apple.com/cn/app/id1120243546">HackRemote: 蓝牙 (BLE) 遥控器</a></br>
+            <a href="https://itunes.apple.com/cn/app/id1120243546"><img src="/images/2016/06/appstore.png" align="left"></a></br></br>
+        </li>
+    </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/airterminal/">AirTerminal: 用于Raspberry Pi等设备的蓝牙终端</a>
+          </li>
+        
+          <li>
+            <a href="/2017/plex-on-rt1900ac/">RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hunter-wolf/">一道智力题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hackerremote/">HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/nes-emulator/">使用 C 和 Allegro 实现的 NES 模拟器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiao3d.me" target="_blank">Xiao3d</a>
+          </li>
+        
+          <li>
+            <a href="http://nodewee.me" target="_blank">NodeWee</a>
+          </li>
+        
+          <li>
+            <a href="http://ptbsare.org" target="_blank">匆匆那年：ptbsare&#39;s blog</a>
+          </li>
+        
+          <li>
+            <a href="http://kuangqi.me" target="_blank">The Bloom of Youth | 锦瑟华年</a>
+          </li>
+        
+          <li>
+            <a href="http://hakale.cn" target="_blank">Hakale&#39;s note</a>
+          </li>
+        
+          <li>
+            <a href="http://hacer.cc" target="_blank">Hacer</a>
+          </li>
+        
+          <li>
+            <a href="http://chuangzaoshi.com" target="_blank">创造狮导航</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blanboom<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blanboom';
+  
+  var disqus_url = 'https://blanboom.org/2017/airterminal/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//gapis.geekzu.org/ajax/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一道智力题 | Blanboom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最近在同学的 QQ 空间上，发现了这样一道智力题：
+
+有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。如果猎人离开，狼就会把所有人吃掉。如果男人离开，女人会把两个小男孩掐死。如果女人离开，男人会把两个小女孩掐死。河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。如何使他们全部过河？
+
+看到这道题，首先想到的是农夫过河问题。既然这两个问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一道智力题">
+<meta property="og:url" content="https://blanboom.org/2016/hunter-wolf/index.html">
+<meta property="og:site_name" content="Blanboom">
+<meta property="og:description" content="最近在同学的 QQ 空间上，发现了这样一道智力题：
+
+有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。如果猎人离开，狼就会把所有人吃掉。如果男人离开，女人会把两个小男孩掐死。如果女人离开，男人会把两个小女孩掐死。河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。如何使他们全部过河？
+
+看到这道题，首先想到的是农夫过河问题。既然这两个问题">
+<meta property="og:updated_time" content="2016-06-19T03:03:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一道智力题">
+<meta name="twitter:description" content="最近在同学的 QQ 空间上，发现了这样一道智力题：
+
+有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。如果猎人离开，狼就会把所有人吃掉。如果男人离开，女人会把两个小男孩掐死。如果女人离开，男人会把两个小女孩掐死。河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。如何使他们全部过河？
+
+看到这道题，首先想到的是农夫过河问题。既然这两个问题">
+  
+  <link rel="alternative" href="/atom.xml" title="Blanboom" type="application/atom+xml">
+  
+  
+  <link rel="amphtml" href="https://blanboom.org/2016/hunter-wolf/amp/index.html">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#0075be">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-40682162-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blanboom</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blanboom.org"></form>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    var number_of_banners = 30;
+    var randnum = Math.floor(Math.random() * number_of_banners + 1);
+    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner" + randnum + ".jpg)";
+    
+</script>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-hunter-wolf" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/hunter-wolf/" class="article-date">
+  <time datetime="2016-06-19T02:12:00.000Z" itemprop="datePublished">2016-06-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      一道智力题
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在同学的 QQ 空间上，发现了这样一道智力题：</p>
+<blockquote>
+<p>有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。<br>如果猎人离开，狼就会把所有人吃掉。<br>如果男人离开，女人会把两个小男孩掐死。<br>如果女人离开，男人会把两个小女孩掐死。<br>河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。<br>如何使他们全部过河？</p>
+</blockquote>
+<p>看到这道题，首先想到的是<a href="https://www.zhihu.com/question/29968331" target="_blank" rel="external">农夫过河问题</a>。既然这两个问题十分相似，那我就尝试按照农夫过河问题的思路，通过程序来找出该题的解。</p>
+<a id="more"></a>
+<p>程序代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/local/bin/python3</span></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 问题：</span></div><div class="line"><span class="comment"># 有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩</span></div><div class="line"><span class="comment"># 如果猎人离开，狼就会把所有人吃掉</span></div><div class="line"><span class="comment"># 如果男人离开，女人会把两个小男孩掐死</span></div><div class="line"><span class="comment"># 如果女人离开，男人会把两个小女孩掐死</span></div><div class="line"><span class="comment"># 河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船</span></div><div class="line"><span class="comment"># 如何使他们全部过河？</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 思路：</span></div><div class="line"><span class="comment"># 与农夫过河问题类似，参考 https://www.zhihu.com/question/29968331</span></div><div class="line"><span class="comment"># 一共有 8 个人（包含狼），每个人有两个状态：分别为在河的一侧，以及在河的另一侧</span></div><div class="line"><span class="comment"># 这两种状态可用一个二进制位表示，0 代表在河的一侧，1 代表在河的另一侧</span></div><div class="line"><span class="comment"># 则可用一个 8 位二进制数表示这 8 个人的状态，进行组合，一共有 256 个状态</span></div><div class="line"><span class="comment"># 通过坐船，可以使一种状态转变为另一种状态</span></div><div class="line"><span class="comment"># 如果状态从 00000000 转换到 11111111, 则说明所有人均到达河的另一侧 </span></div><div class="line"><span class="comment"># 将两种可以相互转变的状态相互连接，可以构建出一个用于表示状态转移情况的图</span></div><div class="line"><span class="comment"># 在图中找到一条从 00000000 到 11111111 的路径，即可解决该问题</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 数据存储格式：</span></div><div class="line"><span class="comment"># 使用 8 位二进制数进行表示，从高位到低位分别表示男人，男孩，男孩，女人，女孩，女孩，狼的状态 </span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 船允许的所有状态，1 代表在船上</span></div><div class="line"><span class="comment"># 将两个状态进行异或操作，发生变化的位就会置一，则说明置一的位所对应的人是在船上</span></div><div class="line"><span class="comment"># 但是，船的行驶是有方向的，例如从 10000000 到 01000000 的状态是无法通过一次乘船达到的</span></div><div class="line"><span class="comment"># 所以需要进行进一步判断，具体方法见下面的代码</span></div><div class="line">boatAllowedStates = [</div><div class="line">    <span class="number">0b11000000</span>, <span class="number">0b10100000</span>, <span class="number">0b00011000</span>, <span class="number">0b00010100</span>, <span class="number">0b10000010</span>,</div><div class="line">    <span class="number">0b01000010</span>, <span class="number">0b00100010</span>, <span class="number">0b00010010</span>, <span class="number">0b00001010</span>, <span class="number">0b00000110</span>,</div><div class="line">    <span class="number">0b00000011</span>, <span class="number">0b10010000</span>, <span class="number">0b10000000</span>, <span class="number">0b00010000</span>, <span class="number">0b00000010</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment"># 以邻接矩阵的形式存储可能的状态转移情况</span></div><div class="line"><span class="comment"># 矩阵的索引就是用于表示状态的 8 位二进制数（0～255）</span></div><div class="line">statesGraph = [([<span class="number">0</span>] * <span class="number">256</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>)] <span class="comment"># 创建 256x256 二维数组</span></div><div class="line"></div><div class="line"><span class="comment"># 判断是否为危险的状态</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_dangerous</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="comment"># 第一种不安全的情况：男人不在，女人在，男孩在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b10000000</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00010000</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b01100000</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b10000000</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00010000</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b01100000</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="comment"># 第二种不安全的情况：女人不在，男人在，女孩在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b00010000</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b10000000</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00001100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b00010000</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b10000000</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00001100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="comment"># 第三种不安全的情况：猎人不在，狼在，其他人在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b00000010</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00000001</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b11111100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b00000010</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00000001</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b11111100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="comment"># 构建该邻接矩阵</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">    <span class="keyword">if</span> is_dangerous(x):      <span class="comment"># 判断 x 的状态是否危险 </span></div><div class="line">        <span class="keyword">continue</span> </div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">        <span class="keyword">if</span> is_dangerous(y):  <span class="comment"># 判断 y 的状态是否危险</span></div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="comment"># 如果通过坐船，可以使状态 x 转变为状态 y, 则使矩阵对应位置为 1</span></div><div class="line">        tmp = x ^ y</div><div class="line">        <span class="keyword">if</span> tmp <span class="keyword">in</span> boatAllowedStates: </div><div class="line">            <span class="comment"># 进一步判断，排除类似 10000000 到 01000000 的情况</span></div><div class="line">            <span class="keyword">if</span> tmp &amp; x ^ tmp == <span class="number">0</span> <span class="keyword">or</span> tmp &amp; x ^ tmp == tmp:</div><div class="line">                statesGraph[x][y] = <span class="number">1</span>    <span class="comment"># 连接图中能够能够转换的状态</span></div><div class="line"></div><div class="line"><span class="comment"># 通过图的深度优先搜索算法，找出一条从 0b00000000 到 0b11111111 的路径</span></div><div class="line"><span class="comment"># ⚠️<span class="doctag">TODO:</span> </span></div><div class="line"><span class="comment"># 此时仅仅是找到了一条能够到达的路径，不一定是最佳的结果</span></div><div class="line"><span class="comment"># 可考虑直接找出所有可行的结果</span></div><div class="line"><span class="comment"># 或使用最短路径算法，找出乘船次数最少的结果</span></div><div class="line">visited = [<span class="number">0</span>] * <span class="number">256</span> <span class="comment"># 用在图的深度优先搜索中，已访问的状态</span></div><div class="line">path = [<span class="number">257</span>] * <span class="number">256</span>  <span class="comment"># 用于存储路径，数组内元素为下一个状态, 257 代表尚未初始化</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs_with_path</span><span class="params">(src)</span>:</span></div><div class="line">    visited[src] = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">        <span class="keyword">if</span> statesGraph[src][i] == <span class="number">1</span> <span class="keyword">and</span> visited[i] == <span class="number">0</span> <span class="keyword">and</span> visited[<span class="number">0b11111111</span>] == <span class="number">0</span>:</div><div class="line">            path[src] = i</div><div class="line">            dfs_with_path(i)</div><div class="line"></div><div class="line">dfs_with_path(<span class="number">0b00000000</span>)</div><div class="line"></div><div class="line"><span class="comment"># 将路径显示在屏幕上</span></div><div class="line">tmp_path = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> tmp_path != <span class="number">0b11111111</span>:</div><div class="line">    print(<span class="string">'&#123;0:08b&#125;'</span>.format(tmp_path))</div><div class="line">    tmp_path = path[tmp_path]</div><div class="line">    <span class="keyword">if</span>(tmp_path == <span class="number">257</span>):</div><div class="line">        <span class="comment"># 257 在本程序中代表未初始化的值，如果遇到 257，说明没找到这样的路径</span></div><div class="line">        print(<span class="string">"Not found!"</span>)</div><div class="line">        exit()</div><div class="line">print(<span class="string">'&#123;0:08b&#125;'</span>.format(<span class="number">0b11111111</span>))</div><div class="line">print(<span class="string">"Found!"</span>)</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blanboom.org/2016/hunter-wolf/" data-id="cjamk4dio0031218ia9sjfio0" class="article-share-link">Share</a>
+      
+        <a href="https://blanboom.org/2016/hunter-wolf/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/图/">图</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/智力题/">智力题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/plex-on-rt1900ac/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/hackerremote/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/电子与制作/">电子与制作</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件与工具/">软件与工具</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/51/" style="font-size: 10px;">51</a> <a href="/tags/AirTerminal/" style="font-size: 10px;">AirTerminal</a> <a href="/tags/Allegro/" style="font-size: 10px;">Allegro</a> <a href="/tags/AppleScript/" style="font-size: 12.5px;">AppleScript</a> <a href="/tags/Arduino/" style="font-size: 20px;">Arduino</a> <a href="/tags/Arduino库/" style="font-size: 10px;">Arduino库</a> <a href="/tags/BLE/" style="font-size: 12.5px;">BLE</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DIY/" style="font-size: 10px;">DIY</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Famicom/" style="font-size: 10px;">Famicom</a> <a href="/tags/GNU/" style="font-size: 10px;">GNU</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HackerRemote/" style="font-size: 10px;">HackerRemote</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kindle/" style="font-size: 10px;">Kindle</a> <a href="/tags/LED/" style="font-size: 12.5px;">LED</a> <a href="/tags/LEGO/" style="font-size: 10px;">LEGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIDI/" style="font-size: 10px;">MIDI</a> <a href="/tags/MPU-6050/" style="font-size: 10px;">MPU-6050</a> <a href="/tags/MakeyMakey/" style="font-size: 10px;">MakeyMakey</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/NES/" style="font-size: 10px;">NES</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/OmniFocus/" style="font-size: 12.5px;">OmniFocus</a> <a href="/tags/POV/" style="font-size: 10px;">POV</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Plex/" style="font-size: 10px;">Plex</a> <a href="/tags/Prezi/" style="font-size: 10px;">Prezi</a> <a href="/tags/RT1900ac/" style="font-size: 10px;">RT1900ac</a> <a href="/tags/STM32/" style="font-size: 12.5px;">STM32</a> <a href="/tags/Synology/" style="font-size: 10px;">Synology</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/上海创客嘉年华/" style="font-size: 10px;">上海创客嘉年华</a> <a href="/tags/中国/" style="font-size: 10px;">中国</a> <a href="/tags/主题/" style="font-size: 10px;">主题</a> <a href="/tags/人工智能/" style="font-size: 10px;">人工智能</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/创客/" style="font-size: 10px;">创客</a> <a href="/tags/创客空间/" style="font-size: 10px;">创客空间</a> <a href="/tags/创意/" style="font-size: 15px;">创意</a> <a href="/tags/单片机/" style="font-size: 17.5px;">单片机</a> <a href="/tags/历史/" style="font-size: 10px;">历史</a> <a href="/tags/图/" style="font-size: 10px;">图</a> <a href="/tags/多任务/" style="font-size: 12.5px;">多任务</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源软件/" style="font-size: 10px;">开源软件</a> <a href="/tags/按键/" style="font-size: 10px;">按键</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/摇摇棒/" style="font-size: 10px;">摇摇棒</a> <a href="/tags/教育/" style="font-size: 10px;">教育</a> <a href="/tags/新车间/" style="font-size: 10px;">新车间</a> <a href="/tags/时钟/" style="font-size: 17.5px;">时钟</a> <a href="/tags/智力题/" style="font-size: 10px;">智力题</a> <a href="/tags/有限状态机/" style="font-size: 10px;">有限状态机</a> <a href="/tags/演示文稿/" style="font-size: 10px;">演示文稿</a> <a href="/tags/物联网/" style="font-size: 10px;">物联网</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/生态系统/" style="font-size: 10px;">生态系统</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/生物/" style="font-size: 10px;">生物</a> <a href="/tags/电子/" style="font-size: 12.5px;">电子</a> <a href="/tags/电子书/" style="font-size: 10px;">电子书</a> <a href="/tags/电赛/" style="font-size: 10px;">电赛</a> <a href="/tags/睡眠/" style="font-size: 10px;">睡眠</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/科普/" style="font-size: 10px;">科普</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/群晖/" style="font-size: 10px;">群晖</a> <a href="/tags/蓝牙/" style="font-size: 15px;">蓝牙</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/调度器/" style="font-size: 10px;">调度器</a> <a href="/tags/路由器/" style="font-size: 10px;">路由器</a> <a href="/tags/辉光管/" style="font-size: 12.5px;">辉光管</a> <a href="/tags/阅读/" style="font-size: 10px;">阅读</a> <a href="/tags/陀螺仪/" style="font-size: 10px;">陀螺仪</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a> <a href="/tags/风力摆/" style="font-size: 10px;">风力摆</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Apps</h3>
+    <div class="widget">
+    <ul>
+        <li>
+            <a href="https://itunes.apple.com/cn/app/id1120243546">HackRemote: 蓝牙 (BLE) 遥控器</a></br>
+            <a href="https://itunes.apple.com/cn/app/id1120243546"><img src="/images/2016/06/appstore.png" align="left"></a></br></br>
+        </li>
+    </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/airterminal/">AirTerminal: 用于Raspberry Pi等设备的蓝牙终端</a>
+          </li>
+        
+          <li>
+            <a href="/2017/plex-on-rt1900ac/">RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hunter-wolf/">一道智力题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hackerremote/">HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/nes-emulator/">使用 C 和 Allegro 实现的 NES 模拟器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiao3d.me" target="_blank">Xiao3d</a>
+          </li>
+        
+          <li>
+            <a href="http://nodewee.me" target="_blank">NodeWee</a>
+          </li>
+        
+          <li>
+            <a href="http://ptbsare.org" target="_blank">匆匆那年：ptbsare&#39;s blog</a>
+          </li>
+        
+          <li>
+            <a href="http://kuangqi.me" target="_blank">The Bloom of Youth | 锦瑟华年</a>
+          </li>
+        
+          <li>
+            <a href="http://hakale.cn" target="_blank">Hakale&#39;s note</a>
+          </li>
+        
+          <li>
+            <a href="http://hacer.cc" target="_blank">Hacer</a>
+          </li>
+        
+          <li>
+            <a href="http://chuangzaoshi.com" target="_blank">创造狮导航</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blanboom<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blanboom';
+  
+  var disqus_url = 'https://blanboom.org/2016/hunter-wolf/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//gapis.geekzu.org/ajax/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

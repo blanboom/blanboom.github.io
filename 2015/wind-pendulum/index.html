@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015 电赛风力摆题：我的方案 | Blanboom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：
+
+一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。
+
+趁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015 电赛风力摆题：我的方案">
+<meta property="og:url" content="https://blanboom.org/2015/wind-pendulum/index.html">
+<meta property="og:site_name" content="Blanboom">
+<meta property="og:description" content="2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：
+
+一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。
+
+趁">
+<meta property="og:image" content="https://blanboom.org/images/2015/08/pendulum_1.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/08/pendulum_3.png">
+<meta property="og:updated_time" content="2017-06-02T13:03:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015 电赛风力摆题：我的方案">
+<meta name="twitter:description" content="2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：
+
+一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。
+
+趁">
+<meta name="twitter:image" content="https://blanboom.org/images/2015/08/pendulum_1.jpg">
+  
+  <link rel="alternative" href="/atom.xml" title="Blanboom" type="application/atom+xml">
+  
+  
+  <link rel="amphtml" href="https://blanboom.org/2015/wind-pendulum/amp/index.html">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#0075be">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-40682162-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blanboom</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blanboom.org"></form>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    var number_of_banners = 30;
+    var randnum = Math.floor(Math.random() * number_of_banners + 1);
+    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner" + randnum + ".jpg)";
+    
+</script>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-wind-pendulum" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/wind-pendulum/" class="article-date">
+  <time datetime="2015-08-27T06:14:40.000Z" itemprop="datePublished">2015-08-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015 电赛风力摆题：我的方案
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：</p>
+<blockquote>
+<p>一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。</p>
+</blockquote>
+<p>趁这段时间，整理一下我们组的方案。</p>
+<a id="more"></a>
+<h1 id="总体方案"><a href="#总体方案" class="headerlink" title="总体方案"></a>总体方案</h1><p>作品的机械结构由我的队友完成。支架使用铝型材制作，通过万向节与摆杆相连，底部是由细碳纤杆做成的立方体，四个电机固定在立方体的四个侧面上。</p>
+<p><img src="/images/2015/08/pendulum_1.jpg" alt="风力摆照片"></p>
+<p>该题的电路比较简单，Arduno MEGA 2560 产生四路 PWM 波，通过 PMV31XN 驱动各个电机；MPU-6050 用于获取摆的运动状态。为了方便设置，作品上还安装了三个微动开关和一个 SSD1306 OLED 显示屏。</p>
+<p><img src="/images/2015/08/pendulum_3.png" alt="风力摆示意图"></p>
+<p>MPU-6050 固定在摆杆上，传感器 X, Y 轴的方向与两组电机轴的方向一致。（类似于四旋翼中的 “+” 模式。）</p>
+<h1 id="基本要求一：起摆"><a href="#基本要求一：起摆" class="headerlink" title="基本要求一：起摆"></a>基本要求一：起摆</h1><p>题目的要求如下：</p>
+<blockquote>
+<p>从静止开始,15s 内控制风力摆做类似自由摆运动，使激光笔稳定地<br>在地面画出一条长度不短于 50cm 的直线段，其线性度偏差不大于 ±2.5cm，并且具有较好的重复性。</p>
+</blockquote>
+<p>自由摆的摆动相当于左右方向的往复运动，在没有外力的情况下，由于阻力的影响，摆幅会逐渐降低。而在摆运动的过程中，不断给摆补充能量，就会使摆幅不断增大。</p>
+<p>按照我们的方案，风力摆向左摆动时，给风力摆施加向左的力，向右运动时施加向右的力，风力摆就会越摆越高。从 MPU-6050 中读取的角速度正负，正好对应摆动的左右方向。</p>
+<p>程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode1</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    initMPU_NoDMP();        <span class="comment">// 初始化 MPU-6050</span></div><div class="line">    Serial.println(<span class="string">"App mode1 initialized!"</span>);</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();  <span class="comment">// 从 MPU-6050 读取角速度和加速度</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;         <span class="comment">// 如果 X 轴的角速度大于 0</span></div><div class="line">            motorOutput13(<span class="number">255</span>);  <span class="comment">// 电机 1 转动，给风力摆正方向的力</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(<span class="number">-255</span>); <span class="comment">// 电机 3 转动，给风力摆反方向的力</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        delay(<span class="number">50</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求二：完成幅度可控的摆动"><a href="#基本要求二：完成幅度可控的摆动" class="headerlink" title="基本要求二：完成幅度可控的摆动"></a>基本要求二：完成幅度可控的摆动</h1><blockquote>
+<p>从静止开始，15s 内完成幅度可控的摆动。画出长度在 30~60cm 间可设置，长度偏差不大于 ±2.5cm 的直线段，并且具有较好的重复性。</p>
+</blockquote>
+<p>将题目中的线段长度换算为风力摆需要达到的摆动幅度（角度）。在风力摆运动的过程中，通过 MPU-6050 实时获取目前的摆动幅度，通过 PID 算法控制电机转速，即可使风力摆逐渐达到要求的摆幅。</p>
+<p>对于摆动幅度的获取，首先通过 MPU-6050 读取角速度，角速度为 0 时，说明风力摆已到达最高点。此时，可通过 MPU-6050 的 DMP 读取四元数，并换算为摆幅角度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode2</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> theta_in, theta_out, theta_set, theta_last = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(&amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">5.0</span>, <span class="number">1.3</span>, <span class="number">2.0</span>, DIRECT)</span></span>;</div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode2 initialized!"</span>);</div><div class="line">    theta_set = interface_input_length();   <span class="comment">// 输入长度</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(theta_set &lt;= <span class="number">35</span>) &#123; theta_pid.SetTunings(<span class="number">1.0</span>, <span class="number">0.7</span>, <span class="number">1.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(theta_set &lt;= <span class="number">45</span>) &#123; theta_pid.SetTunings(<span class="number">8.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> &#123; theta_pid.SetTunings(<span class="number">5.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;  <span class="comment">// 设置 PID 参数</span></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set = <span class="built_in">atan</span>((theta_set / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set *= <span class="number">180</span> /M_PI;    <span class="comment">// 将长度换算为以角度为单位的摆动幅度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    initMPU();</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;   </div><div class="line">            <span class="comment">// 角速度为 0，摆动到最高点，获取此时摆动幅度</span></div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;  <span class="comment">// 将 pitch 和 roll 换算为摆动幅度</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;      <span class="comment">// 两次的摆动幅度（最大摆动角度）取平均值</span></div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();  <span class="comment">// 计算 PID</span></div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Serial.println(theta_in);</div><div class="line">        Serial.println(<span class="string">", "</span>);</div><div class="line">        Serial.println(theta_out);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">100</span>; &#125; <span class="comment">// 保证在静止的时候依旧能摆起来</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;</div><div class="line">            motorOutput13(theta_out);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-theta_out);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();           <span class="comment">// 获取 yaw, roll, pitch</span></div><div class="line">        getMotion6_NoDMP(); <span class="comment">// 获取角速度和加速度</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求三：按照指定方向摆动"><a href="#基本要求三：按照指定方向摆动" class="headerlink" title="基本要求三：按照指定方向摆动"></a>基本要求三：按照指定方向摆动</h1><blockquote>
+<p>可设定摆动方向，风力摆从静止开始，15s 内按照设置的方向（角度）摆动，画出不短于 20cm 的直线段。</p>
+</blockquote>
+<p>根据力的合成与分解，控制两对电机的转速，即可做到按照指定方向摆动。其余部分与基础要求一类似。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode3</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">uint16_t</span> angle_input = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int16_t</span> motor_val1, motor_val2;</div><div class="line"></div><div class="line">    initMPU_NoDMP();</div><div class="line">    Serial.println(<span class="string">"App mode3 initialized!"</span>);</div><div class="line">    Serial.println(<span class="string">"Input radius:"</span>);</div><div class="line">    angle_input = interface_input_angle();  <span class="comment">//输入角度</span></div><div class="line"></div><div class="line">    <span class="comment">//if(angle_input == 120) &#123; angle_input = 130; &#125;  // 手动修正误差</span></div><div class="line"></div><div class="line">    <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">    motor_val1 = <span class="number">120</span> * <span class="built_in">sin</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line">    motor_val2 = <span class="number">120</span> * <span class="built_in">cos</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (gx &gt; <span class="number">0</span>) &#123;   <span class="comment">// 以 90 度摆动时，只判断 gx 可能会出现问题。由于比赛时间限制，没有来得及修改。</span></div><div class="line">            motorOutput13(motor_val1);</div><div class="line">            motorOutput24(motor_val2);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-motor_val1);</div><div class="line">            motorOutput24(-motor_val2);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求四：制动"><a href="#基本要求四：制动" class="headerlink" title="基本要求四：制动"></a>基本要求四：制动</h1><blockquote>
+<p>将风力摆拉起一定角度 (30°~45°) 放开，5s 内使风力摆制动达到静止状态。</p>
+</blockquote>
+<p>本要求刚好与基本要求一相反，在风力摆运动的过程中，给风力摆一个与运动方向相反的力，即可消耗其能量，使风力摆快速停下。这个力的大小，应该根据摆的运动速度实时调整，防止在摆在接近停止时来回振荡。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode4</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> kp_x = <span class="number">-0.1</span>, kp_y = <span class="number">-0.1</span>;</div><div class="line">    <span class="keyword">int16_t</span> output_x = <span class="number">0</span>, output_y = <span class="number">0</span>;</div><div class="line">    initMPU_NoDMP();</div><div class="line">    delay(<span class="number">400</span>);</div><div class="line">    Serial.println(<span class="string">"App mode4 initialized!"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">        output_x = gx * kp_x;</div><div class="line">        output_y = gy * kp_y; <span class="comment">// kp_x 和 kp_y 均为负数，说明风机施加的力与运动方向相反</span></div><div class="line"></div><div class="line">        <span class="comment">//Serial.println(output_x);</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(output_x &lt; <span class="number">-255</span>) &#123; output_x = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_x &gt; <span class="number">255</span> ) &#123; output_x =  <span class="number">255</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(output_y &lt; <span class="number">-255</span>) &#123; output_y = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_y &gt; <span class="number">255</span> ) &#123; output_y =  <span class="number">255</span>; &#125;</div><div class="line"></div><div class="line">        motorOutput13(output_x);</div><div class="line">        motorOutput24(output_y);</div><div class="line"></div><div class="line">        delay(<span class="number">4</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="发挥要求：画圆"><a href="#发挥要求：画圆" class="headerlink" title="发挥要求：画圆"></a>发挥要求：画圆</h1><blockquote>
+<p>(1) 以风力摆静止时激光笔的光点为圆心，驱动风力摆用激光笔在地面画圆，30s 内需重复 3 次；圆半径可在 15~35cm 范围内设置，激光笔画出的轨迹应落在指定半径 ±2.5cm 的圆环内；</p>
+<p>(2) 在发挥部分 (1) 后继续作圆周运动，在距离风力摆 1~2m 距离内用一台 50~60W 台扇在水平方向吹向风力摆，台扇吹 5s 后停止，风力摆能够在 5s 内恢复发挥部分 (1) 规定的圆周运动，激光笔画出符合要求的轨迹;</p>
+</blockquote>
+<p>圆锥摆相当于两个方向相互垂直的单摆的叠加，其相位差为 90 度。所以需要在基础要求二的基础上，对 X, Y 轴分别进行 PID 控制。同时需要提前测量好周期，控制好相位，否则无法画出正圆。</p>
+<p>由于在完成本要求时，已经是比赛的最后一天，参数没调好，再加上程序应该还有更多优化的空间，在实验室调试时，算是勉强完成题目的要求。但在正式比赛的过程中，画出的圆有了较大的变形，再加上参数没调好，出现了振荡的现象，最终成绩不是太好。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode5</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">uint8_t</span> delayTime = <span class="number">120</span>; <span class="comment">// 电机转速更新周期，应根据摆的周期，结合实测结果进行微调，否则画出的圆会出现变形</span></div><div class="line">    <span class="keyword">float</span> currentAngle = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">float</span> i;</div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> lastTime = <span class="number">0</span>, currentTime = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in,   theta_out,   theta_set,   theta_last   = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in_2, theta_out_2, theta_set_2, theta_last_2 = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(  &amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">6.0</span>, <span class="number">1.2</span>, <span class="number">5.1</span>, DIRECT)</span></span>; <span class="comment">// X 方向 PID</span></div><div class="line">    <span class="function">PID <span class="title">theta_pid_2</span><span class="params">(&amp;theta_in_2, &amp;theta_out_2, &amp;theta_set_2, <span class="number">8.0</span>, <span class="number">1.5</span>, <span class="number">3.5</span>, DIRECT)</span></span>;  <span class="comment">// Y 方向 PID</span></div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>, gy_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>, a_2 = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line">    theta_pid_2.SetMode(AUTOMATIC);</div><div class="line">    theta_pid_2.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid_2.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode5 initialized!"</span>);</div><div class="line">    theta_set = interface_input_radius() * <span class="number">2.0</span> + <span class="number">1.0</span>; <span class="comment">// 输入半径，换算为直径。1.0 为人工误差修正</span></div><div class="line">    theta_set_2 = theta_set;</div><div class="line"></div><div class="line">    initMPU();</div><div class="line"></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set    = <span class="built_in">atan</span>((theta_set   / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set   *= <span class="number">180</span> /M_PI;</div><div class="line">    theta_set_2  = <span class="built_in">atan</span>((theta_set_2 / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set_2 *= <span class="number">180</span> /M_PI; <span class="comment">// 将直径换算为摆动角度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 在 X 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在 Y 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gy == <span class="number">0</span> || (gy &gt; <span class="number">0</span> &amp;&amp; gy_last &lt; <span class="number">0</span>) || (gy &lt; <span class="number">0</span> &amp;&amp; gy_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a_2 == <span class="number">0</span>) &#123;</div><div class="line">                a_2 = <span class="number">1</span>;</div><div class="line">                theta_in_2 = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a_2 = <span class="number">0</span>;</div><div class="line">                theta_in_2 += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in_2 /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in_2 &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in_2 = theta_last_2;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last_2 = theta_in_2;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">60.0</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out_2) &lt; <span class="number">2</span>) &#123; theta_out_2 = <span class="number">60.0</span>; &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在指定的时间间隔更新电机转速 */</span></div><div class="line">        currentTime = millis();</div><div class="line">        i = (currentTime - lastTime) / delayTime;</div><div class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span>)&#123;</div><div class="line">            currentAngle += <span class="number">30.0</span> * i;</div><div class="line">            <span class="keyword">if</span>(currentAngle &gt;= <span class="number">360</span>) &#123; currentAngle = <span class="number">0.0</span>; &#125;</div><div class="line">            motorOutput13(theta_out   * <span class="built_in">sin</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            motorOutput24(theta_out_2 * <span class="built_in">cos</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            lastTime = currentTime;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line">        gy_last = gy;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blanboom.org/2015/wind-pendulum/" data-id="cjamk4dil002p218imy8z0mlt" class="article-share-link">Share</a>
+      
+        <a href="https://blanboom.org/2015/wind-pendulum/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Arduino/">Arduino</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MPU-6050/">MPU-6050</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/电赛/">电赛</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/陀螺仪/">陀螺仪</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/风力摆/">风力摆</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/nixie-clock-lite/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          四位辉光管时钟
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/join-me/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">欢迎与我合作参加 2015 年创新项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/电子与制作/">电子与制作</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件与工具/">软件与工具</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/51/" style="font-size: 10px;">51</a> <a href="/tags/AirTerminal/" style="font-size: 10px;">AirTerminal</a> <a href="/tags/Allegro/" style="font-size: 10px;">Allegro</a> <a href="/tags/AppleScript/" style="font-size: 12.5px;">AppleScript</a> <a href="/tags/Arduino/" style="font-size: 20px;">Arduino</a> <a href="/tags/Arduino库/" style="font-size: 10px;">Arduino库</a> <a href="/tags/BLE/" style="font-size: 12.5px;">BLE</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DIY/" style="font-size: 10px;">DIY</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Famicom/" style="font-size: 10px;">Famicom</a> <a href="/tags/GNU/" style="font-size: 10px;">GNU</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HackerRemote/" style="font-size: 10px;">HackerRemote</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kindle/" style="font-size: 10px;">Kindle</a> <a href="/tags/LED/" style="font-size: 12.5px;">LED</a> <a href="/tags/LEGO/" style="font-size: 10px;">LEGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIDI/" style="font-size: 10px;">MIDI</a> <a href="/tags/MPU-6050/" style="font-size: 10px;">MPU-6050</a> <a href="/tags/MakeyMakey/" style="font-size: 10px;">MakeyMakey</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/NES/" style="font-size: 10px;">NES</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/OmniFocus/" style="font-size: 12.5px;">OmniFocus</a> <a href="/tags/POV/" style="font-size: 10px;">POV</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Plex/" style="font-size: 10px;">Plex</a> <a href="/tags/Prezi/" style="font-size: 10px;">Prezi</a> <a href="/tags/RT1900ac/" style="font-size: 10px;">RT1900ac</a> <a href="/tags/STM32/" style="font-size: 12.5px;">STM32</a> <a href="/tags/Synology/" style="font-size: 10px;">Synology</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/上海创客嘉年华/" style="font-size: 10px;">上海创客嘉年华</a> <a href="/tags/中国/" style="font-size: 10px;">中国</a> <a href="/tags/主题/" style="font-size: 10px;">主题</a> <a href="/tags/人工智能/" style="font-size: 10px;">人工智能</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/创客/" style="font-size: 10px;">创客</a> <a href="/tags/创客空间/" style="font-size: 10px;">创客空间</a> <a href="/tags/创意/" style="font-size: 15px;">创意</a> <a href="/tags/单片机/" style="font-size: 17.5px;">单片机</a> <a href="/tags/历史/" style="font-size: 10px;">历史</a> <a href="/tags/图/" style="font-size: 10px;">图</a> <a href="/tags/多任务/" style="font-size: 12.5px;">多任务</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源软件/" style="font-size: 10px;">开源软件</a> <a href="/tags/按键/" style="font-size: 10px;">按键</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/摇摇棒/" style="font-size: 10px;">摇摇棒</a> <a href="/tags/教育/" style="font-size: 10px;">教育</a> <a href="/tags/新车间/" style="font-size: 10px;">新车间</a> <a href="/tags/时钟/" style="font-size: 17.5px;">时钟</a> <a href="/tags/智力题/" style="font-size: 10px;">智力题</a> <a href="/tags/有限状态机/" style="font-size: 10px;">有限状态机</a> <a href="/tags/演示文稿/" style="font-size: 10px;">演示文稿</a> <a href="/tags/物联网/" style="font-size: 10px;">物联网</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/生态系统/" style="font-size: 10px;">生态系统</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/生物/" style="font-size: 10px;">生物</a> <a href="/tags/电子/" style="font-size: 12.5px;">电子</a> <a href="/tags/电子书/" style="font-size: 10px;">电子书</a> <a href="/tags/电赛/" style="font-size: 10px;">电赛</a> <a href="/tags/睡眠/" style="font-size: 10px;">睡眠</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/科普/" style="font-size: 10px;">科普</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/群晖/" style="font-size: 10px;">群晖</a> <a href="/tags/蓝牙/" style="font-size: 15px;">蓝牙</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/调度器/" style="font-size: 10px;">调度器</a> <a href="/tags/路由器/" style="font-size: 10px;">路由器</a> <a href="/tags/辉光管/" style="font-size: 12.5px;">辉光管</a> <a href="/tags/阅读/" style="font-size: 10px;">阅读</a> <a href="/tags/陀螺仪/" style="font-size: 10px;">陀螺仪</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a> <a href="/tags/风力摆/" style="font-size: 10px;">风力摆</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Apps</h3>
+    <div class="widget">
+    <ul>
+        <li>
+            <a href="https://itunes.apple.com/cn/app/id1120243546">HackRemote: 蓝牙 (BLE) 遥控器</a></br>
+            <a href="https://itunes.apple.com/cn/app/id1120243546"><img src="/images/2016/06/appstore.png" align="left"></a></br></br>
+        </li>
+    </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/airterminal/">AirTerminal: 用于Raspberry Pi等设备的蓝牙终端</a>
+          </li>
+        
+          <li>
+            <a href="/2017/plex-on-rt1900ac/">RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hunter-wolf/">一道智力题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hackerremote/">HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/nes-emulator/">使用 C 和 Allegro 实现的 NES 模拟器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiao3d.me" target="_blank">Xiao3d</a>
+          </li>
+        
+          <li>
+            <a href="http://nodewee.me" target="_blank">NodeWee</a>
+          </li>
+        
+          <li>
+            <a href="http://ptbsare.org" target="_blank">匆匆那年：ptbsare&#39;s blog</a>
+          </li>
+        
+          <li>
+            <a href="http://kuangqi.me" target="_blank">The Bloom of Youth | 锦瑟华年</a>
+          </li>
+        
+          <li>
+            <a href="http://hakale.cn" target="_blank">Hakale&#39;s note</a>
+          </li>
+        
+          <li>
+            <a href="http://hacer.cc" target="_blank">Hacer</a>
+          </li>
+        
+          <li>
+            <a href="http://chuangzaoshi.com" target="_blank">创造狮导航</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blanboom<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blanboom';
+  
+  var disqus_url = 'https://blanboom.org/2015/wind-pendulum/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//gapis.geekzu.org/ajax/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

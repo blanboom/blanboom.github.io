@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>有限状态机在单片机编程中的应用 | Blanboom</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：
+
+一个任务的执行时间过长，导致其他任务无法及时执行
+在一些任务中大量使用 delay() 等函数进行软件延时，这些延时函数占用过多时间，影响其他任务的执行
+一些复杂任务的程序逻辑不清晰，不便于以后对程序进行维护，或添加新功能
+
+本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务分解为多个简单任务，同时使代码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="有限状态机在单片机编程中的应用">
+<meta property="og:url" content="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/index.html">
+<meta property="og:site_name" content="Blanboom">
+<meta property="og:description" content="在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：
+
+一个任务的执行时间过长，导致其他任务无法及时执行
+在一些任务中大量使用 delay() 等函数进行软件延时，这些延时函数占用过多时间，影响其他任务的执行
+一些复杂任务的程序逻辑不清晰，不便于以后对程序进行维护，或添加新功能
+
+本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务分解为多个简单任务，同时使代码">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_sleep.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_adv_1.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_adv_2.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_adv_3.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_example.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/psm_keyscan_1.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_keyscan_2.jpg">
+<meta property="og:image" content="https://blanboom.org/images/2015/02/fsm_alarm.jpg">
+<meta property="og:updated_time" content="2017-06-02T15:36:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="有限状态机在单片机编程中的应用">
+<meta name="twitter:description" content="在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：
+
+一个任务的执行时间过长，导致其他任务无法及时执行
+在一些任务中大量使用 delay() 等函数进行软件延时，这些延时函数占用过多时间，影响其他任务的执行
+一些复杂任务的程序逻辑不清晰，不便于以后对程序进行维护，或添加新功能
+
+本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务分解为多个简单任务，同时使代码">
+<meta name="twitter:image" content="https://blanboom.org/images/2015/02/fsm_sleep.jpg">
+  
+  <link rel="alternative" href="/atom.xml" title="Blanboom" type="application/atom+xml">
+  
+  
+  <link rel="amphtml" href="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/amp/index.html">
+  
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#0075be">
+  <meta name="msapplication-TileImage" content="/mstile-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  
+  <link href="//fonts.geekzu.org/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-40682162-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Blanboom</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/projects">Projects</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://blanboom.org"></form>
+      </div>
+    </div>
+  </div>
+  <script>
+    
+    var number_of_banners = 30;
+    var randnum = Math.floor(Math.random() * number_of_banners + 1);
+    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner" + randnum + ".jpg)";
+    
+</script>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-finite-state-machine-in-microcontrollers" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/finite-state-machine-in-microcontrollers/" class="article-date">
+  <time datetime="2015-02-06T14:02:00.000Z" itemprop="datePublished">2015-02-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/学习笔记/">学习笔记</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      有限状态机在单片机编程中的应用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：</p>
+<ul>
+<li>一个任务的<strong>执行时间过长</strong>，导致其他任务无法及时执行</li>
+<li>在一些任务中大量使用 delay() 等函数进行软件延时，这些<strong>延时函数占用过多时间</strong>，影响其他任务的执行</li>
+<li>一些复杂任务的程序<strong>逻辑不清晰</strong>，不便于以后对程序进行维护，或添加新功能</li>
+</ul>
+<p>本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务<strong>分解为多个简单任务</strong>，同时使代码<strong>逻辑更加清晰</strong>，从而解决上述问题。</p>
+<h4 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h4><ul>
+<li><a href="#toc_0">1. 什么是有限状态机</a></li>
+<li><a href="#toc_1">2. 有限状态机的作用</a><ul>
+<li><a href="#toc_2">2.1 分解耗时过长的任务</a></li>
+<li><a href="#toc_3">2.2 避免软件延时对 CPU 资源造成浪费</a></li>
+<li><a href="#toc_4">2.3 使程序逻辑更加清晰</a></li>
+</ul>
+</li>
+<li><a href="#toc_5">3. 有限状态机的实现</a><ul>
+<li><a href="#toc_6">3.1 通过 switch - case 语句实现</a></li>
+<li><a href="#toc_7">3.2 通过 Arduino 库实现</a></li>
+<li><a href="#toc_8">3.3 其他方式</a></li>
+</ul>
+</li>
+<li><a href="#toc_9">4. 示例一：按键去抖动程序的优化</a><ul>
+<li><a href="#toc_10">4.1 传统的按键去抖动程序</a></li>
+<li><a href="#toc_11">4.2 优化后的按键去抖动程序</a></li>
+</ul>
+</li>
+<li><a href="#toc_12">5. 示例二：通过有限状态机实现的闹钟程序</a></li>
+<li><a href="#toc_13">6. 后记</a></li>
+</ul>
+<a id="more"></a>
+<h1 id="toc_0">1. 什么是有限状态机</h1>
+
+<p>根据维基百科上的定义，有限状态机（finite-state machine, FSM，简称状态机）是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
+<p>为了理解这句话，假设自己还有三天就要考试，这时候就要进入紧张的备考状态，将空闲时间用在<strong>复习</strong>上。但是，为了保证足够的精力，<strong>小睡</strong>一会儿也是十分有必要的。那么，什么时候复习，什么时候睡觉呢？可以这样描述：</p>
+<blockquote>
+<p>在复习的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感到瞌睡，<strong>则</strong> 睡觉</p>
+<p><strong>如果</strong> 没有感觉到瞌睡，<strong>则</strong> 继续复习</p>
+</blockquote>
+<p>在小睡的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感觉不再瞌睡，<strong>则</strong> 开始复习</p>
+<p><strong>如果</strong> 感觉依旧瞌睡，<strong>则</strong> 继续睡觉</p>
+</blockquote>
+</blockquote>
+<p>也可通过一幅简单的示意图（也叫「状态转移图」）表示出来：</p>
+<p><img src="/images/2015/02/fsm_sleep.jpg" alt="图 1  复习与小睡"></p>
+<p>这个例子其实就是一个简单的有限状态机，其中，复习和小睡是两个<strong>状态</strong>，感觉瞌睡和感觉清醒这两个<strong>条件</strong>可以使状态发生<strong>转换</strong>。<sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup></p>
+<p>另外，Programming Basics<sup id="fnref3"><a href="#fn3" rel="footnote">3</a></sup> 网站上也提供了状态机相关的教程，用形象化的图片解释了什么是有限状态机，可<a href="http://www.programmingbasics.org/zh/beginner/fsm.html" target="_blank" rel="external">通过此链接访问</a>。</p>
+<p>在嵌入式程序设计中，如果一个系统需要处理<strong>一系列连续发生的任务</strong>，或在<strong>不同的模式</strong>下对输入进行不同的处理，常常使用有限状态机实现。例如测量、监测、控制等控制逻辑型应用。<sup id="fnref4"><a href="#fn4" rel="footnote">4</a></sup></p>
+<h1 id="toc_1">2. 有限状态机的作用</h1>
+
+<h2 id="toc_2">2.1 分解耗时过长的任务</h2>
+
+<p>大家应该都知道，CPU 没有并行执行任务的能力。<strong>计算机「同时」运行多个程序，其实是多个程序依次交替执行</strong>，给人以程序同时运行的错觉。各个程序在什么时候开始执行，执行多长时间后切换到下一个程序，由操作系统决定。</p>
+<p>单片机执行多任务也是类似的过程，但由于其资源有限，为了节省对 CPU 和存储空间的占用，在很多情况下没有使用操作系统。这时，<strong>单片机中运行的各个任务必须在一定时间内主动执行完毕，才能保证下一个任务能够及时执行</strong>。</p>
+<p>对于一些需要长时间执行的任务，例如按键去除抖动、读取和播放 MP3 文件等，采用有限状态机的方式，<strong>将任务划分为多个小的步骤（状态），每次只执行其中的一步</strong>。这样，其他任务就有机会「插入」到这个任务之中，确保了各个任务都能按时执行。</p>
+<p><img src="/images/2015/02/fsm_adv_1.jpg" alt="图 2  状态机用于分解耗时过长的任务"></p>
+<h2 id="toc_3">2.2 避免软件延时对 CPU 资源造成浪费</h2>
+
+<p>对于一些简单的程序，可通过 delay(), delay_ms() 之类的函数进行软件延时。这些延时函数，一般是通过将某个变量循环递加或递加，到达一定值后跳出循环，从而<strong>通过消耗 CPU 时间实现了延时</strong>。</p>
+<p>这种方式虽然简单，但在延时函数执行的过程中，其他程序无法运行，消耗了大量 CPU 资源。而通过状态机，<strong>有助于减少软件延时的使用，提高 CPU 利用率</strong>。</p>
+<p><img src="/images/2015/02/fsm_adv_2.jpg" alt="图 3  用状态机避免软件延时"></p>
+<p>请参考下文中的 <strong>示例一：按键去抖动程序的优化</strong>，这一例子展示了如何通过软件延时分解耗时较长的任务，同时减少软件延时的使用。</p>
+<h2 id="toc_4">2.3 使程序逻辑更加清晰</h2>
+
+<p>通过状态机，将一个复杂任务划分为多个状态，可以使程序清晰易懂，便于维护。以后想要添加、删除程序中的功能，都会变得非常容易。</p>
+<p><img src="/images/2015/02/fsm_adv_3.jpg" alt="图 4  用状态机优化程序逻辑"></p>
+<p>下文中的 <strong>示例二：通过状态机实现的闹钟</strong> 展示了如何通过状态机优化程序逻辑。</p>
+<h1 id="toc_5">3. 有限状态机的实现</h1>
+
+<h2 id="toc_6">3.1 通过 switch - case 语句实现</h2>
+
+<p>如果使用 C 语言，switch - case 语句，即可简单地实现有限状态机。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 定义各个状态所对应的数值 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_A 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_B 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_C 2</span></div><div class="line"></div><div class="line"><span class="comment">/* 该变量的值即为当前状态机所处的状态 */</span></div><div class="line"><span class="keyword">uint8_t</span> currentStatus = STATUS_A;</div><div class="line"></div><div class="line"><span class="comment">/* 通过状态机实现的某个任务，</span></div><div class="line"> * 需要放入 while(1) 等地方循环执行</div><div class="line"> * /</div><div class="line">void fsm_app(void)</div><div class="line">&#123;</div><div class="line">	switch(currentStatus) /* 根据现在的状态执行相应的程序 */</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> STATUS_A:  <span class="comment">/* 状态 A */</span></div><div class="line">		doThingsForStatusA(); <span class="comment">/* 执行状态 A 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_1)&#123; currentStatus = STATUE_B; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_B:  <span class="comment">/* 状态 B */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_2)&#123; currentStatus = STATUE_C; &#125;</div><div class="line">		<span class="keyword">if</span>(condition_3)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_C:  <span class="comment">/* 状态 C */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_4)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		currentStatus = STATUE_A;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过这段程序，即可实现一个具有三个状态的状态机。状态转移图如下图所示：</p>
+<p><img src="/images/2015/02/fsm_example.jpg" alt="图 5  通过 switch - case 语句实现的状态机"></p>
+<h2 id="toc_7">3.2 通过 Arduino 库实现</h2>
+
+<p>对于 Arduino 用户，还可以使用 FSM Library 实现。这一库将有限状态机进行了封装，可以以更简洁的方式实现状态机。</p>
+<p>下载地址及使用说明：<a href="http://playground.arduino.cc/Code/FiniteStateMachine" target="_blank" rel="external">http://playground.arduino.cc/Code/FiniteStateMachine</a></p>
+<h2 id="toc_8">3.3 其他方式</h2>
+
+<p>对于一些更复杂的任务，使用 switch - case 语句，代码可能会太简洁。这时候，使用其他方式实现状态机，可能会更好。具体请查阅相关资料。</p>
+<h1 id="toc_9">4. 示例一：按键去抖动程序的优化</h1>
+
+<h2 id="toc_10">4.1 传统的按键去抖动程序</h2>
+
+<p>初学单片机时，我们接触的按键去抖动程序一般是这样的<sup id="fnref5"><a href="#fn5" rel="footnote">5</a></sup>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyscan</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(key1 == <span class="number">0</span>)         <span class="comment">// 如果按键 1 按下</span></div><div class="line">	&#123;</div><div class="line">		delayms(<span class="number">10</span>);      <span class="comment">// 延时 10ms，消除因干扰产生的抖动</span></div><div class="line">			<span class="keyword">if</span>(key1 == <span class="number">0</span>) <span class="comment">// 再次检测按键 1，如果依旧按下</span></div><div class="line">			&#123;</div><div class="line">				doSomething(); <span class="comment">//此时说明按键 1 已按下，执行按键 1 需要执行的任务</span></div><div class="line">				<span class="keyword">while</span>(!key1);  <span class="comment">// 等待按键释放</span></div><div class="line">			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对应的流程图如下：</p>
+<p><img src="/images/2015/02/psm_keyscan_1.jpg" alt="图 6  传统的按键去抖动程序"></p>
+<p>从流程图中可知，delayms() 延时函数和最后的等待按键释放的程序，会占用过多时间。</p>
+<h2 id="toc_11">4.2 优化后的按键去抖动程序</h2>
+
+<p>如果使用有限状态机的思路，可以按照下图方式实现：</p>
+<p><img src="/images/2015/02/fsm_keyscan_2.jpg" alt="图 7  用状态机实现的按键去抖动程序"></p>
+<p>该状态机有三个状态，分别是<strong>按键未按下</strong>，<strong>等待</strong>，<strong>按键按下</strong>。当按键按下时，则会进入等待状态，若在等待状态中按键一直保持按下，说明按键已经稳定地按下，进入按键按下的状态，等待按键释放。程序代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 按键去抖动状态机中的三个状态 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_RELEASE    <span class="comment">// 按键未按下</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_WAITING    <span class="comment">// 等待（消抖）</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_PRESSED    <span class="comment">// 按键按下（等待释放）</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 等待状态持续时间</span></div><div class="line"> * 需要根据单片机速度和按键消抖程序被调用的速度来进行调整</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DURIATION_TIME 40</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数的返回值，按下为 1，未按下为 0 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PRESSED 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NOT_PRESSED 0</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键扫描程序所处的状态</span></div><div class="line"> * 初始状态为：按键按下（KEY_STATE_RELEASE）</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyState = KEY_STATE_RELEASE;</div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数，通过有限状态机实现</span></div><div class="line"> * 函数在从等待状态转换到按键按下状态时返回 PRESSED，代表按键已被触发</div><div class="line"> * 其他情况返回 NOT_PRESSED</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyDetect(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">uint8_t</span> duriation;  <span class="comment">// 用于在等待状态中计数</span></div><div class="line">	<span class="keyword">switch</span>(keyState)</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_RELEASE:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_WAITING;  <span class="comment">// 转换至下一个状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;    <span class="comment">// 返回：按键未按下</span></div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_WAITING:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			duriation++;</div><div class="line">			<span class="keyword">if</span>(duriation &gt;= DURIATION_TIME)    <span class="comment">// 如果经过多次检测，按键仍然按下</span></div><div class="line">			&#123;	<span class="comment">// 说明没有抖动了，可以确定按键已按下</span></div><div class="line">				duriation = <span class="number">0</span>;</div><div class="line">				keyState = KEY_STATE_PRESSED;  <span class="comment">// 转换至下一个状态</span></div><div class="line">				<span class="keyword">return</span> PRESSED;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span>  <span class="comment">// 如果此时按键松开</span></div><div class="line">		&#123;	<span class="comment">// 可能存在抖动或干扰</span></div><div class="line">			duriation = <span class="number">0</span>;  <span class="comment">// 清零的目的是便于下次重新计数</span></div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 重新返回按键松开的状态</span></div><div class="line">			<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_PRESSED:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">0</span>)       <span class="comment">// 如果按键松开</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 回到按键松开的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		keyState = KEY_STATE_RELEASE;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该程序也可经过扩展，实现判断按键双击、长按等功能。只需增加相应的状态和转移条件即可。</p>
+<h1 id="toc_12">5. 示例二：通过有限状态机实现的闹钟程序</h1>
+
+<p>最近正在制作一个闹钟。这个闹钟支持播放 MP3 格式的闹钟声<sup id="fnref6"><a href="#fn6" rel="footnote">6</a></sup>，支持贪睡模式，同时还有一些功能打算以后再添加上。</p>
+<p>为了使程序逻辑更加清晰，也为了更方便地添加新功能，我打算采用有限状态机实现。相关程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"App_Alarm.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"USART1.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"diag/Trace.h"</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 相关常量定义 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALARM_MUSIC_END 0      <span class="comment">// 闹钟音乐播放完毕</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_OK		0	   <span class="comment">// 格式正确</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_ERROR	(-1)   <span class="comment">// 格式错误</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输入信息定义</span></div><div class="line"> * 作为函数的返回值供函数 getInput() 使用</div><div class="line"> * getInput() 将获取并返回键盘或触摸屏等设备中输入的控制命令或闹钟时间值</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ERROR    (-1)    <span class="comment">// 输入格式错误</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_CANCEL   (-2)    <span class="comment">// 输入了「取消」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_SNOOZE   (-3)    <span class="comment">// 输入了「小睡」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ALARM_ON (-4)    <span class="comment">// 输入了「打开闹钟」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NO_INPUT	   (-10)   <span class="comment">// 没有输入</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输出信息定义</span></div><div class="line"> * 作为为函数的参数供函数 displayMessege() 使用</div><div class="line"> * displayMessege() 用于在显示屏上显示相关的提示信息</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_ALARM_TIME 	(0)  <span class="comment">// 提示：设置闹钟时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_CLEAR			(1)  <span class="comment">// 提示：已取消</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_ALARM_IS_ON		(2)  <span class="comment">// 提示：闹钟已打开</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_WAITING			(3)  <span class="comment">// 提示：等待闹钟响起</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_SNOOZE_TIME	(4)  <span class="comment">// 提示：设置小睡时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_GET_UP			(5)  <span class="comment">// 提示：该起床了</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 闹钟的状态 */</span></div><div class="line"><span class="keyword">enum</span> alarmStates</div><div class="line">&#123;</div><div class="line">	ALARM_OFF,				<span class="comment">// 闹钟关闭</span></div><div class="line">	SET_ALARM_TIME,			<span class="comment">// 设置闹钟时间</span></div><div class="line">	WATING_FOR_ALARM,		<span class="comment">// 等待闹钟响起</span></div><div class="line">	PLAY_ALARM_MUSIC,		<span class="comment">// 播放闹钟音乐</span></div><div class="line">	SET_SNOOZE_TIME			<span class="comment">// 设置贪睡时间</span></div><div class="line">&#125; alarmState = ALARM_OFF;	<span class="comment">// 默认状态：闹钟关闭</span></div><div class="line"></div><div class="line"><span class="comment">/* 相关函数的定义 */</span></div><div class="line"><span class="keyword">int16_t</span> getInput(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">displayMessege</span><span class="params">(<span class="keyword">uint8_t</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAlarm</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">int16_t</span> alarmTimeDiff(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">int8_t</span> playAlarmMusic(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setSnooze</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">uint8_t</span> checkAlarmFormat(<span class="keyword">int16_t</span>);</div><div class="line"><span class="keyword">uint8_t</span> checkSnoozeFormat(<span class="keyword">int16_t</span>);</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 闹钟主程序，需要放入 while(1) 中循环调用</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">alarmApp</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int16_t</span> input;		<span class="comment">// 输入值暂存在这个变量中</span></div><div class="line">	<span class="keyword">switch</span> (alarmState) <span class="comment">// 获取闹钟状态，下面程序将根据闹钟的状态执行相应的任务</span></div><div class="line">	&#123;</div><div class="line">	<span class="comment">/* 状态：闹钟关闭</span></div><div class="line">	 * 在此状态中，将会不断检查是否打开闹钟，如果打开了闹钟，则会进入下一个状态：设置闹钟时间</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> ALARM_OFF:</div><div class="line">		<span class="keyword">if</span> (getInput() == INPUT_ALARM_ON)  <span class="comment">// 检查是否打开了闹钟</span></div><div class="line">		&#123;   <span class="comment">// 如果打开了闹钟</span></div><div class="line">			displayMessege(MESSEGE_SET_ALARM_TIME);	<span class="comment">// 在屏幕或串口上提示：请设置闹钟时间</span></div><div class="line">			alarmState = SET_ALARM_TIME;			<span class="comment">// 进入下一个状态：设置闹钟时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置闹钟时间</span></div><div class="line">	 * 在此状态中，将会检查输入值，</div><div class="line">	 * 如果</div><div class="line">	 * 		输入“取消”命令，则取消闹钟设置，返回到闹钟关闭的状态</div><div class="line">	 * 		输入闹钟时间格式错误，则状态不变，等待下一次重新输入</div><div class="line">	 * 		输入了正确的闹钟时间，则设置闹钟，显示闹钟设置成功，并进入下一状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_ALARM_TIME:</div><div class="line">		input = getInput();  		<span class="comment">// 获取输入值</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)	<span class="comment">// 如果输入了“取消”</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);  <span class="comment">// 显示“已取消”</span></div><div class="line">			alarmState = ALARM_OFF;			<span class="comment">// 进入状态：关闭闹钟</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkAlarmFormat(input) == FORMAT_OK)	<span class="comment">// 如果输入格式正确</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_ALARM_IS_ON); <span class="comment">// 显示“成功设置闹钟，闹钟已启动”</span></div><div class="line">			setAlarm(input); <span class="comment">// 根据输入值设置闹钟</span></div><div class="line">			alarmState = WATING_FOR_ALARM; <span class="comment">// 进入下一状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：等待闹钟响起</span></div><div class="line">	 * 在此状态中，将会检查是否到达闹钟时间，如果到达，则进入下一状态：播放闹钟音乐</div><div class="line">	 * 同时，在此状态中也会检查输入，如果输入了“取消”的命令，则进入闹钟关闭的状态</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> WATING_FOR_ALARM:</div><div class="line">		displayMessege(MESSEGE_WAITING); <span class="comment">// 显示等待闹钟响起的信息，例如离闹钟响起还有多长时间</span></div><div class="line">		<span class="keyword">if</span> (alarmTimeDiff() &lt;= <span class="number">0</span>) <span class="comment">// 检查离闹钟响起还有多少时间，如果时间小于等于零（到达闹钟时间）</span></div><div class="line">		&#123;</div><div class="line">			alarmState = PLAY_ALARM_MUSIC;  <span class="comment">// 进入下一个状态：播放闹钟音乐</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(getInput() == INPUT_CANCEL) <span class="comment">// 如果输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;      <span class="comment">// 进入闹钟关闭的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：播放闹钟音乐</span></div><div class="line">	 * 在此状态中，将播放闹钟音乐，若播放完毕，进入闹钟关闭的状态</div><div class="line">	 * 同时，在此状态中也会检查输入，</div><div class="line">	 * 		如果输入了“小睡”的命令，则进入状态：设置小睡时间</div><div class="line">	 * 		如果输入了“取消”的命令，则进入状态：闹钟关闭</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> PLAY_ALARM_MUSIC:</div><div class="line">		displayMessege(MESSEGE_GET_UP);  <span class="comment">// 显示消息：“该起床了”</span></div><div class="line">		<span class="keyword">if</span>(playAlarmMusic() == ALARM_MUSIC_END) <span class="comment">// 播放闹钟音乐</span></div><div class="line">		&#123; <span class="comment">// 若音乐播放完毕</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF; <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		input = getInput();</div><div class="line">		<span class="keyword">if</span>(input == INPUT_SNOOZE) <span class="comment">// 若输入了“小睡”的命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_SET_SNOOZE_TIME); <span class="comment">// 显示消息：“请设置小睡时间”</span></div><div class="line">			alarmState = SET_SNOOZE_TIME; <span class="comment">// 进入状态：设置小睡时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL) <span class="comment">// 若输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;   <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置小睡时间</span></div><div class="line">	 * 在此状态中，将从输入获取小睡时间，并将闹钟时间加上小睡时间，进入状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_SNOOZE_TIME:</div><div class="line">		input = getInput(); <span class="comment">// 获取输入</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)</div><div class="line">		&#123;   <span class="comment">// 若输入“取消”，则进入“闹钟关闭”的状态</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkSnoozeFormat(input) == FORMAT_OK)</div><div class="line">		&#123;   <span class="comment">// 若输入格式正确</span></div><div class="line">			setSnooze(input);  <span class="comment">// 设置新的闹钟时间</span></div><div class="line">			alarmState = WATING_FOR_ALARM;  <span class="comment">// 进入状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		displayMessege(MESSEGE_CLEAR);</div><div class="line">		alarmState = ALARM_OFF;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>状态转移图如图所示：</p>
+<p><img src="/images/2015/02/fsm_alarm.jpg" alt="图 8  用状态机实现的闹钟"></p>
+<p></p><h1 id="toc_13">6. 后记</h1><br>在单片机编程时，如果遇到代码复杂、任务占用时间过长等问题，可以尝试通过有限状态机解决。<p></p>
+<p>之前写过一个<a href="https://blanboom.org/2013/arduino-task-scheduler-library">针对 Arduino 的合作式任务调度器</a>。配合有限状态机，更有利于多任务处理。</p>
+<p>另外，instructables 上的一篇文章通过三个实例演示了有限状态机在 Arduino 上的应用，如果感兴趣，可以通过这个链接阅读：<a href="http://www.instructables.com/id/Arduino-Finite-State-Machine/" target="_blank" rel="external">http://www.instructables.com/id/Arduino-Finite-State-Machine/</a></p>
+<p><br><br></p>
+<h4 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h4><div class="footnotes"><ol><li id="fn1">来源：<a href="http://zh.wikipedia.org/zh-cn/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA" target="_blank" rel="external">http://zh.wikipedia.org/zh-cn/有限状态机</a>&nbsp;<a href="#fnref1">&#8617;</a></li><li id="fn2">为了便于理解，此处描述的状态机及状态转移图省略了一些内容，例如没有标明开始状态&nbsp;<a href="#fnref2">&#8617;</a></li><li id="fn3">Programming Basics 针对初学者的互动编程学习网站，网址为：<a href="http://programmingbasics.org" target="_blank" rel="external">http://programmingbasics.org</a>&nbsp;<a href="#fnref3">&#8617;</a></li><li id="fn4">根据 <a href="http://www.ti.com/mcu/docs/litabsmultiplefilelist.tsp?sectionId=96&amp;tabId=1502&amp;literatureNumber=slaa402a&amp;docCategoryId=1&amp;familyId=342" target="_blank" rel="external">Finite State Machines for MSP430 (Rev. A)</a> 翻译&nbsp;<a href="#fnref4">&#8617;</a></li><li id="fn5">改编自<a href="http://book.douban.com/subject/3413850/" target="_blank" rel="external">《新概念51单片机C语言教程》</a>中相关内容&nbsp;<a href="#fnref5">&#8617;</a></li><li id="fn6">其实 MP3 播放程序也可以通过有限状态机实现，因为为了实现 MP3 播放持续时间较长（一首歌的时间），而且需要完成多个步骤（打开文件、读取文件、将数据发送到 MP3 解码芯片、告诉 MP3 解码芯片音乐播放完毕等）&nbsp;<a href="#fnref6">&#8617;</a></li></ol></div>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/" data-id="cjamk4dii002f218igr8j1ulk" class="article-share-link">Share</a>
+      
+        <a href="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单片机/">单片机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/多任务/">多任务</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/有限状态机/">有限状态机</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/状态机/">状态机</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/hack-hexo-theme-landscape/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo 主题 Landscape 改造小记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/diy-websites/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">我常去的 DIY 网站</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/学习笔记/">学习笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记/">日记</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/电子与制作/">电子与制作</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/软件与工具/">软件与工具</a><span class="category-list-count">11</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/51/" style="font-size: 10px;">51</a> <a href="/tags/AirTerminal/" style="font-size: 10px;">AirTerminal</a> <a href="/tags/Allegro/" style="font-size: 10px;">Allegro</a> <a href="/tags/AppleScript/" style="font-size: 12.5px;">AppleScript</a> <a href="/tags/Arduino/" style="font-size: 20px;">Arduino</a> <a href="/tags/Arduino库/" style="font-size: 10px;">Arduino库</a> <a href="/tags/BLE/" style="font-size: 12.5px;">BLE</a> <a href="/tags/C/" style="font-size: 10px;">C</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/DIY/" style="font-size: 10px;">DIY</a> <a href="/tags/Eclipse/" style="font-size: 10px;">Eclipse</a> <a href="/tags/Famicom/" style="font-size: 10px;">Famicom</a> <a href="/tags/GNU/" style="font-size: 10px;">GNU</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/HTML/" style="font-size: 10px;">HTML</a> <a href="/tags/HackerRemote/" style="font-size: 10px;">HackerRemote</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/Kindle/" style="font-size: 10px;">Kindle</a> <a href="/tags/LED/" style="font-size: 12.5px;">LED</a> <a href="/tags/LEGO/" style="font-size: 10px;">LEGO</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIDI/" style="font-size: 10px;">MIDI</a> <a href="/tags/MPU-6050/" style="font-size: 10px;">MPU-6050</a> <a href="/tags/MakeyMakey/" style="font-size: 10px;">MakeyMakey</a> <a href="/tags/NAS/" style="font-size: 10px;">NAS</a> <a href="/tags/NES/" style="font-size: 10px;">NES</a> <a href="/tags/OS-X/" style="font-size: 10px;">OS X</a> <a href="/tags/OmniFocus/" style="font-size: 12.5px;">OmniFocus</a> <a href="/tags/POV/" style="font-size: 10px;">POV</a> <a href="/tags/PPT/" style="font-size: 10px;">PPT</a> <a href="/tags/Plex/" style="font-size: 10px;">Plex</a> <a href="/tags/Prezi/" style="font-size: 10px;">Prezi</a> <a href="/tags/RT1900ac/" style="font-size: 10px;">RT1900ac</a> <a href="/tags/STM32/" style="font-size: 12.5px;">STM32</a> <a href="/tags/Synology/" style="font-size: 10px;">Synology</a> <a href="/tags/UI/" style="font-size: 10px;">UI</a> <a href="/tags/iOS/" style="font-size: 12.5px;">iOS</a> <a href="/tags/上海创客嘉年华/" style="font-size: 10px;">上海创客嘉年华</a> <a href="/tags/中国/" style="font-size: 10px;">中国</a> <a href="/tags/主题/" style="font-size: 10px;">主题</a> <a href="/tags/人工智能/" style="font-size: 10px;">人工智能</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/创客/" style="font-size: 10px;">创客</a> <a href="/tags/创客空间/" style="font-size: 10px;">创客空间</a> <a href="/tags/创意/" style="font-size: 15px;">创意</a> <a href="/tags/单片机/" style="font-size: 17.5px;">单片机</a> <a href="/tags/历史/" style="font-size: 10px;">历史</a> <a href="/tags/图/" style="font-size: 10px;">图</a> <a href="/tags/多任务/" style="font-size: 12.5px;">多任务</a> <a href="/tags/学习/" style="font-size: 10px;">学习</a> <a href="/tags/工具/" style="font-size: 10px;">工具</a> <a href="/tags/开源软件/" style="font-size: 10px;">开源软件</a> <a href="/tags/按键/" style="font-size: 10px;">按键</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/摇摇棒/" style="font-size: 10px;">摇摇棒</a> <a href="/tags/教育/" style="font-size: 10px;">教育</a> <a href="/tags/新车间/" style="font-size: 10px;">新车间</a> <a href="/tags/时钟/" style="font-size: 17.5px;">时钟</a> <a href="/tags/智力题/" style="font-size: 10px;">智力题</a> <a href="/tags/有限状态机/" style="font-size: 10px;">有限状态机</a> <a href="/tags/演示文稿/" style="font-size: 10px;">演示文稿</a> <a href="/tags/物联网/" style="font-size: 10px;">物联网</a> <a href="/tags/状态机/" style="font-size: 10px;">状态机</a> <a href="/tags/生态系统/" style="font-size: 10px;">生态系统</a> <a href="/tags/生活/" style="font-size: 12.5px;">生活</a> <a href="/tags/生物/" style="font-size: 10px;">生物</a> <a href="/tags/电子/" style="font-size: 12.5px;">电子</a> <a href="/tags/电子书/" style="font-size: 10px;">电子书</a> <a href="/tags/电赛/" style="font-size: 10px;">电赛</a> <a href="/tags/睡眠/" style="font-size: 10px;">睡眠</a> <a href="/tags/硬件/" style="font-size: 10px;">硬件</a> <a href="/tags/科普/" style="font-size: 10px;">科普</a> <a href="/tags/算法/" style="font-size: 10px;">算法</a> <a href="/tags/终端/" style="font-size: 10px;">终端</a> <a href="/tags/群晖/" style="font-size: 10px;">群晖</a> <a href="/tags/蓝牙/" style="font-size: 15px;">蓝牙</a> <a href="/tags/设计/" style="font-size: 15px;">设计</a> <a href="/tags/调度器/" style="font-size: 10px;">调度器</a> <a href="/tags/路由器/" style="font-size: 10px;">路由器</a> <a href="/tags/辉光管/" style="font-size: 12.5px;">辉光管</a> <a href="/tags/阅读/" style="font-size: 10px;">阅读</a> <a href="/tags/陀螺仪/" style="font-size: 10px;">陀螺仪</a> <a href="/tags/音乐/" style="font-size: 10px;">音乐</a> <a href="/tags/风力摆/" style="font-size: 10px;">风力摆</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Apps</h3>
+    <div class="widget">
+    <ul>
+        <li>
+            <a href="https://itunes.apple.com/cn/app/id1120243546">HackRemote: 蓝牙 (BLE) 遥控器</a></br>
+            <a href="https://itunes.apple.com/cn/app/id1120243546"><img src="/images/2016/06/appstore.png" align="left"></a></br></br>
+        </li>
+    </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/airterminal/">AirTerminal: 用于Raspberry Pi等设备的蓝牙终端</a>
+          </li>
+        
+          <li>
+            <a href="/2017/plex-on-rt1900ac/">RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hunter-wolf/">一道智力题</a>
+          </li>
+        
+          <li>
+            <a href="/2016/hackerremote/">HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/nes-emulator/">使用 C 和 Allegro 实现的 NES 模拟器</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">March 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/04/">April 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/02/">February 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">December 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">November 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/10/">October 2013</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/09/">September 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/08/">August 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">May 2013</a><span class="archive-list-count">4</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiao3d.me" target="_blank">Xiao3d</a>
+          </li>
+        
+          <li>
+            <a href="http://nodewee.me" target="_blank">NodeWee</a>
+          </li>
+        
+          <li>
+            <a href="http://ptbsare.org" target="_blank">匆匆那年：ptbsare&#39;s blog</a>
+          </li>
+        
+          <li>
+            <a href="http://kuangqi.me" target="_blank">The Bloom of Youth | 锦瑟华年</a>
+          </li>
+        
+          <li>
+            <a href="http://hakale.cn" target="_blank">Hakale&#39;s note</a>
+          </li>
+        
+          <li>
+            <a href="http://hacer.cc" target="_blank">Hacer</a>
+          </li>
+        
+          <li>
+            <a href="http://chuangzaoshi.com" target="_blank">创造狮导航</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Blanboom<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/projects" class="mobile-nav-link">Projects</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'blanboom';
+  
+  var disqus_url = 'https://blanboom.org/2015/finite-state-machine-in-microcontrollers/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//gapis.geekzu.org/ajax/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

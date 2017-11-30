@@ -1,0 +1,1795 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://blanboom.org/2015/wind-pendulum/index.html" >
+    <title>2015 电赛风力摆题：我的方案 | Blanboom</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+  	<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"headline": "2015 电赛风力摆题：我的方案",
+			
+			"description": "&lt;p&gt;2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;趁这段时间，整理一下我们组的方案。&lt;/p&gt;",
+			
+			"mainEntityOfPage":{
+			    "@type":"WebPage",
+			    "@id":"https://blanboom.org/2015/wind-pendulum/"
+			},
+			"datePublished": "2015-08-27T06:14:40.000Z",
+			"dateModified": "2017-06-02T13:03:02.000Z",
+			
+			"image": {
+				"@type": "ImageObject",
+				"url": "/amp-dist/sample/sample-substituteTitleImage.png",
+				"width" : "1024",
+				"height" : "800"
+			},
+			
+			"author": {
+			    "@type": "Person",
+			    "name": "Blanboom"
+			},
+			"publisher": {
+			    "@type": "Organization",
+			    "name": "Blanboom"
+			    
+			    ,
+			    "logo": {
+			      "@type": "ImageObject",
+			      "url": "https://blanboom.org/amp-dist/sample/sample-logo.png",
+			      "width": 600,
+			      "height": 60
+			    }
+			    
+			}
+		}
+	</script>
+	
+	<style amp-custom>
+		
+:root sub,
+:root sup {
+  vertical-align: baseline;
+}
+a {
+  -moz-transition: 0.7s;
+  -ms-transition: 0.7s;
+  -o-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  color: #0379c4;
+  -webkit-transition: 0.7s;
+  -moz-transition: 0.7s;
+  -o-transition: 0.7s;
+  -ms-transition: 0.7s;
+  transition: 0.7s;
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+a img {
+  border: none;
+}
+a:hover {
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  color: #31adfc;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+abbr,
+acronym,
+address,
+applet,
+big,
+blockquote,
+body,
+caption,
+cite,
+code,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+ul,
+var {
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+abbr {
+  cursor: help;
+  border-bottom: 1px dotted;
+  font-variant: normal;
+}
+acronym {
+  border-bottom: 1px dotted;
+  font-variant: normal;
+}
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background: #fff;
+  color: #34393a;
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+  font-size: 102%;
+  font-wight: 500;
+  line-height: 2em;
+  text-rendering: optimizelegibility;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner,
+figure.highlight td,
+.post .entry-content figure.highlight th {
+  border: 0;
+  padding: 0;
+}
+caption,
+table,
+td,
+th {
+  vertical-align: middle;
+}
+caption,
+td,
+th,
+.table-align-left {
+  text-align: left;
+}
+code,
+figure.highlight .code,
+pre {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Consolas, Monaco, Consolas, monospace;
+}
+code,
+pre {
+  background-color: #f5f2f0;
+  margin: 0 3px;
+  padding: 1px 8px;
+}
+code,
+pre,
+samp {
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+}
+del {
+  text-decoration: line-through;
+}
+#article-nav {
+  clear: both;
+  margin: 1em 20px;
+  position: relative;
+  
+}
+#article-nav:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+#article-nav:before {
+  content: "";
+  display: table;
+  -webkit-border-radius: 50%;
+  -webkit-box-shadow: 0 1px 2px #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 1px 2px #fff;
+  box-shadow: 0 1px 2px #fff;
+  content: "";
+  height: 8px;
+  left: 50%;
+  margin-left: -4px;
+  margin-top: -4px;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+}
+#article-nav-newer {
+  float: left;
+  padding-right: 20px;
+  text-align: right;
+}
+#article-nav-newer .article-nav-caption {
+  margin-right: -2px;
+}
+#article-nav-older {
+  float: right;
+  padding-left: 20px;
+  text-align: left;
+}
+#container {
+  margin-left: auto;
+  margin-right: auto;
+}
+#footer {
+  background-color: #0379c4;
+  display: block;
+  font-size: 70%;
+  line-height: 1.6;
+  padding: 20px 0;
+}
+#footer:after {
+  content: ".";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.moreRead:before,
+.useFlame,
+kbd,
+.copyright,
+.table-align-center {
+  text-align: center;
+}
+.blog-title a,
+.nav,
+.nav-icon,
+.loadingPutAbsolute,
+.moreRead:before,
+.titleWrapper {
+  position: relative;
+}
+#header {
+  display: block;
+  margin: 0.5em 0 1em;
+  position: static;
+  text-align: center;
+  position: relative;
+}
+#header:after {
+  display: block;
+  font-size: 0;
+  height: 0;
+}
+#header:after,
+.clearfix:after,
+.nav ul:after {
+  clear: both;
+  visibility: hidden;
+}
+#main {
+  margin-bottom: 3em;
+  padding-left: 0;
+}
+.useFlame,
+kbd {
+  display: inline-block;
+}
+#page-nav a,
+.photoby,
+kbd {
+  color: #4c5355;
+}
+* html .clearfix {
+  height: 1%;
+}
+.alignleft,
+.left {
+  float: left;
+}
+.alignright,
+.right {
+  float: right;
+}
+.article-devider {
+  border: 0;
+  border-top: 5px solid #ddd;
+  margin: 5em auto;
+  width: 8%;
+}
+.article-nav-caption,
+.nav {
+  text-transform: uppercase;
+}
+.article-nav-caption {
+  color: #ddd;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1em;
+}
+.article-nav-link-wrap,
+a {
+  text-decoration: none;
+}
+.article-nav-link-wrap {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #999;
+  display: block;
+  margin-top: 0;
+  text-align: center;
+  width: 50%;
+}
+.article-nav-link-wrap:hover {
+  color: #bfbfbf;
+}
+.article-nav-title {
+  font-size: 0.85em;
+  line-height: 1.6em;
+  margin-top: 0.5em;
+}
+.nav ul {
+  display: block;
+}
+.nav ul li {
+  display: block;
+}
+.nav ul li a {
+  display: block;
+}
+.authorCap {
+  font-size: 1.5em;
+}
+.authorReading {
+  font-size: 0.7em;
+}
+.site-author-info-wrapper {
+  padding: 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.gravatar-wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.gravatar-area {
+  margin: 0 20px 0 0;
+}
+.authorCap-wrapper {
+  -webkit-box-flex: 3;
+  -moz-box-flex: 3;
+  -o-box-flex: 3;
+  box-flex: 3;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+.blog-title {
+  border-bottom: none;
+  float: none;
+  font-size: 120%;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 10px 0;
+  padding-bottom: 0.2em;
+}
+.blog-title a {
+  left: 0.1em;
+  padding: 0.4em 0;
+}
+.circle {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+}
+.copyright-title {
+  font-size: 1.2em;
+}
+.copyright-tool {
+  text-align: center;
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+  margin: 1em 0 0 0;
+}
+h6.tag,
+h6.categories {
+  color: #0379c4;
+  font-size: 110%;
+}
+.entry-content {
+  width: 93.75%;
+  margin: 0 auto;
+  font-size: 100%;
+}
+.entry-content h2,
+.entry-content h3 {
+  text-align: center;
+}
+.entry-content h1 {
+  font-size: 170%;
+  line-height: 1.5;
+  margin: 1em 0 0.8em;
+}
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  line-height: 1.5;
+  margin: 1em 0 0.8em;
+}
+.entry-content h2 {
+  border-bottom: 2px solid #0379c4;
+  color: #0379c4;
+  font-size: 160%;
+  margin: 1.8em 0 0.5em;
+  padding: 0.8em 0;
+}
+.entry-content h3 {
+  color: #0379c4;
+  font-size: 150%;
+  margin: 1.8em 0 0.5em;
+  padding: 0.8em 0.5em;
+}
+.entry-content h4 {
+  border-left: 2px solid #0379c4;
+  color: #0379c4;
+  font-size: 120%;
+  margin: 1.8em 0 0.5em;
+  padding-left: 1.2em;
+  text-align: left;
+}
+.entry-content h5,
+.entry-content h6 {
+  color: #0379c4;
+  margin: 1.8em 0 0.5em;
+  text-align: left;
+}
+.entry-content h5 {
+  font-size: 110%;
+  padding-left: 1.2em;
+}
+.entry-content h6 {
+  font-size: 100%;
+}
+.entry-content p {
+  font-size: 1em;
+  letter-spacing: 0;
+  line-height: 2.2em;
+  margin: 1.8em 0;
+}
+.entry-content p em {
+  background-color: #faf7dc;
+  color: #736e4f;
+  font-style: normal;
+  margin: 0 2px;
+  padding: 3px;
+}
+.entry-content p strong {
+  color: #734f4f;
+  font-style: normal;
+  margin: 0 2px;
+  padding: 3px;
+  background-color: #fadcdc;
+}
+.entry-content dl,
+.entry-content ol,
+.entry-content ul {
+  margin: 1.8em 0 1.8em 1em;
+  padding: 0;
+}
+.entry-content ol p,
+.entry-content ul p,
+.entry-content dl p {
+  margin: 0;
+}
+.entry-content dl li,
+.entry-content ol li {
+  line-height: 1.8em;
+  margin: 0.5em;
+}
+.entry-content ol {
+  list-style: decimal ;
+}
+.entry-content ol li {
+  font-size: 1em;
+  margin: 0.2em 0 0.2em 2.6em;
+  padding: 0 0 0 0.1em;
+  position: relative;
+}
+.entry-content ol p:not(:first-child),
+.entry-content ul p:not(:first-child) {
+  color: #4c5355;
+}
+.entry-content ol {
+  padding: 0 /* paddingキャンセル */;
+  margin: 0 /* marginキャンセル */;
+  list-style: none /* olがはき出す数字を消す */;
+}
+.entry-content ol {
+  counter-reset: number /* 名前を付けたカウンターをリセット */;
+  list-style: none /* olが数字を付けることをキャンセル */;
+  margin: 0;
+  padding: 0;
+}
+.entry-content ol li:before {
+  counter-increment: number /* 任意の名前を付けて！ */;
+  content: counter(number) /* 名前を付けたカウンターを呼び出し */;
+  position: absolute;
+  left: -2.2em;
+  top: 0.05em;
+  display: inline-block;
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  float: left;
+  background: #6abcf0;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 1.6em;
+}
+.entry-content ol li p:first-child {
+  display: inline-block;
+  line-height: 1.6em;
+  height: 1.6em;
+  line-height: 1.6em;
+}
+.entry-content ul {
+  list-style: none;
+}
+.entry-content ul li {
+  font-size: 1em;
+  margin: 0.2em 0 0.2em 0.5em;
+  padding: 0 0 0 0.2em;
+  position: relative;
+}
+.entry-content ul li::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0.4em;
+  left: -1em;
+  width: 8px;
+  height: 8px;
+  border-bottom: 3px solid #ddd;
+}
+.entry-content dl li ol,
+.entry-content dl li ul {
+  margin-bottom: 2em;
+}
+.entry-content ol li ol,
+.entry-content ol li ul {
+  margin-bottom: 2em;
+}
+.entry-content ul li ol,
+.entry-content ul li ul {
+  margin-bottom: 2em;
+}
+.entry-content blockquote p:last-child,
+.entry-content .archive .post {
+  margin-bottom: 0;
+}
+.entry-content blockquote {
+  margin: 1.8em 0;
+  padding: 0.5em 20px;
+  position: relative;
+  background-color: #f6f6f4;
+}
+.entry-content blockquote p {
+  margin: 1em 0;
+}
+.entry-content blockquote:before {
+  color: #dfdfd8;
+  content: "”";
+  font-family: sans-serif;
+  font-size: 600%;
+  line-height: 1em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.entry-content blockquote blockquote:before {
+  content: "";
+}
+.entry-content hr {
+  border: 0;
+  border-top: 3px solid #ddd;
+  margin: 3em auto;
+  width: 20%;
+}
+.entry-content img,
+.entry-content video {
+  display: block;
+  height: auto;
+  margin: auto;
+  max-width: 100%;
+}
+.entry-content pre {
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background: #f5f2f0;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  border: 0;
+  font-size: 100%;
+  line-height: 1.3;
+  overflow-x: auto;
+  padding: 15px;
+}
+.entry-content table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.85em;
+  margin: 1.8em auto;
+  width: auto;
+}
+.entry-content td {
+  border: 1px solid #c4c4c4;
+  line-height: 1.5em;
+  padding: 0.6em 0.4em;
+}
+.entry-content th {
+  background-color: #fdf7f4;
+  border: 1px solid #c4c4c4;
+  padding: 0.6em 0.4em;
+}
+.entry-content iframe {
+  width: 100% ;
+}
+.entry-content figure.highlight {
+  margin: 1.8em 0;
+}
+.entry-content figure.highlight td {
+  border: 0;
+  font-size: 1.1em;
+  padding: 0;
+}
+.entry-content figure.highlight td.code {
+  border-left: 1px solid #eceae8;
+}
+.entry-meta-header {
+  font-size: 87%;
+  left: -200px;
+  margin-bottom: 1em;
+  position: static;
+  top: 0.5em;
+  width: auto;
+  text-align: center;
+}
+.entry-meta-header .date {
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+}
+.entry-meta-header .meta-elements {
+  display: inline;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+}
+.gist {
+  background: #fff;
+  border: 1px solid color-gutter;
+  color: #918577;
+  line-height: 1.6;
+  margin-top: 15px;
+  overflow: auto;
+  padding: 7px 15px;
+}
+.gist .gist-file {
+  border: none;
+  font-family: inherit;
+  font-size: 1em;
+  letter-spacing: 0;
+  margin: 0;
+}
+.gist .gist-file .gist-data {
+  background: 0 0;
+  border-bottom: none;
+}
+.gist .gist-file .gist-data pre {
+  font-family: Menlo, Consolas, Monaco, Consolas, monospace;
+  padding: 0 ;
+}
+.gist .gist-file .gist-meta {
+  background: 0 0;
+  color: #918577;
+  font-size: 100%;
+  margin-top: 5px;
+  padding: 0;
+}
+.gist .gist-file .gist-meta a {
+  color: #918577;
+}
+.gist .gist-file .gist-meta a:visited {
+  color: #918577;
+}
+.line {
+  font-size: 95%;
+  letter-spacing: 0.05em;
+  line-height: 2em;
+}
+.post {
+  font-size: 90%;
+  margin-bottom: 5em;
+  position: relative;
+}
+.post .entry-header {
+  margin-bottom: 2em;
+}
+.post .entry-title {
+  font-size: 130%;
+  margin: 0;
+}
+.post h1 {
+  font-size: 1.2em;
+}
+.table-align-right {
+  text-align: right;
+}
+figure.highlight {
+  background: #fff;
+  border: 1px solid color-gutter;
+  font-size: 0.9em;
+  line-height: 2;
+  margin: 2.2em 0;
+  overflow: auto;
+  padding: 7px 10px;
+  position: relative;
+}
+figure.highlight .code {
+  border-left: 1px solid #fff;
+  color: #918577;
+}
+figure.highlight .gutter {
+  color: #d4d0cd;
+  padding-right: 10px;
+  text-align: left;
+}
+figure.highlight figcaption {
+  color: #d4d0cd;
+  margin-bottom: 5px;
+}
+figure.highlight figcaption a {
+  position: absolute;
+  right: 15px;
+}
+figure.highlight pre {
+  background: 0 0;
+  border: none;
+  margin: 0;
+  padding: 8px;
+}
+figure.highlight table {
+  border-spacing: 0;
+  margin: 0;
+}
+.post .entry-content figure.highlight table {
+  border-spacing: 0;
+  margin: 0;
+}
+figure.highlight th {
+  border: 0;
+  font-weight: 400;
+  padding: 0;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #000;
+  text-decoration: none;
+}
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #0379c4;
+}
+img.responsive-img {
+  height: auto;
+  max-width: 100%;
+}
+video.responsive-video {
+  height: auto;
+  max-width: 100%;
+}
+kbd {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 0 10px #e2e2e2 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  -webkit-font-smoothing: subpixel-antialiased;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  border-left: 1px solid #fff;
+  border-radius: 3px;
+  border-right: 1px solid #e6e6e6;
+  border-top: 1px solid #fff;
+  -webkit-box-shadow: 0 0 10px #e8e8e8 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  box-shadow: 0 0 10px #e8e8e8 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  font-size: 0.85em;
+  line-height: 1;
+  margin: 5px;
+  padding: 6px 8px 3px;
+  text-shadow: 0 1px 0 #fff;
+  vertical-align: baseline;
+  
+}
+pre .addition,
+pre .css .tag,
+pre .keyword,
+pre .method,
+pre .nginx .title,
+pre .request,
+pre .status,
+pre .winutils {
+  color: #1a9ca1;
+}
+pre .attr_selector,
+pre .cdata,
+pre .clojure .title,
+pre .diff .change,
+pre .important {
+  color: #816ec5;
+}
+pre .preprocessor {
+  color: #816ec5;
+}
+pre .preprocessor .keyword {
+  color: #816ec5;
+}
+pre .shebang,
+pre .special,
+pre .subst {
+  color: #816ec5;
+}
+pre .symbol {
+  color: #816ec5;
+}
+pre .symbol .string {
+  color: #816ec5;
+}
+pre .attribute,
+pre .class .title,
+pre .constant,
+pre .haskell .type,
+pre .lisp .body,
+pre .parent,
+pre .smalltalk .number,
+pre .variable {
+  color: #c38700;
+}
+pre .built_in,
+pre .chunk,
+pre .decorator,
+pre .id,
+pre .identifier,
+pre .literal,
+pre .localvars,
+pre .title,
+pre .vhdl,
+pre .deletion {
+  color: #b42147;
+}
+pre .command,
+pre .hexcolor,
+pre .number,
+pre .phpdoc,
+pre .regexp,
+pre .string,
+pre .tag .value,
+pre .tex .formula {
+  color: #6c9a1c;
+}
+pre .comment,
+pre .diff .header,
+pre .doctype,
+pre .javadoc,
+pre .lisp .string,
+pre .pi,
+pre .template_comment {
+  color: #d4d0cd;
+  font-wight: normal;
+}
+sub {
+  bottom: -0.2em;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+}
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  top: -0.5em;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+td.code,
+.article-tag-list {
+  padding: 0;
+}
+.entry-content .toc {
+  background: #fff;
+  padding: 1em 1em 1em 0;
+  margin: 2.8em 0em;
+  border: 1px solid #98d1f5;
+}
+.entry-content .toc ul:first-child {
+  border-top: none;
+}
+.entry-content .toc ul {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0;
+  border-top: 1px dotted #98d1f5;
+}
+.entry-content .toc ul ul,
+.entry-content .toc ul ol {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0 0 0 0.8em;
+}
+.entry-content .toc ul li {
+  padding: 0;
+  margin: 0 0 0 1em;
+  border-top: 1px dotted #98d1f5;
+}
+.entry-content .toc ul li a {
+  display: block;
+  padding: 10px 8px;
+  color: #34393a;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.entry-content .toc ul li a:hover {
+  color: #0379c4;
+  background-color: #98d1f5;
+}
+.entry-content .toc ul li a:before {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-right: 0.8em;
+}
+.entry-content .toc ul li ul,
+.entry-content .toc ul li ol {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0 0 0 0.8em;
+}
+.entry-content .toc ul li ul li a,
+.entry-content .toc ul li ol li a {
+  padding: 7px 10px;
+  font-size: 0.9em;
+}
+.entry-content .toc ul li ul li a:before,
+.entry-content .toc ul li ol li a:before {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-right: 0.6em;
+}
+.entry-content .toc ul li:first-child {
+  border-top: none;
+}
+.entry-content .toc ul li::after,
+.entry-content .toc ul li::before {
+  content: normal;
+}
+header {
+  height: 60px;
+}
+header .nav-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+header .left-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  font-size: 20px;
+  margin-left: 0;
+  font-weight: 300;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  width: auto;
+  font-size: 15px;
+}
+header .right {
+  font-size: 15px;
+}
+header .alt {
+  padding: 0;
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.header-title a {
+  padding: 0 0 0 20px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  color: #000;
+  letter-spacing: 0.2em;
+}
+button {
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: buttontext;
+  background-color: buttonface;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2px 6px 3px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  -webkit-border-image: initial;
+  -moz-border-image: initial;
+  -o-border-image: initial;
+  border-image: initial;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0em 0em 0em 0em;
+  font: 11px system-ui;
+  -webkit-writing-mode: horizontal-tb;
+  -webkit-appearance: button;
+}
+.__web-inspector-hide-shortcut__ {
+  visibility: hidden ;
+}
+.hamburger {
+  display: inline-block;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-3 -6 24 24\"><path fill=\"#4A4A4A\" d=\"M0 12h18v-2H0v2M0 7h18V5H0v2M0 0v2h18V0H0\"/></svg>");
+  background-repeat: no-repeat;
+  -webkit-background-size: 30px 24px;
+  -moz-background-size: 30px 24px;
+  background-size: 30px 24px;
+  background-position: center center;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  -webkit-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+.tab {
+  position: relative;
+  color: #424242;
+  padding: 6px;
+  margin: 0 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  -webkit-transition: 0.1s ease color;
+  -webkit-transition: 0.1s ease color;
+  -moz-transition: 0.1s ease color;
+  -o-transition: 0.1s ease color;
+  -ms-transition: 0.1s ease color;
+  transition: 0.1s ease color;
+}
+amp-sidebar {
+  width: 200px;
+}
+amp-sidebar ul {
+  padding: 10px 0;
+}
+amp-sidebar li a {
+  display: block;
+  padding: 10px 20px;
+}
+.title-cover {
+  background-color: #0379c4;
+  color: #fff;
+  padding: 30px 15px 20px 15px;
+  text-align: center;
+}
+.title-cover a {
+  color: #fff;
+}
+.title-cover a:hover {
+  color: #fff;
+}
+.meta-content {
+  background-color: #e9e9e9;
+  padding: 20px 0;
+}
+.meta-wrapper {
+  margin: 20px 20px;
+  padding: 20px 20px;
+  background-color: #fff;
+}
+#footer .homeLink,
+#footer .copyright-tool {
+  margin: 20px;
+}
+.copyright-tool {
+  color: #fff;
+  font-size: 0.5em;
+}
+.social-share {
+  margin: 10px 0 0 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.social-share amp-social-share {
+  margin: 5px;
+}
+#totop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.2em;
+  z-index: 995;
+  line-height: 1.8em;
+}
+#totop a {
+  background: rgba(152,209,245,0.6);
+  text-decoration: none;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  display: block;
+  width: 1.2em;
+  height: 2.2em;
+  line-height: 2em;
+  letter-spacing: 0;
+  position: relative;
+  display: inline-block;
+  padding: 0 0 0 16px;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 15px;
+}
+#totop a:before,
+#totop a:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  content: "";
+  vertical-align: middle;
+}
+#totop a:before {
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#totop a:hover {
+  text-decoration: none;
+  background: #0379c4;
+  color: #fff;
+  line-height: 2.3em;
+}
+.site-author-desc {
+  font-size: 1.2em;
+  line-height: 2em;
+  margin-top: 1em;
+}
+.site-author-info {
+  background-color: #fff;
+  margin: 20px;
+}
+.gravatar-area {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.article-tag,
+.article-tag-list,
+.article-categories,
+.article-categories-list {
+  padding: 0;
+  margin: 0;
+}
+.article-categories {
+  margin-bottom: 1.6em;
+}
+.article-tag-list li,
+.article-categories-list li {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0.2em 0;
+}
+.article-tag-list li a,
+.article-categories-list li a {
+  padding: 0.5em 0.6em;
+  margin: 0.4em 0em;
+  background-color: #f5f2f0;
+  color: #34393a;
+}
+.article-tag-list li a:before,
+.article-categories-list li a:before {
+  content: "#";
+}
+.article-tag-list li a:hover,
+.article-categories-list li a:hover {
+  color: #fff;
+  background-color: #0498f6;
+}
+.homeLink,
+.htmlPageLink {
+  font-weight: 700;
+  -moz-transition: 0.7s;
+  -ms-transition: 0.7s;
+  -o-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  -moz-transition: 0.7s;
+  -o-transition: 0.7s;
+  -ms-transition: 0.7s;
+  transition: 0.7s;
+  padding: 0.4em 0;
+}
+.homeLink a,
+.htmlPageLink a {
+  color: #fff;
+  display: block;
+  padding: 1em;
+  text-align: center;
+}
+.homeLink:hover,
+.htmlPageLink:hover {
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.homeLink {
+  font-size: 120%;
+  background: #18a3fb;
+}
+.homeLink:hover {
+  background: #4ab7fc;
+}
+.htmlPageLink {
+  font-size: 110%;
+  background: #18a3fb;
+}
+.htmlPageLink:hover {
+  background: #4ab7fc;
+}
+.googleAdPost,
+.ad-footer,
+amp-instagram,
+amp-vimeo,
+amp-video,
+amp-youtube,
+amp-twitter {
+  margin: 2.8em auto;
+}
+@media (min-width: 800px) {
+  .entry-header,
+  .entry-title,
+  .entry-content,
+  .article-nav {
+    width: 780px;
+    margin: 0 auto;
+  }
+  .nav-container {
+    width: 800px;
+    margin: 0 auto;
+  }
+  .meta-wrapper {
+    width: 760px;
+    margin: 20px auto;
+  }
+  .site-author-info {
+    width: 760px;
+    margin: 20px auto;
+  }
+  #footer .homeLink,
+  #footer .copyright-tool {
+    width: 760px;
+    margin: 20px auto;
+  }
+}
+
+	</style>
+	
+  </head>
+  <body>
+  	
+  	
+  	<!-- google analytics -->
+  	
+  	<amp-analytics type="googleanalytics" id="google-analytics">
+		<script type="application/json">
+		{
+		  "vars": {
+		    "account": "UA-40682162-1"
+		  },
+		  "triggers": {
+		    "trackPageview": {
+		      "on": "visible",
+		      "request": "pageview"
+		    }
+		  }
+		}
+		</script>
+	</amp-analytics>
+	
+  	
+  	
+  	<!-- menu -->
+  	<header>
+  		<div class="nav-container">
+	  		<div class="left-nav">
+	  			<div class="header-title">
+	  				<a href="/">Blanboom</a>
+	  			</div>
+	  		</div>
+	  		<div class="right alt">
+	  			<button on='tap:sidebar.toggle' class="tab hamburger"></button>
+	  		</div>
+	  	</div>
+    </header>
+  	
+  	
+  	<!-- sidebar -->
+  	<amp-sidebar id='sidebar' layout="nodisplay" side="left">
+      <ul>
+      	<!--
+      		To use the menu, add the menu option of _config.yml.
+      		
+      		generator_amp:
+      		  theme:
+			    menu:
+			      diary: /categories/diary/
+			      gallery: /categories/archive-gallery
+			      archives: /archives
+      	-->
+        <li><a href="/">Home</a></li>
+        
+      </ul>
+    </amp-sidebar>
+  	
+  	
+  	<!-- container -->
+  	<div id="container">
+	  	<div id="main">
+		    <article id="post-wind-pendulum" class="post">
+		    
+		    	<!-- entry title -->
+				<div class="title-cover">
+					<div class="entry-header">
+						
+						  <h1 class="article-title entry-title" itemprop="name">
+						    <a href="https://blanboom.org/2015/wind-pendulum/" target="_blank" itemprop="url">2015 电赛风力摆题：我的方案</a>
+						  </h1>
+						
+					</div>
+					
+					<!-- datePublished -->
+					<div class="entry-meta-header">
+						<span class="meta-elements date">
+							<time datetime="2015-08-27" itemprop="datePublished">2015-08-27</time>
+						</span>
+					</div>
+				</div>
+				
+				<!-- entry content -->
+			    <div class="entry-content ecp">
+			    
+			    
+			    	<!-- social share button -->
+			    	<!--
+			      		To use the facebook button, add the facebook_app_id option of _config.yml.
+			      		
+			      		generator_amp:
+			      		  theme:
+    						facebook_app_id: 123456789
+			      	-->
+			    	<div class="social-share">
+			    		<amp-social-share type="twitter" width="40" height="40"></amp-social-share>
+			    		
+			    		<!--
+			    		<amp-social-share type="pinterest" width="40" height="40"></amp-social-share>
+			    		-->
+			    		<amp-social-share type="gplus" width="40" height="40"></amp-social-share>
+			    		<!--
+			    		<amp-social-share type="tumblr" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="whatsapp" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="linkedin" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="email" width="40" height="40"></amp-social-share>
+			    		-->
+			    	</div>
+			    	
+			    	
+			    	<!-- content -->
+			  		<p>2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：</p>
+<blockquote>
+<p>一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。</p>
+</blockquote>
+<p>趁这段时间，整理一下我们组的方案。</p>
+<a id="more"></a>
+<h1 id="总体方案"><a href="#总体方案" class="headerlink" title="总体方案"></a>总体方案</h1><p>作品的机械结构由我的队友完成。支架使用铝型材制作，通过万向节与摆杆相连，底部是由细碳纤杆做成的立方体，四个电机固定在立方体的四个侧面上。</p>
+<p><p><amp-img src="/images/2015/08/pendulum_1.jpg" width="576" height="768" layout="responsive"></amp-img></p></p>
+<p>该题的电路比较简单，Arduno MEGA 2560 产生四路 PWM 波，通过 PMV31XN 驱动各个电机；MPU-6050 用于获取摆的运动状态。为了方便设置，作品上还安装了三个微动开关和一个 SSD1306 OLED 显示屏。</p>
+<p><p><amp-img src="/images/2015/08/pendulum_3.png" width="301" height="229" layout="responsive"></amp-img></p></p>
+<p>MPU-6050 固定在摆杆上，传感器 X, Y 轴的方向与两组电机轴的方向一致。（类似于四旋翼中的 “+” 模式。）</p>
+<h1 id="基本要求一：起摆"><a href="#基本要求一：起摆" class="headerlink" title="基本要求一：起摆"></a>基本要求一：起摆</h1><p>题目的要求如下：</p>
+<blockquote>
+<p>从静止开始,15s 内控制风力摆做类似自由摆运动，使激光笔稳定地<br>在地面画出一条长度不短于 50cm 的直线段，其线性度偏差不大于 ±2.5cm，并且具有较好的重复性。</p>
+</blockquote>
+<p>自由摆的摆动相当于左右方向的往复运动，在没有外力的情况下，由于阻力的影响，摆幅会逐渐降低。而在摆运动的过程中，不断给摆补充能量，就会使摆幅不断增大。</p>
+<p>按照我们的方案，风力摆向左摆动时，给风力摆施加向左的力，向右运动时施加向右的力，风力摆就会越摆越高。从 MPU-6050 中读取的角速度正负，正好对应摆动的左右方向。</p>
+<p>程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode1</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    initMPU_NoDMP();        <span class="comment">// 初始化 MPU-6050</span></div><div class="line">    Serial.println(<span class="string">"App mode1 initialized!"</span>);</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();  <span class="comment">// 从 MPU-6050 读取角速度和加速度</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;         <span class="comment">// 如果 X 轴的角速度大于 0</span></div><div class="line">            motorOutput13(<span class="number">255</span>);  <span class="comment">// 电机 1 转动，给风力摆正方向的力</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(<span class="number">-255</span>); <span class="comment">// 电机 3 转动，给风力摆反方向的力</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        delay(<span class="number">50</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求二：完成幅度可控的摆动"><a href="#基本要求二：完成幅度可控的摆动" class="headerlink" title="基本要求二：完成幅度可控的摆动"></a>基本要求二：完成幅度可控的摆动</h1><blockquote>
+<p>从静止开始，15s 内完成幅度可控的摆动。画出长度在 30~60cm 间可设置，长度偏差不大于 ±2.5cm 的直线段，并且具有较好的重复性。</p>
+</blockquote>
+<p>将题目中的线段长度换算为风力摆需要达到的摆动幅度（角度）。在风力摆运动的过程中，通过 MPU-6050 实时获取目前的摆动幅度，通过 PID 算法控制电机转速，即可使风力摆逐渐达到要求的摆幅。</p>
+<p>对于摆动幅度的获取，首先通过 MPU-6050 读取角速度，角速度为 0 时，说明风力摆已到达最高点。此时，可通过 MPU-6050 的 DMP 读取四元数，并换算为摆幅角度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode2</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> theta_in, theta_out, theta_set, theta_last = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(&amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">5.0</span>, <span class="number">1.3</span>, <span class="number">2.0</span>, DIRECT)</span></span>;</div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode2 initialized!"</span>);</div><div class="line">    theta_set = interface_input_length();   <span class="comment">// 输入长度</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(theta_set &lt;= <span class="number">35</span>) &#123; theta_pid.SetTunings(<span class="number">1.0</span>, <span class="number">0.7</span>, <span class="number">1.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(theta_set &lt;= <span class="number">45</span>) &#123; theta_pid.SetTunings(<span class="number">8.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> &#123; theta_pid.SetTunings(<span class="number">5.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;  <span class="comment">// 设置 PID 参数</span></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set = <span class="built_in">atan</span>((theta_set / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set *= <span class="number">180</span> /M_PI;    <span class="comment">// 将长度换算为以角度为单位的摆动幅度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    initMPU();</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;   </div><div class="line">            <span class="comment">// 角速度为 0，摆动到最高点，获取此时摆动幅度</span></div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;  <span class="comment">// 将 pitch 和 roll 换算为摆动幅度</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;      <span class="comment">// 两次的摆动幅度（最大摆动角度）取平均值</span></div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();  <span class="comment">// 计算 PID</span></div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Serial.println(theta_in);</div><div class="line">        Serial.println(<span class="string">", "</span>);</div><div class="line">        Serial.println(theta_out);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">100</span>; &#125; <span class="comment">// 保证在静止的时候依旧能摆起来</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;</div><div class="line">            motorOutput13(theta_out);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-theta_out);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();           <span class="comment">// 获取 yaw, roll, pitch</span></div><div class="line">        getMotion6_NoDMP(); <span class="comment">// 获取角速度和加速度</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求三：按照指定方向摆动"><a href="#基本要求三：按照指定方向摆动" class="headerlink" title="基本要求三：按照指定方向摆动"></a>基本要求三：按照指定方向摆动</h1><blockquote>
+<p>可设定摆动方向，风力摆从静止开始，15s 内按照设置的方向（角度）摆动，画出不短于 20cm 的直线段。</p>
+</blockquote>
+<p>根据力的合成与分解，控制两对电机的转速，即可做到按照指定方向摆动。其余部分与基础要求一类似。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode3</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">uint16_t</span> angle_input = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int16_t</span> motor_val1, motor_val2;</div><div class="line"></div><div class="line">    initMPU_NoDMP();</div><div class="line">    Serial.println(<span class="string">"App mode3 initialized!"</span>);</div><div class="line">    Serial.println(<span class="string">"Input radius:"</span>);</div><div class="line">    angle_input = interface_input_angle();  <span class="comment">//输入角度</span></div><div class="line"></div><div class="line">    <span class="comment">//if(angle_input == 120) &#123; angle_input = 130; &#125;  // 手动修正误差</span></div><div class="line"></div><div class="line">    <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">    motor_val1 = <span class="number">120</span> * <span class="built_in">sin</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line">    motor_val2 = <span class="number">120</span> * <span class="built_in">cos</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (gx &gt; <span class="number">0</span>) &#123;   <span class="comment">// 以 90 度摆动时，只判断 gx 可能会出现问题。由于比赛时间限制，没有来得及修改。</span></div><div class="line">            motorOutput13(motor_val1);</div><div class="line">            motorOutput24(motor_val2);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-motor_val1);</div><div class="line">            motorOutput24(-motor_val2);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求四：制动"><a href="#基本要求四：制动" class="headerlink" title="基本要求四：制动"></a>基本要求四：制动</h1><blockquote>
+<p>将风力摆拉起一定角度 (30°~45°) 放开，5s 内使风力摆制动达到静止状态。</p>
+</blockquote>
+<p>本要求刚好与基本要求一相反，在风力摆运动的过程中，给风力摆一个与运动方向相反的力，即可消耗其能量，使风力摆快速停下。这个力的大小，应该根据摆的运动速度实时调整，防止在摆在接近停止时来回振荡。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode4</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> kp_x = <span class="number">-0.1</span>, kp_y = <span class="number">-0.1</span>;</div><div class="line">    <span class="keyword">int16_t</span> output_x = <span class="number">0</span>, output_y = <span class="number">0</span>;</div><div class="line">    initMPU_NoDMP();</div><div class="line">    delay(<span class="number">400</span>);</div><div class="line">    Serial.println(<span class="string">"App mode4 initialized!"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">        output_x = gx * kp_x;</div><div class="line">        output_y = gy * kp_y; <span class="comment">// kp_x 和 kp_y 均为负数，说明风机施加的力与运动方向相反</span></div><div class="line"></div><div class="line">        <span class="comment">//Serial.println(output_x);</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(output_x &lt; <span class="number">-255</span>) &#123; output_x = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_x &gt; <span class="number">255</span> ) &#123; output_x =  <span class="number">255</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(output_y &lt; <span class="number">-255</span>) &#123; output_y = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_y &gt; <span class="number">255</span> ) &#123; output_y =  <span class="number">255</span>; &#125;</div><div class="line"></div><div class="line">        motorOutput13(output_x);</div><div class="line">        motorOutput24(output_y);</div><div class="line"></div><div class="line">        delay(<span class="number">4</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="发挥要求：画圆"><a href="#发挥要求：画圆" class="headerlink" title="发挥要求：画圆"></a>发挥要求：画圆</h1><blockquote>
+<p>(1) 以风力摆静止时激光笔的光点为圆心，驱动风力摆用激光笔在地面画圆，30s 内需重复 3 次；圆半径可在 15~35cm 范围内设置，激光笔画出的轨迹应落在指定半径 ±2.5cm 的圆环内；</p>
+<p>(2) 在发挥部分 (1) 后继续作圆周运动，在距离风力摆 1~2m 距离内用一台 50~60W 台扇在水平方向吹向风力摆，台扇吹 5s 后停止，风力摆能够在 5s 内恢复发挥部分 (1) 规定的圆周运动，激光笔画出符合要求的轨迹;</p>
+</blockquote>
+<p>圆锥摆相当于两个方向相互垂直的单摆的叠加，其相位差为 90 度。所以需要在基础要求二的基础上，对 X, Y 轴分别进行 PID 控制。同时需要提前测量好周期，控制好相位，否则无法画出正圆。</p>
+<p>由于在完成本要求时，已经是比赛的最后一天，参数没调好，再加上程序应该还有更多优化的空间，在实验室调试时，算是勉强完成题目的要求。但在正式比赛的过程中，画出的圆有了较大的变形，再加上参数没调好，出现了振荡的现象，最终成绩不是太好。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode5</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">uint8_t</span> delayTime = <span class="number">120</span>; <span class="comment">// 电机转速更新周期，应根据摆的周期，结合实测结果进行微调，否则画出的圆会出现变形</span></div><div class="line">    <span class="keyword">float</span> currentAngle = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">float</span> i;</div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> lastTime = <span class="number">0</span>, currentTime = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in,   theta_out,   theta_set,   theta_last   = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in_2, theta_out_2, theta_set_2, theta_last_2 = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(  &amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">6.0</span>, <span class="number">1.2</span>, <span class="number">5.1</span>, DIRECT)</span></span>; <span class="comment">// X 方向 PID</span></div><div class="line">    <span class="function">PID <span class="title">theta_pid_2</span><span class="params">(&amp;theta_in_2, &amp;theta_out_2, &amp;theta_set_2, <span class="number">8.0</span>, <span class="number">1.5</span>, <span class="number">3.5</span>, DIRECT)</span></span>;  <span class="comment">// Y 方向 PID</span></div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>, gy_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>, a_2 = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line">    theta_pid_2.SetMode(AUTOMATIC);</div><div class="line">    theta_pid_2.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid_2.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode5 initialized!"</span>);</div><div class="line">    theta_set = interface_input_radius() * <span class="number">2.0</span> + <span class="number">1.0</span>; <span class="comment">// 输入半径，换算为直径。1.0 为人工误差修正</span></div><div class="line">    theta_set_2 = theta_set;</div><div class="line"></div><div class="line">    initMPU();</div><div class="line"></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set    = <span class="built_in">atan</span>((theta_set   / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set   *= <span class="number">180</span> /M_PI;</div><div class="line">    theta_set_2  = <span class="built_in">atan</span>((theta_set_2 / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set_2 *= <span class="number">180</span> /M_PI; <span class="comment">// 将直径换算为摆动角度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 在 X 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在 Y 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gy == <span class="number">0</span> || (gy &gt; <span class="number">0</span> &amp;&amp; gy_last &lt; <span class="number">0</span>) || (gy &lt; <span class="number">0</span> &amp;&amp; gy_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a_2 == <span class="number">0</span>) &#123;</div><div class="line">                a_2 = <span class="number">1</span>;</div><div class="line">                theta_in_2 = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a_2 = <span class="number">0</span>;</div><div class="line">                theta_in_2 += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in_2 /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in_2 &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in_2 = theta_last_2;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last_2 = theta_in_2;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">60.0</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out_2) &lt; <span class="number">2</span>) &#123; theta_out_2 = <span class="number">60.0</span>; &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在指定的时间间隔更新电机转速 */</span></div><div class="line">        currentTime = millis();</div><div class="line">        i = (currentTime - lastTime) / delayTime;</div><div class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span>)&#123;</div><div class="line">            currentAngle += <span class="number">30.0</span> * i;</div><div class="line">            <span class="keyword">if</span>(currentAngle &gt;= <span class="number">360</span>) &#123; currentAngle = <span class="number">0.0</span>; &#125;</div><div class="line">            motorOutput13(theta_out   * <span class="built_in">sin</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            motorOutput24(theta_out_2 * <span class="built_in">cos</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            lastTime = currentTime;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line">        gy_last = gy;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+			  		
+			  		
+			  		<!-- google Adsense -->
+			  		
+					
+			  	</div>
+				
+		  	</article>
+		  	
+		  	
+		  	<!-- meta (categories , tags) -->
+		  	
+		  	<div class="meta-content">
+		  	
+		  		
+		  		<div class="meta-wrapper">
+				  	<h6 class="categories">Category</h6>
+				  	<div class="article-categories">
+						<ul class="article-categories-list">
+							
+					    		<li class="article-categories-list-item">
+					    			<a class="article-categories-list-link" href="/categories/学习笔记/" class="link-gaTrack" data-linkType="link-categories">
+					    				学习笔记
+					    			</a>
+					    		</li>
+							
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+				<div class="meta-wrapper">
+				  	<h6 class="tag">Tag</h6>
+				  	<div class="article-tag">
+						<ul class="article-tag-list">
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/Arduino/" class="link-gaTrack" data-linkType="link-tag">
+					    				Arduino
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/风力摆/" class="link-gaTrack" data-linkType="link-tag">
+					    				风力摆
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/MPU-6050/" class="link-gaTrack" data-linkType="link-tag">
+					    				MPU-6050
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/陀螺仪/" class="link-gaTrack" data-linkType="link-tag">
+					    				陀螺仪
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/电赛/" class="link-gaTrack" data-linkType="link-tag">
+					    				电赛
+					    			</a>
+					    		</li>
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		  	
+		  	
+		  	<!-- article nav -->
+		  	
+			<nav id="article-nav">
+			  
+			  <a href="/2016/nixie-clock-lite/" id="article-nav-newer" class="article-nav-link-wrap">
+			    <strong class="article-nav-caption">Newer</strong>
+			    <div class="article-nav-title">
+			      
+			        四位辉光管时钟
+			      
+			    </div>
+			  </a>
+			  
+			  
+			  <a href="/2015/join-me/" id="article-nav-older" class="article-nav-link-wrap">
+			    <strong class="article-nav-caption">Older</strong>
+			    <div class="article-nav-title">
+			      
+			        欢迎与我合作参加 2015 年创新项目
+			      
+			    </div>
+			  </a>
+			  
+			</nav>
+			
+			
+		</div>
+		
+		
+		<footer id="footer">
+		
+			
+			
+			
+			
+			<div class="homeLink">
+		  		<a href="/">Home</a>
+		  	</div>
+			
+			
+			<div class="copyright-tool">
+				<div class="copyright-title">
+					<span>
+					&copy; 2017&nbsp;Blanboom
+					</span>
+				</div>
+				
+			</div>
+			
+		</footer>
+		
+		
+	</div>
+	
+	
+  	<div id="totop"><a href="#"></a></div>
+  	
+  	
+  </body>
+</html>

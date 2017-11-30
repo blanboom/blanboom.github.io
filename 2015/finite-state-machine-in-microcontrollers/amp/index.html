@@ -1,0 +1,1883 @@
+<!doctype html>
+<html ⚡>
+  <head>
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/index.html" >
+    <title>有限状态机在单片机编程中的应用 | Blanboom</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style>
+    <noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+  	<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script type="application/ld+json">
+		{
+			"@context": "http://schema.org",
+			"@type": "BlogPosting",
+			"headline": "有限状态机在单片机编程中的应用",
+			
+			"description": "&lt;p&gt;在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个任务的&lt;strong&gt;执行时间过长&lt;/strong&gt;，导致其他任务无法及时执行&lt;/li&gt;
+&lt;li&gt;在一些任务中大量使用 delay() 等函数进行软件延时，这些&lt;strong&gt;延时函数占用过多时间&lt;/strong&gt;，影响其他任务的执行&lt;/li&gt;
+&lt;li&gt;一些复杂任务的程序&lt;strong&gt;逻辑不清晰&lt;/strong&gt;，不便于以后对程序进行维护，或添加新功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务&lt;strong&gt;分解为多个简单任务&lt;/strong&gt;，同时使代码&lt;strong&gt;逻辑更加清晰&lt;/strong&gt;，从而解决上述问题。&lt;/p&gt;
+&lt;h4 id=&#34;目录：&#34;&gt;&lt;a href=&#34;#目录：&#34; class=&#34;headerlink&#34; title=&#34;目录：&#34;&gt;&lt;/a&gt;目录：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_0&#34;&gt;1. 什么是有限状态机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_1&#34;&gt;2. 有限状态机的作用&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_2&#34;&gt;2.1 分解耗时过长的任务&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_3&#34;&gt;2.2 避免软件延时对 CPU 资源造成浪费&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_4&#34;&gt;2.3 使程序逻辑更加清晰&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_5&#34;&gt;3. 有限状态机的实现&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_6&#34;&gt;3.1 通过 switch - case 语句实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_7&#34;&gt;3.2 通过 Arduino 库实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_8&#34;&gt;3.3 其他方式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_9&#34;&gt;4. 示例一：按键去抖动程序的优化&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_10&#34;&gt;4.1 传统的按键去抖动程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_11&#34;&gt;4.2 优化后的按键去抖动程序&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_12&#34;&gt;5. 示例二：通过有限状态机实现的闹钟程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#toc_13&#34;&gt;6. 后记&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;",
+			
+			"mainEntityOfPage":{
+			    "@type":"WebPage",
+			    "@id":"https://blanboom.org/2015/finite-state-machine-in-microcontrollers/"
+			},
+			"datePublished": "2015-02-06T14:02:00.000Z",
+			"dateModified": "2017-06-02T15:36:20.000Z",
+			
+			"image": {
+				"@type": "ImageObject",
+				"url": "/amp-dist/sample/sample-substituteTitleImage.png",
+				"width" : "1024",
+				"height" : "800"
+			},
+			
+			"author": {
+			    "@type": "Person",
+			    "name": "Blanboom"
+			},
+			"publisher": {
+			    "@type": "Organization",
+			    "name": "Blanboom"
+			    
+			    ,
+			    "logo": {
+			      "@type": "ImageObject",
+			      "url": "https://blanboom.org/amp-dist/sample/sample-logo.png",
+			      "width": 600,
+			      "height": 60
+			    }
+			    
+			}
+		}
+	</script>
+	
+	<style amp-custom>
+		
+:root sub,
+:root sup {
+  vertical-align: baseline;
+}
+a {
+  -moz-transition: 0.7s;
+  -ms-transition: 0.7s;
+  -o-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  color: #0379c4;
+  -webkit-transition: 0.7s;
+  -moz-transition: 0.7s;
+  -o-transition: 0.7s;
+  -ms-transition: 0.7s;
+  transition: 0.7s;
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+a img {
+  border: none;
+}
+a:hover {
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  color: #31adfc;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+abbr,
+acronym,
+address,
+applet,
+big,
+blockquote,
+body,
+caption,
+cite,
+code,
+dd,
+del,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+html,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+object,
+ol,
+p,
+pre,
+q,
+s,
+samp,
+small,
+span,
+strike,
+strong,
+sub,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr,
+tt,
+ul,
+var {
+  border: 0;
+  font-family: inherit;
+  font-size: 100%;
+  font-style: inherit;
+  font-weight: inherit;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+abbr {
+  cursor: help;
+  border-bottom: 1px dotted;
+  font-variant: normal;
+}
+acronym {
+  border-bottom: 1px dotted;
+  font-variant: normal;
+}
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  background: #fff;
+  color: #34393a;
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+  font-size: 102%;
+  font-wight: 500;
+  line-height: 2em;
+  text-rendering: optimizelegibility;
+}
+button::-moz-focus-inner,
+input::-moz-focus-inner,
+figure.highlight td,
+.post .entry-content figure.highlight th {
+  border: 0;
+  padding: 0;
+}
+caption,
+table,
+td,
+th {
+  vertical-align: middle;
+}
+caption,
+td,
+th,
+.table-align-left {
+  text-align: left;
+}
+code,
+figure.highlight .code,
+pre {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Consolas, Monaco, Consolas, monospace;
+}
+code,
+pre {
+  background-color: #f5f2f0;
+  margin: 0 3px;
+  padding: 1px 8px;
+}
+code,
+pre,
+samp {
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+}
+del {
+  text-decoration: line-through;
+}
+#article-nav {
+  clear: both;
+  margin: 1em 20px;
+  position: relative;
+  
+}
+#article-nav:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+#article-nav:before {
+  content: "";
+  display: table;
+  -webkit-border-radius: 50%;
+  -webkit-box-shadow: 0 1px 2px #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 1px 2px #fff;
+  box-shadow: 0 1px 2px #fff;
+  content: "";
+  height: 8px;
+  left: 50%;
+  margin-left: -4px;
+  margin-top: -4px;
+  position: absolute;
+  top: 50%;
+  width: 8px;
+}
+#article-nav-newer {
+  float: left;
+  padding-right: 20px;
+  text-align: right;
+}
+#article-nav-newer .article-nav-caption {
+  margin-right: -2px;
+}
+#article-nav-older {
+  float: right;
+  padding-left: 20px;
+  text-align: left;
+}
+#container {
+  margin-left: auto;
+  margin-right: auto;
+}
+#footer {
+  background-color: #0379c4;
+  display: block;
+  font-size: 70%;
+  line-height: 1.6;
+  padding: 20px 0;
+}
+#footer:after {
+  content: ".";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+.moreRead:before,
+.useFlame,
+kbd,
+.copyright,
+.table-align-center {
+  text-align: center;
+}
+.blog-title a,
+.nav,
+.nav-icon,
+.loadingPutAbsolute,
+.moreRead:before,
+.titleWrapper {
+  position: relative;
+}
+#header {
+  display: block;
+  margin: 0.5em 0 1em;
+  position: static;
+  text-align: center;
+  position: relative;
+}
+#header:after {
+  display: block;
+  font-size: 0;
+  height: 0;
+}
+#header:after,
+.clearfix:after,
+.nav ul:after {
+  clear: both;
+  visibility: hidden;
+}
+#main {
+  margin-bottom: 3em;
+  padding-left: 0;
+}
+.useFlame,
+kbd {
+  display: inline-block;
+}
+#page-nav a,
+.photoby,
+kbd {
+  color: #4c5355;
+}
+* html .clearfix {
+  height: 1%;
+}
+.alignleft,
+.left {
+  float: left;
+}
+.alignright,
+.right {
+  float: right;
+}
+.article-devider {
+  border: 0;
+  border-top: 5px solid #ddd;
+  margin: 5em auto;
+  width: 8%;
+}
+.article-nav-caption,
+.nav {
+  text-transform: uppercase;
+}
+.article-nav-caption {
+  color: #ddd;
+  font-weight: 700;
+  letter-spacing: 2px;
+  line-height: 1em;
+}
+.article-nav-link-wrap,
+a {
+  text-decoration: none;
+}
+.article-nav-link-wrap {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #999;
+  display: block;
+  margin-top: 0;
+  text-align: center;
+  width: 50%;
+}
+.article-nav-link-wrap:hover {
+  color: #bfbfbf;
+}
+.article-nav-title {
+  font-size: 0.85em;
+  line-height: 1.6em;
+  margin-top: 0.5em;
+}
+.nav ul {
+  display: block;
+}
+.nav ul li {
+  display: block;
+}
+.nav ul li a {
+  display: block;
+}
+.authorCap {
+  font-size: 1.5em;
+}
+.authorReading {
+  font-size: 0.7em;
+}
+.site-author-info-wrapper {
+  padding: 20px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.gravatar-wrapper {
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+}
+.gravatar-area {
+  margin: 0 20px 0 0;
+}
+.authorCap-wrapper {
+  -webkit-box-flex: 3;
+  -moz-box-flex: 3;
+  -o-box-flex: 3;
+  box-flex: 3;
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+}
+.blog-title {
+  border-bottom: none;
+  float: none;
+  font-size: 120%;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 10px 0;
+  padding-bottom: 0.2em;
+}
+.blog-title a {
+  left: 0.1em;
+  padding: 0.4em 0;
+}
+.circle {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+}
+.copyright-title {
+  font-size: 1.2em;
+}
+.copyright-tool {
+  text-align: center;
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+  margin: 1em 0 0 0;
+}
+h6.tag,
+h6.categories {
+  color: #0379c4;
+  font-size: 110%;
+}
+.entry-content {
+  width: 93.75%;
+  margin: 0 auto;
+  font-size: 100%;
+}
+.entry-content h2,
+.entry-content h3 {
+  text-align: center;
+}
+.entry-content h1 {
+  font-size: 170%;
+  line-height: 1.5;
+  margin: 1em 0 0.8em;
+}
+.entry-content h2,
+.entry-content h3,
+.entry-content h4,
+.entry-content h5,
+.entry-content h6 {
+  line-height: 1.5;
+  margin: 1em 0 0.8em;
+}
+.entry-content h2 {
+  border-bottom: 2px solid #0379c4;
+  color: #0379c4;
+  font-size: 160%;
+  margin: 1.8em 0 0.5em;
+  padding: 0.8em 0;
+}
+.entry-content h3 {
+  color: #0379c4;
+  font-size: 150%;
+  margin: 1.8em 0 0.5em;
+  padding: 0.8em 0.5em;
+}
+.entry-content h4 {
+  border-left: 2px solid #0379c4;
+  color: #0379c4;
+  font-size: 120%;
+  margin: 1.8em 0 0.5em;
+  padding-left: 1.2em;
+  text-align: left;
+}
+.entry-content h5,
+.entry-content h6 {
+  color: #0379c4;
+  margin: 1.8em 0 0.5em;
+  text-align: left;
+}
+.entry-content h5 {
+  font-size: 110%;
+  padding-left: 1.2em;
+}
+.entry-content h6 {
+  font-size: 100%;
+}
+.entry-content p {
+  font-size: 1em;
+  letter-spacing: 0;
+  line-height: 2.2em;
+  margin: 1.8em 0;
+}
+.entry-content p em {
+  background-color: #faf7dc;
+  color: #736e4f;
+  font-style: normal;
+  margin: 0 2px;
+  padding: 3px;
+}
+.entry-content p strong {
+  color: #734f4f;
+  font-style: normal;
+  margin: 0 2px;
+  padding: 3px;
+  background-color: #fadcdc;
+}
+.entry-content dl,
+.entry-content ol,
+.entry-content ul {
+  margin: 1.8em 0 1.8em 1em;
+  padding: 0;
+}
+.entry-content ol p,
+.entry-content ul p,
+.entry-content dl p {
+  margin: 0;
+}
+.entry-content dl li,
+.entry-content ol li {
+  line-height: 1.8em;
+  margin: 0.5em;
+}
+.entry-content ol {
+  list-style: decimal ;
+}
+.entry-content ol li {
+  font-size: 1em;
+  margin: 0.2em 0 0.2em 2.6em;
+  padding: 0 0 0 0.1em;
+  position: relative;
+}
+.entry-content ol p:not(:first-child),
+.entry-content ul p:not(:first-child) {
+  color: #4c5355;
+}
+.entry-content ol {
+  padding: 0 /* paddingキャンセル */;
+  margin: 0 /* marginキャンセル */;
+  list-style: none /* olがはき出す数字を消す */;
+}
+.entry-content ol {
+  counter-reset: number /* 名前を付けたカウンターをリセット */;
+  list-style: none /* olが数字を付けることをキャンセル */;
+  margin: 0;
+  padding: 0;
+}
+.entry-content ol li:before {
+  counter-increment: number /* 任意の名前を付けて！ */;
+  content: counter(number) /* 名前を付けたカウンターを呼び出し */;
+  position: absolute;
+  left: -2.2em;
+  top: 0.05em;
+  display: inline-block;
+  margin: 0 0.5em 0 0;
+  padding: 0;
+  float: left;
+  background: #6abcf0;
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  line-height: 1.6em;
+}
+.entry-content ol li p:first-child {
+  display: inline-block;
+  line-height: 1.6em;
+  height: 1.6em;
+  line-height: 1.6em;
+}
+.entry-content ul {
+  list-style: none;
+}
+.entry-content ul li {
+  font-size: 1em;
+  margin: 0.2em 0 0.2em 0.5em;
+  padding: 0 0 0 0.2em;
+  position: relative;
+}
+.entry-content ul li::after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 0.4em;
+  left: -1em;
+  width: 8px;
+  height: 8px;
+  border-bottom: 3px solid #ddd;
+}
+.entry-content dl li ol,
+.entry-content dl li ul {
+  margin-bottom: 2em;
+}
+.entry-content ol li ol,
+.entry-content ol li ul {
+  margin-bottom: 2em;
+}
+.entry-content ul li ol,
+.entry-content ul li ul {
+  margin-bottom: 2em;
+}
+.entry-content blockquote p:last-child,
+.entry-content .archive .post {
+  margin-bottom: 0;
+}
+.entry-content blockquote {
+  margin: 1.8em 0;
+  padding: 0.5em 20px;
+  position: relative;
+  background-color: #f6f6f4;
+}
+.entry-content blockquote p {
+  margin: 1em 0;
+}
+.entry-content blockquote:before {
+  color: #dfdfd8;
+  content: "”";
+  font-family: sans-serif;
+  font-size: 600%;
+  line-height: 1em;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+.entry-content blockquote blockquote:before {
+  content: "";
+}
+.entry-content hr {
+  border: 0;
+  border-top: 3px solid #ddd;
+  margin: 3em auto;
+  width: 20%;
+}
+.entry-content img,
+.entry-content video {
+  display: block;
+  height: auto;
+  margin: auto;
+  max-width: 100%;
+}
+.entry-content pre {
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding;
+  background: #f5f2f0;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  border: 0;
+  font-size: 100%;
+  line-height: 1.3;
+  overflow-x: auto;
+  padding: 15px;
+}
+.entry-content table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.85em;
+  margin: 1.8em auto;
+  width: auto;
+}
+.entry-content td {
+  border: 1px solid #c4c4c4;
+  line-height: 1.5em;
+  padding: 0.6em 0.4em;
+}
+.entry-content th {
+  background-color: #fdf7f4;
+  border: 1px solid #c4c4c4;
+  padding: 0.6em 0.4em;
+}
+.entry-content iframe {
+  width: 100% ;
+}
+.entry-content figure.highlight {
+  margin: 1.8em 0;
+}
+.entry-content figure.highlight td {
+  border: 0;
+  font-size: 1.1em;
+  padding: 0;
+}
+.entry-content figure.highlight td.code {
+  border-left: 1px solid #eceae8;
+}
+.entry-meta-header {
+  font-size: 87%;
+  left: -200px;
+  margin-bottom: 1em;
+  position: static;
+  top: 0.5em;
+  width: auto;
+  text-align: center;
+}
+.entry-meta-header .date {
+  font-family: 'メイリオ', 'MS PGothic', sans-serif;
+}
+.entry-meta-header .meta-elements {
+  display: inline;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+}
+.gist {
+  background: #fff;
+  border: 1px solid color-gutter;
+  color: #918577;
+  line-height: 1.6;
+  margin-top: 15px;
+  overflow: auto;
+  padding: 7px 15px;
+}
+.gist .gist-file {
+  border: none;
+  font-family: inherit;
+  font-size: 1em;
+  letter-spacing: 0;
+  margin: 0;
+}
+.gist .gist-file .gist-data {
+  background: 0 0;
+  border-bottom: none;
+}
+.gist .gist-file .gist-data pre {
+  font-family: Menlo, Consolas, Monaco, Consolas, monospace;
+  padding: 0 ;
+}
+.gist .gist-file .gist-meta {
+  background: 0 0;
+  color: #918577;
+  font-size: 100%;
+  margin-top: 5px;
+  padding: 0;
+}
+.gist .gist-file .gist-meta a {
+  color: #918577;
+}
+.gist .gist-file .gist-meta a:visited {
+  color: #918577;
+}
+.line {
+  font-size: 95%;
+  letter-spacing: 0.05em;
+  line-height: 2em;
+}
+.post {
+  font-size: 90%;
+  margin-bottom: 5em;
+  position: relative;
+}
+.post .entry-header {
+  margin-bottom: 2em;
+}
+.post .entry-title {
+  font-size: 130%;
+  margin: 0;
+}
+.post h1 {
+  font-size: 1.2em;
+}
+.table-align-right {
+  text-align: right;
+}
+figure.highlight {
+  background: #fff;
+  border: 1px solid color-gutter;
+  font-size: 0.9em;
+  line-height: 2;
+  margin: 2.2em 0;
+  overflow: auto;
+  padding: 7px 10px;
+  position: relative;
+}
+figure.highlight .code {
+  border-left: 1px solid #fff;
+  color: #918577;
+}
+figure.highlight .gutter {
+  color: #d4d0cd;
+  padding-right: 10px;
+  text-align: left;
+}
+figure.highlight figcaption {
+  color: #d4d0cd;
+  margin-bottom: 5px;
+}
+figure.highlight figcaption a {
+  position: absolute;
+  right: 15px;
+}
+figure.highlight pre {
+  background: 0 0;
+  border: none;
+  margin: 0;
+  padding: 8px;
+}
+figure.highlight table {
+  border-spacing: 0;
+  margin: 0;
+}
+.post .entry-content figure.highlight table {
+  border-spacing: 0;
+  margin: 0;
+}
+figure.highlight th {
+  border: 0;
+  font-weight: 400;
+  padding: 0;
+}
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #000;
+  text-decoration: none;
+}
+h1 a:hover,
+h2 a:hover,
+h3 a:hover,
+h4 a:hover,
+h5 a:hover,
+h6 a:hover {
+  color: #0379c4;
+}
+img.responsive-img {
+  height: auto;
+  max-width: 100%;
+}
+video.responsive-video {
+  height: auto;
+  max-width: 100%;
+}
+kbd {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-border-radius: 3px;
+  -webkit-box-shadow: 0 0 10px #e2e2e2 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  -webkit-font-smoothing: subpixel-antialiased;
+  background: #fff;
+  border-bottom: 1px solid #e6e6e6;
+  border-left: 1px solid #fff;
+  border-radius: 3px;
+  border-right: 1px solid #e6e6e6;
+  border-top: 1px solid #fff;
+  -webkit-box-shadow: 0 0 10px #e8e8e8 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  box-shadow: 0 0 10px #e8e8e8 inset, 0 1px 0 #c3c3c3, 0 2px 0 #c9c9c9, 0 3px 3px #333;
+  font-size: 0.85em;
+  line-height: 1;
+  margin: 5px;
+  padding: 6px 8px 3px;
+  text-shadow: 0 1px 0 #fff;
+  vertical-align: baseline;
+  
+}
+pre .addition,
+pre .css .tag,
+pre .keyword,
+pre .method,
+pre .nginx .title,
+pre .request,
+pre .status,
+pre .winutils {
+  color: #1a9ca1;
+}
+pre .attr_selector,
+pre .cdata,
+pre .clojure .title,
+pre .diff .change,
+pre .important {
+  color: #816ec5;
+}
+pre .preprocessor {
+  color: #816ec5;
+}
+pre .preprocessor .keyword {
+  color: #816ec5;
+}
+pre .shebang,
+pre .special,
+pre .subst {
+  color: #816ec5;
+}
+pre .symbol {
+  color: #816ec5;
+}
+pre .symbol .string {
+  color: #816ec5;
+}
+pre .attribute,
+pre .class .title,
+pre .constant,
+pre .haskell .type,
+pre .lisp .body,
+pre .parent,
+pre .smalltalk .number,
+pre .variable {
+  color: #c38700;
+}
+pre .built_in,
+pre .chunk,
+pre .decorator,
+pre .id,
+pre .identifier,
+pre .literal,
+pre .localvars,
+pre .title,
+pre .vhdl,
+pre .deletion {
+  color: #b42147;
+}
+pre .command,
+pre .hexcolor,
+pre .number,
+pre .phpdoc,
+pre .regexp,
+pre .string,
+pre .tag .value,
+pre .tex .formula {
+  color: #6c9a1c;
+}
+pre .comment,
+pre .diff .header,
+pre .doctype,
+pre .javadoc,
+pre .lisp .string,
+pre .pi,
+pre .template_comment {
+  color: #d4d0cd;
+  font-wight: normal;
+}
+sub {
+  bottom: -0.2em;
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+}
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  top: -0.5em;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+td.code,
+.article-tag-list {
+  padding: 0;
+}
+.entry-content .toc {
+  background: #fff;
+  padding: 1em 1em 1em 0;
+  margin: 2.8em 0em;
+  border: 1px solid #98d1f5;
+}
+.entry-content .toc ul:first-child {
+  border-top: none;
+}
+.entry-content .toc ul {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0;
+  border-top: 1px dotted #98d1f5;
+}
+.entry-content .toc ul ul,
+.entry-content .toc ul ol {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0 0 0 0.8em;
+}
+.entry-content .toc ul li {
+  padding: 0;
+  margin: 0 0 0 1em;
+  border-top: 1px dotted #98d1f5;
+}
+.entry-content .toc ul li a {
+  display: block;
+  padding: 10px 8px;
+  color: #34393a;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.entry-content .toc ul li a:hover {
+  color: #0379c4;
+  background-color: #98d1f5;
+}
+.entry-content .toc ul li a:before {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-right: 0.8em;
+}
+.entry-content .toc ul li ul,
+.entry-content .toc ul li ol {
+  margin-bottom: 0;
+  padding: 0;
+  margin: 0 0 0 0.8em;
+}
+.entry-content .toc ul li ul li a,
+.entry-content .toc ul li ol li a {
+  padding: 7px 10px;
+  font-size: 0.9em;
+}
+.entry-content .toc ul li ul li a:before,
+.entry-content .toc ul li ol li a:before {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  margin-right: 0.6em;
+}
+.entry-content .toc ul li:first-child {
+  border-top: none;
+}
+.entry-content .toc ul li::after,
+.entry-content .toc ul li::before {
+  content: normal;
+}
+header {
+  height: 60px;
+}
+header .nav-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  -o-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+header .left-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -o-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  font-size: 20px;
+  margin-left: 0;
+  font-weight: 300;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-box-pack: start;
+  -moz-box-pack: start;
+  -o-box-pack: start;
+  -ms-flex-pack: start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -webkit-box-flex: 1;
+  -ms-flex: 1 1 auto;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+  box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-align: left;
+  width: auto;
+  font-size: 15px;
+}
+header .right {
+  font-size: 15px;
+}
+header .alt {
+  padding: 0;
+  text-align: right;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.header-title a {
+  padding: 0 0 0 20px;
+  height: 60px;
+  line-height: 60px;
+  font-size: 20px;
+  color: #000;
+  letter-spacing: 0.2em;
+}
+button {
+  -webkit-box-align: start;
+  -moz-box-align: start;
+  -o-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  text-align: center;
+  cursor: default;
+  color: buttontext;
+  background-color: buttonface;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 2px 6px 3px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  -webkit-border-image: initial;
+  -moz-border-image: initial;
+  -o-border-image: initial;
+  border-image: initial;
+  text-rendering: auto;
+  color: initial;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  display: inline-block;
+  text-align: start;
+  margin: 0em 0em 0em 0em;
+  font: 11px system-ui;
+  -webkit-writing-mode: horizontal-tb;
+  -webkit-appearance: button;
+}
+.__web-inspector-hide-shortcut__ {
+  visibility: hidden ;
+}
+.hamburger {
+  display: inline-block;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-3 -6 24 24\"><path fill=\"#4A4A4A\" d=\"M0 12h18v-2H0v2M0 7h18V5H0v2M0 0v2h18V0H0\"/></svg>");
+  background-repeat: no-repeat;
+  -webkit-background-size: 30px 24px;
+  -moz-background-size: 30px 24px;
+  background-size: 30px 24px;
+  background-position: center center;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  -ms-flex-item-align: center;
+  -ms-grid-row-align: center;
+  -webkit-align-self: center;
+  align-self: center;
+  -ms-flex-item-align: center;
+}
+.tab {
+  position: relative;
+  color: #424242;
+  padding: 6px;
+  margin: 0 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 400;
+  -webkit-transition: 0.1s ease color;
+  -webkit-transition: 0.1s ease color;
+  -moz-transition: 0.1s ease color;
+  -o-transition: 0.1s ease color;
+  -ms-transition: 0.1s ease color;
+  transition: 0.1s ease color;
+}
+amp-sidebar {
+  width: 200px;
+}
+amp-sidebar ul {
+  padding: 10px 0;
+}
+amp-sidebar li a {
+  display: block;
+  padding: 10px 20px;
+}
+.title-cover {
+  background-color: #0379c4;
+  color: #fff;
+  padding: 30px 15px 20px 15px;
+  text-align: center;
+}
+.title-cover a {
+  color: #fff;
+}
+.title-cover a:hover {
+  color: #fff;
+}
+.meta-content {
+  background-color: #e9e9e9;
+  padding: 20px 0;
+}
+.meta-wrapper {
+  margin: 20px 20px;
+  padding: 20px 20px;
+  background-color: #fff;
+}
+#footer .homeLink,
+#footer .copyright-tool {
+  margin: 20px;
+}
+.copyright-tool {
+  color: #fff;
+  font-size: 0.5em;
+}
+.social-share {
+  margin: 10px 0 0 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -o-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+.social-share amp-social-share {
+  margin: 5px;
+}
+#totop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 1.2em;
+  z-index: 995;
+  line-height: 1.8em;
+}
+#totop a {
+  background: rgba(152,209,245,0.6);
+  text-decoration: none;
+  color: #fff;
+  padding: 0;
+  text-align: center;
+  display: block;
+  width: 1.2em;
+  height: 2.2em;
+  line-height: 2em;
+  letter-spacing: 0;
+  position: relative;
+  display: inline-block;
+  padding: 0 0 0 16px;
+  vertical-align: middle;
+  text-decoration: none;
+  font-size: 15px;
+}
+#totop a:before,
+#totop a:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  content: "";
+  vertical-align: middle;
+}
+#totop a:before {
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #fff;
+  border-right: 2px solid #fff;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+#totop a:hover {
+  text-decoration: none;
+  background: #0379c4;
+  color: #fff;
+  line-height: 2.3em;
+}
+.site-author-desc {
+  font-size: 1.2em;
+  line-height: 2em;
+  margin-top: 1em;
+}
+.site-author-info {
+  background-color: #fff;
+  margin: 20px;
+}
+.gravatar-area {
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+}
+.article-tag,
+.article-tag-list,
+.article-categories,
+.article-categories-list {
+  padding: 0;
+  margin: 0;
+}
+.article-categories {
+  margin-bottom: 1.6em;
+}
+.article-tag-list li,
+.article-categories-list li {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0.2em 0;
+}
+.article-tag-list li a,
+.article-categories-list li a {
+  padding: 0.5em 0.6em;
+  margin: 0.4em 0em;
+  background-color: #f5f2f0;
+  color: #34393a;
+}
+.article-tag-list li a:before,
+.article-categories-list li a:before {
+  content: "#";
+}
+.article-tag-list li a:hover,
+.article-categories-list li a:hover {
+  color: #fff;
+  background-color: #0498f6;
+}
+.homeLink,
+.htmlPageLink {
+  font-weight: 700;
+  -moz-transition: 0.7s;
+  -ms-transition: 0.7s;
+  -o-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  -webkit-transition: 0.7s;
+  -moz-transition: 0.7s;
+  -o-transition: 0.7s;
+  -ms-transition: 0.7s;
+  transition: 0.7s;
+  padding: 0.4em 0;
+}
+.homeLink a,
+.htmlPageLink a {
+  color: #fff;
+  display: block;
+  padding: 1em;
+  text-align: center;
+}
+.homeLink:hover,
+.htmlPageLink:hover {
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -o-transition: 0.3s;
+  -ms-transition: 0.3s;
+  transition: 0.3s;
+}
+.homeLink {
+  font-size: 120%;
+  background: #18a3fb;
+}
+.homeLink:hover {
+  background: #4ab7fc;
+}
+.htmlPageLink {
+  font-size: 110%;
+  background: #18a3fb;
+}
+.htmlPageLink:hover {
+  background: #4ab7fc;
+}
+.googleAdPost,
+.ad-footer,
+amp-instagram,
+amp-vimeo,
+amp-video,
+amp-youtube,
+amp-twitter {
+  margin: 2.8em auto;
+}
+@media (min-width: 800px) {
+  .entry-header,
+  .entry-title,
+  .entry-content,
+  .article-nav {
+    width: 780px;
+    margin: 0 auto;
+  }
+  .nav-container {
+    width: 800px;
+    margin: 0 auto;
+  }
+  .meta-wrapper {
+    width: 760px;
+    margin: 20px auto;
+  }
+  .site-author-info {
+    width: 760px;
+    margin: 20px auto;
+  }
+  #footer .homeLink,
+  #footer .copyright-tool {
+    width: 760px;
+    margin: 20px auto;
+  }
+}
+
+	</style>
+	
+  </head>
+  <body>
+  	
+  	
+  	<!-- google analytics -->
+  	
+  	<amp-analytics type="googleanalytics" id="google-analytics">
+		<script type="application/json">
+		{
+		  "vars": {
+		    "account": "UA-40682162-1"
+		  },
+		  "triggers": {
+		    "trackPageview": {
+		      "on": "visible",
+		      "request": "pageview"
+		    }
+		  }
+		}
+		</script>
+	</amp-analytics>
+	
+  	
+  	
+  	<!-- menu -->
+  	<header>
+  		<div class="nav-container">
+	  		<div class="left-nav">
+	  			<div class="header-title">
+	  				<a href="/">Blanboom</a>
+	  			</div>
+	  		</div>
+	  		<div class="right alt">
+	  			<button on='tap:sidebar.toggle' class="tab hamburger"></button>
+	  		</div>
+	  	</div>
+    </header>
+  	
+  	
+  	<!-- sidebar -->
+  	<amp-sidebar id='sidebar' layout="nodisplay" side="left">
+      <ul>
+      	<!--
+      		To use the menu, add the menu option of _config.yml.
+      		
+      		generator_amp:
+      		  theme:
+			    menu:
+			      diary: /categories/diary/
+			      gallery: /categories/archive-gallery
+			      archives: /archives
+      	-->
+        <li><a href="/">Home</a></li>
+        
+      </ul>
+    </amp-sidebar>
+  	
+  	
+  	<!-- container -->
+  	<div id="container">
+	  	<div id="main">
+		    <article id="post-finite-state-machine-in-microcontrollers" class="post">
+		    
+		    	<!-- entry title -->
+				<div class="title-cover">
+					<div class="entry-header">
+						
+						  <h1 class="article-title entry-title" itemprop="name">
+						    <a href="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/" target="_blank" itemprop="url">有限状态机在单片机编程中的应用</a>
+						  </h1>
+						
+					</div>
+					
+					<!-- datePublished -->
+					<div class="entry-meta-header">
+						<span class="meta-elements date">
+							<time datetime="2015-02-06" itemprop="datePublished">2015-02-06</time>
+						</span>
+					</div>
+				</div>
+				
+				<!-- entry content -->
+			    <div class="entry-content ecp">
+			    
+			    
+			    	<!-- social share button -->
+			    	<!--
+			      		To use the facebook button, add the facebook_app_id option of _config.yml.
+			      		
+			      		generator_amp:
+			      		  theme:
+    						facebook_app_id: 123456789
+			      	-->
+			    	<div class="social-share">
+			    		<amp-social-share type="twitter" width="40" height="40"></amp-social-share>
+			    		
+			    		<!--
+			    		<amp-social-share type="pinterest" width="40" height="40"></amp-social-share>
+			    		-->
+			    		<amp-social-share type="gplus" width="40" height="40"></amp-social-share>
+			    		<!--
+			    		<amp-social-share type="tumblr" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="whatsapp" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="linkedin" width="40" height="40"></amp-social-share>
+			    		<amp-social-share type="email" width="40" height="40"></amp-social-share>
+			    		-->
+			    	</div>
+			    	
+			    	
+			    	<!-- content -->
+			  		<p>在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：</p>
+<ul>
+<li>一个任务的<strong>执行时间过长</strong>，导致其他任务无法及时执行</li>
+<li>在一些任务中大量使用 delay() 等函数进行软件延时，这些<strong>延时函数占用过多时间</strong>，影响其他任务的执行</li>
+<li>一些复杂任务的程序<strong>逻辑不清晰</strong>，不便于以后对程序进行维护，或添加新功能</li>
+</ul>
+<p>本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务<strong>分解为多个简单任务</strong>，同时使代码<strong>逻辑更加清晰</strong>，从而解决上述问题。</p>
+<h4 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h4><ul>
+<li><a href="#toc_0">1. 什么是有限状态机</a></li>
+<li><a href="#toc_1">2. 有限状态机的作用</a><ul>
+<li><a href="#toc_2">2.1 分解耗时过长的任务</a></li>
+<li><a href="#toc_3">2.2 避免软件延时对 CPU 资源造成浪费</a></li>
+<li><a href="#toc_4">2.3 使程序逻辑更加清晰</a></li>
+</ul>
+</li>
+<li><a href="#toc_5">3. 有限状态机的实现</a><ul>
+<li><a href="#toc_6">3.1 通过 switch - case 语句实现</a></li>
+<li><a href="#toc_7">3.2 通过 Arduino 库实现</a></li>
+<li><a href="#toc_8">3.3 其他方式</a></li>
+</ul>
+</li>
+<li><a href="#toc_9">4. 示例一：按键去抖动程序的优化</a><ul>
+<li><a href="#toc_10">4.1 传统的按键去抖动程序</a></li>
+<li><a href="#toc_11">4.2 优化后的按键去抖动程序</a></li>
+</ul>
+</li>
+<li><a href="#toc_12">5. 示例二：通过有限状态机实现的闹钟程序</a></li>
+<li><a href="#toc_13">6. 后记</a></li>
+</ul>
+<a id="more"></a>
+<h1 id="toc_0">1. 什么是有限状态机</h1>
+
+<p>根据维基百科上的定义，有限状态机（finite-state machine, FSM，简称状态机）是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
+<p>为了理解这句话，假设自己还有三天就要考试，这时候就要进入紧张的备考状态，将空闲时间用在<strong>复习</strong>上。但是，为了保证足够的精力，<strong>小睡</strong>一会儿也是十分有必要的。那么，什么时候复习，什么时候睡觉呢？可以这样描述：</p>
+<blockquote>
+<p>在复习的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感到瞌睡，<strong>则</strong> 睡觉</p>
+<p><strong>如果</strong> 没有感觉到瞌睡，<strong>则</strong> 继续复习</p>
+</blockquote>
+<p>在小睡的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感觉不再瞌睡，<strong>则</strong> 开始复习</p>
+<p><strong>如果</strong> 感觉依旧瞌睡，<strong>则</strong> 继续睡觉</p>
+</blockquote>
+</blockquote>
+<p>也可通过一幅简单的示意图（也叫「状态转移图」）表示出来：</p>
+<p><p><amp-img src="/images/2015/02/fsm_sleep.jpg" width="641" height="198" layout="responsive"></amp-img></p></p>
+<p>这个例子其实就是一个简单的有限状态机，其中，复习和小睡是两个<strong>状态</strong>，感觉瞌睡和感觉清醒这两个<strong>条件</strong>可以使状态发生<strong>转换</strong>。<sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup></p>
+<p>另外，Programming Basics<sup id="fnref3"><a href="#fn3" rel="footnote">3</a></sup> 网站上也提供了状态机相关的教程，用形象化的图片解释了什么是有限状态机，可<a href="http://www.programmingbasics.org/zh/beginner/fsm.html" target="_blank" rel="external">通过此链接访问</a>。</p>
+<p>在嵌入式程序设计中，如果一个系统需要处理<strong>一系列连续发生的任务</strong>，或在<strong>不同的模式</strong>下对输入进行不同的处理，常常使用有限状态机实现。例如测量、监测、控制等控制逻辑型应用。<sup id="fnref4"><a href="#fn4" rel="footnote">4</a></sup></p>
+<h1 id="toc_1">2. 有限状态机的作用</h1>
+
+<h2 id="toc_2">2.1 分解耗时过长的任务</h2>
+
+<p>大家应该都知道，CPU 没有并行执行任务的能力。<strong>计算机「同时」运行多个程序，其实是多个程序依次交替执行</strong>，给人以程序同时运行的错觉。各个程序在什么时候开始执行，执行多长时间后切换到下一个程序，由操作系统决定。</p>
+<p>单片机执行多任务也是类似的过程，但由于其资源有限，为了节省对 CPU 和存储空间的占用，在很多情况下没有使用操作系统。这时，<strong>单片机中运行的各个任务必须在一定时间内主动执行完毕，才能保证下一个任务能够及时执行</strong>。</p>
+<p>对于一些需要长时间执行的任务，例如按键去除抖动、读取和播放 MP3 文件等，采用有限状态机的方式，<strong>将任务划分为多个小的步骤（状态），每次只执行其中的一步</strong>。这样，其他任务就有机会「插入」到这个任务之中，确保了各个任务都能按时执行。</p>
+<p><p><amp-img src="/images/2015/02/fsm_adv_1.jpg" width="450" height="459" layout="responsive"></amp-img></p></p>
+<h2 id="toc_3">2.2 避免软件延时对 CPU 资源造成浪费</h2>
+
+<p>对于一些简单的程序，可通过 delay(), delay_ms() 之类的函数进行软件延时。这些延时函数，一般是通过将某个变量循环递加或递加，到达一定值后跳出循环，从而<strong>通过消耗 CPU 时间实现了延时</strong>。</p>
+<p>这种方式虽然简单，但在延时函数执行的过程中，其他程序无法运行，消耗了大量 CPU 资源。而通过状态机，<strong>有助于减少软件延时的使用，提高 CPU 利用率</strong>。</p>
+<p><p><amp-img src="/images/2015/02/fsm_adv_2.jpg" width="568" height="463" layout="responsive"></amp-img></p></p>
+<p>请参考下文中的 <strong>示例一：按键去抖动程序的优化</strong>，这一例子展示了如何通过软件延时分解耗时较长的任务，同时减少软件延时的使用。</p>
+<h2 id="toc_4">2.3 使程序逻辑更加清晰</h2>
+
+<p>通过状态机，将一个复杂任务划分为多个状态，可以使程序清晰易懂，便于维护。以后想要添加、删除程序中的功能，都会变得非常容易。</p>
+<p><p><amp-img src="/images/2015/02/fsm_adv_3.jpg" width="576" height="463" layout="responsive"></amp-img></p></p>
+<p>下文中的 <strong>示例二：通过状态机实现的闹钟</strong> 展示了如何通过状态机优化程序逻辑。</p>
+<h1 id="toc_5">3. 有限状态机的实现</h1>
+
+<h2 id="toc_6">3.1 通过 switch - case 语句实现</h2>
+
+<p>如果使用 C 语言，switch - case 语句，即可简单地实现有限状态机。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 定义各个状态所对应的数值 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_A 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_B 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_C 2</span></div><div class="line"></div><div class="line"><span class="comment">/* 该变量的值即为当前状态机所处的状态 */</span></div><div class="line"><span class="keyword">uint8_t</span> currentStatus = STATUS_A;</div><div class="line"></div><div class="line"><span class="comment">/* 通过状态机实现的某个任务，</span></div><div class="line"> * 需要放入 while(1) 等地方循环执行</div><div class="line"> * /</div><div class="line">void fsm_app(void)</div><div class="line">&#123;</div><div class="line">	switch(currentStatus) /* 根据现在的状态执行相应的程序 */</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> STATUS_A:  <span class="comment">/* 状态 A */</span></div><div class="line">		doThingsForStatusA(); <span class="comment">/* 执行状态 A 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_1)&#123; currentStatus = STATUE_B; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_B:  <span class="comment">/* 状态 B */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_2)&#123; currentStatus = STATUE_C; &#125;</div><div class="line">		<span class="keyword">if</span>(condition_3)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_C:  <span class="comment">/* 状态 C */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_4)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		currentStatus = STATUE_A;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过这段程序，即可实现一个具有三个状态的状态机。状态转移图如下图所示：</p>
+<p><p><amp-img src="/images/2015/02/fsm_example.jpg" width="510" height="234" layout="responsive"></amp-img></p></p>
+<h2 id="toc_7">3.2 通过 Arduino 库实现</h2>
+
+<p>对于 Arduino 用户，还可以使用 FSM Library 实现。这一库将有限状态机进行了封装，可以以更简洁的方式实现状态机。</p>
+<p>下载地址及使用说明：<a href="http://playground.arduino.cc/Code/FiniteStateMachine" target="_blank" rel="external">http://playground.arduino.cc/Code/FiniteStateMachine</a></p>
+<h2 id="toc_8">3.3 其他方式</h2>
+
+<p>对于一些更复杂的任务，使用 switch - case 语句，代码可能会太简洁。这时候，使用其他方式实现状态机，可能会更好。具体请查阅相关资料。</p>
+<h1 id="toc_9">4. 示例一：按键去抖动程序的优化</h1>
+
+<h2 id="toc_10">4.1 传统的按键去抖动程序</h2>
+
+<p>初学单片机时，我们接触的按键去抖动程序一般是这样的<sup id="fnref5"><a href="#fn5" rel="footnote">5</a></sup>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyscan</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(key1 == <span class="number">0</span>)         <span class="comment">// 如果按键 1 按下</span></div><div class="line">	&#123;</div><div class="line">		delayms(<span class="number">10</span>);      <span class="comment">// 延时 10ms，消除因干扰产生的抖动</span></div><div class="line">			<span class="keyword">if</span>(key1 == <span class="number">0</span>) <span class="comment">// 再次检测按键 1，如果依旧按下</span></div><div class="line">			&#123;</div><div class="line">				doSomething(); <span class="comment">//此时说明按键 1 已按下，执行按键 1 需要执行的任务</span></div><div class="line">				<span class="keyword">while</span>(!key1);  <span class="comment">// 等待按键释放</span></div><div class="line">			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对应的流程图如下：</p>
+<p><p><amp-img src="/images/2015/02/psm_keyscan_1.jpg" width="499" height="544" layout="responsive"></amp-img></p></p>
+<p>从流程图中可知，delayms() 延时函数和最后的等待按键释放的程序，会占用过多时间。</p>
+<h2 id="toc_11">4.2 优化后的按键去抖动程序</h2>
+
+<p>如果使用有限状态机的思路，可以按照下图方式实现：</p>
+<p><p><amp-img src="/images/2015/02/fsm_keyscan_2.jpg" width="542" height="210" layout="responsive"></amp-img></p></p>
+<p>该状态机有三个状态，分别是<strong>按键未按下</strong>，<strong>等待</strong>，<strong>按键按下</strong>。当按键按下时，则会进入等待状态，若在等待状态中按键一直保持按下，说明按键已经稳定地按下，进入按键按下的状态，等待按键释放。程序代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 按键去抖动状态机中的三个状态 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_RELEASE    <span class="comment">// 按键未按下</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_WAITING    <span class="comment">// 等待（消抖）</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_PRESSED    <span class="comment">// 按键按下（等待释放）</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 等待状态持续时间</span></div><div class="line"> * 需要根据单片机速度和按键消抖程序被调用的速度来进行调整</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DURIATION_TIME 40</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数的返回值，按下为 1，未按下为 0 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PRESSED 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NOT_PRESSED 0</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键扫描程序所处的状态</span></div><div class="line"> * 初始状态为：按键按下（KEY_STATE_RELEASE）</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyState = KEY_STATE_RELEASE;</div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数，通过有限状态机实现</span></div><div class="line"> * 函数在从等待状态转换到按键按下状态时返回 PRESSED，代表按键已被触发</div><div class="line"> * 其他情况返回 NOT_PRESSED</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyDetect(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">uint8_t</span> duriation;  <span class="comment">// 用于在等待状态中计数</span></div><div class="line">	<span class="keyword">switch</span>(keyState)</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_RELEASE:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_WAITING;  <span class="comment">// 转换至下一个状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;    <span class="comment">// 返回：按键未按下</span></div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_WAITING:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			duriation++;</div><div class="line">			<span class="keyword">if</span>(duriation &gt;= DURIATION_TIME)    <span class="comment">// 如果经过多次检测，按键仍然按下</span></div><div class="line">			&#123;	<span class="comment">// 说明没有抖动了，可以确定按键已按下</span></div><div class="line">				duriation = <span class="number">0</span>;</div><div class="line">				keyState = KEY_STATE_PRESSED;  <span class="comment">// 转换至下一个状态</span></div><div class="line">				<span class="keyword">return</span> PRESSED;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span>  <span class="comment">// 如果此时按键松开</span></div><div class="line">		&#123;	<span class="comment">// 可能存在抖动或干扰</span></div><div class="line">			duriation = <span class="number">0</span>;  <span class="comment">// 清零的目的是便于下次重新计数</span></div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 重新返回按键松开的状态</span></div><div class="line">			<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_PRESSED:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">0</span>)       <span class="comment">// 如果按键松开</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 回到按键松开的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		keyState = KEY_STATE_RELEASE;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该程序也可经过扩展，实现判断按键双击、长按等功能。只需增加相应的状态和转移条件即可。</p>
+<h1 id="toc_12">5. 示例二：通过有限状态机实现的闹钟程序</h1>
+
+<p>最近正在制作一个闹钟。这个闹钟支持播放 MP3 格式的闹钟声<sup id="fnref6"><a href="#fn6" rel="footnote">6</a></sup>，支持贪睡模式，同时还有一些功能打算以后再添加上。</p>
+<p>为了使程序逻辑更加清晰，也为了更方便地添加新功能，我打算采用有限状态机实现。相关程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"App_Alarm.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"USART1.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"diag/Trace.h"</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 相关常量定义 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALARM_MUSIC_END 0      <span class="comment">// 闹钟音乐播放完毕</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_OK		0	   <span class="comment">// 格式正确</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_ERROR	(-1)   <span class="comment">// 格式错误</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输入信息定义</span></div><div class="line"> * 作为函数的返回值供函数 getInput() 使用</div><div class="line"> * getInput() 将获取并返回键盘或触摸屏等设备中输入的控制命令或闹钟时间值</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ERROR    (-1)    <span class="comment">// 输入格式错误</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_CANCEL   (-2)    <span class="comment">// 输入了「取消」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_SNOOZE   (-3)    <span class="comment">// 输入了「小睡」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ALARM_ON (-4)    <span class="comment">// 输入了「打开闹钟」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NO_INPUT	   (-10)   <span class="comment">// 没有输入</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输出信息定义</span></div><div class="line"> * 作为为函数的参数供函数 displayMessege() 使用</div><div class="line"> * displayMessege() 用于在显示屏上显示相关的提示信息</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_ALARM_TIME 	(0)  <span class="comment">// 提示：设置闹钟时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_CLEAR			(1)  <span class="comment">// 提示：已取消</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_ALARM_IS_ON		(2)  <span class="comment">// 提示：闹钟已打开</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_WAITING			(3)  <span class="comment">// 提示：等待闹钟响起</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_SNOOZE_TIME	(4)  <span class="comment">// 提示：设置小睡时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_GET_UP			(5)  <span class="comment">// 提示：该起床了</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 闹钟的状态 */</span></div><div class="line"><span class="keyword">enum</span> alarmStates</div><div class="line">&#123;</div><div class="line">	ALARM_OFF,				<span class="comment">// 闹钟关闭</span></div><div class="line">	SET_ALARM_TIME,			<span class="comment">// 设置闹钟时间</span></div><div class="line">	WATING_FOR_ALARM,		<span class="comment">// 等待闹钟响起</span></div><div class="line">	PLAY_ALARM_MUSIC,		<span class="comment">// 播放闹钟音乐</span></div><div class="line">	SET_SNOOZE_TIME			<span class="comment">// 设置贪睡时间</span></div><div class="line">&#125; alarmState = ALARM_OFF;	<span class="comment">// 默认状态：闹钟关闭</span></div><div class="line"></div><div class="line"><span class="comment">/* 相关函数的定义 */</span></div><div class="line"><span class="keyword">int16_t</span> getInput(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">displayMessege</span><span class="params">(<span class="keyword">uint8_t</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAlarm</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">int16_t</span> alarmTimeDiff(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">int8_t</span> playAlarmMusic(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setSnooze</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">uint8_t</span> checkAlarmFormat(<span class="keyword">int16_t</span>);</div><div class="line"><span class="keyword">uint8_t</span> checkSnoozeFormat(<span class="keyword">int16_t</span>);</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 闹钟主程序，需要放入 while(1) 中循环调用</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">alarmApp</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int16_t</span> input;		<span class="comment">// 输入值暂存在这个变量中</span></div><div class="line">	<span class="keyword">switch</span> (alarmState) <span class="comment">// 获取闹钟状态，下面程序将根据闹钟的状态执行相应的任务</span></div><div class="line">	&#123;</div><div class="line">	<span class="comment">/* 状态：闹钟关闭</span></div><div class="line">	 * 在此状态中，将会不断检查是否打开闹钟，如果打开了闹钟，则会进入下一个状态：设置闹钟时间</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> ALARM_OFF:</div><div class="line">		<span class="keyword">if</span> (getInput() == INPUT_ALARM_ON)  <span class="comment">// 检查是否打开了闹钟</span></div><div class="line">		&#123;   <span class="comment">// 如果打开了闹钟</span></div><div class="line">			displayMessege(MESSEGE_SET_ALARM_TIME);	<span class="comment">// 在屏幕或串口上提示：请设置闹钟时间</span></div><div class="line">			alarmState = SET_ALARM_TIME;			<span class="comment">// 进入下一个状态：设置闹钟时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置闹钟时间</span></div><div class="line">	 * 在此状态中，将会检查输入值，</div><div class="line">	 * 如果</div><div class="line">	 * 		输入“取消”命令，则取消闹钟设置，返回到闹钟关闭的状态</div><div class="line">	 * 		输入闹钟时间格式错误，则状态不变，等待下一次重新输入</div><div class="line">	 * 		输入了正确的闹钟时间，则设置闹钟，显示闹钟设置成功，并进入下一状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_ALARM_TIME:</div><div class="line">		input = getInput();  		<span class="comment">// 获取输入值</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)	<span class="comment">// 如果输入了“取消”</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);  <span class="comment">// 显示“已取消”</span></div><div class="line">			alarmState = ALARM_OFF;			<span class="comment">// 进入状态：关闭闹钟</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkAlarmFormat(input) == FORMAT_OK)	<span class="comment">// 如果输入格式正确</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_ALARM_IS_ON); <span class="comment">// 显示“成功设置闹钟，闹钟已启动”</span></div><div class="line">			setAlarm(input); <span class="comment">// 根据输入值设置闹钟</span></div><div class="line">			alarmState = WATING_FOR_ALARM; <span class="comment">// 进入下一状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：等待闹钟响起</span></div><div class="line">	 * 在此状态中，将会检查是否到达闹钟时间，如果到达，则进入下一状态：播放闹钟音乐</div><div class="line">	 * 同时，在此状态中也会检查输入，如果输入了“取消”的命令，则进入闹钟关闭的状态</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> WATING_FOR_ALARM:</div><div class="line">		displayMessege(MESSEGE_WAITING); <span class="comment">// 显示等待闹钟响起的信息，例如离闹钟响起还有多长时间</span></div><div class="line">		<span class="keyword">if</span> (alarmTimeDiff() &lt;= <span class="number">0</span>) <span class="comment">// 检查离闹钟响起还有多少时间，如果时间小于等于零（到达闹钟时间）</span></div><div class="line">		&#123;</div><div class="line">			alarmState = PLAY_ALARM_MUSIC;  <span class="comment">// 进入下一个状态：播放闹钟音乐</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(getInput() == INPUT_CANCEL) <span class="comment">// 如果输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;      <span class="comment">// 进入闹钟关闭的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：播放闹钟音乐</span></div><div class="line">	 * 在此状态中，将播放闹钟音乐，若播放完毕，进入闹钟关闭的状态</div><div class="line">	 * 同时，在此状态中也会检查输入，</div><div class="line">	 * 		如果输入了“小睡”的命令，则进入状态：设置小睡时间</div><div class="line">	 * 		如果输入了“取消”的命令，则进入状态：闹钟关闭</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> PLAY_ALARM_MUSIC:</div><div class="line">		displayMessege(MESSEGE_GET_UP);  <span class="comment">// 显示消息：“该起床了”</span></div><div class="line">		<span class="keyword">if</span>(playAlarmMusic() == ALARM_MUSIC_END) <span class="comment">// 播放闹钟音乐</span></div><div class="line">		&#123; <span class="comment">// 若音乐播放完毕</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF; <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		input = getInput();</div><div class="line">		<span class="keyword">if</span>(input == INPUT_SNOOZE) <span class="comment">// 若输入了“小睡”的命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_SET_SNOOZE_TIME); <span class="comment">// 显示消息：“请设置小睡时间”</span></div><div class="line">			alarmState = SET_SNOOZE_TIME; <span class="comment">// 进入状态：设置小睡时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL) <span class="comment">// 若输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;   <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置小睡时间</span></div><div class="line">	 * 在此状态中，将从输入获取小睡时间，并将闹钟时间加上小睡时间，进入状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_SNOOZE_TIME:</div><div class="line">		input = getInput(); <span class="comment">// 获取输入</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)</div><div class="line">		&#123;   <span class="comment">// 若输入“取消”，则进入“闹钟关闭”的状态</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkSnoozeFormat(input) == FORMAT_OK)</div><div class="line">		&#123;   <span class="comment">// 若输入格式正确</span></div><div class="line">			setSnooze(input);  <span class="comment">// 设置新的闹钟时间</span></div><div class="line">			alarmState = WATING_FOR_ALARM;  <span class="comment">// 进入状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		displayMessege(MESSEGE_CLEAR);</div><div class="line">		alarmState = ALARM_OFF;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>状态转移图如图所示：</p>
+<p><p><amp-img src="/images/2015/02/fsm_alarm.jpg" width="523" height="431" layout="responsive"></amp-img></p></p>
+<p></p><h1 id="toc_13">6. 后记</h1><br>在单片机编程时，如果遇到代码复杂、任务占用时间过长等问题，可以尝试通过有限状态机解决。<p></p>
+<p>之前写过一个<a href="https://blanboom.org/2013/arduino-task-scheduler-library">针对 Arduino 的合作式任务调度器</a>。配合有限状态机，更有利于多任务处理。</p>
+<p>另外，instructables 上的一篇文章通过三个实例演示了有限状态机在 Arduino 上的应用，如果感兴趣，可以通过这个链接阅读：<a href="http://www.instructables.com/id/Arduino-Finite-State-Machine/" target="_blank" rel="external">http://www.instructables.com/id/Arduino-Finite-State-Machine/</a></p>
+<p><br><br></p>
+<h4 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h4><div class="footnotes"><ol><li id="fn1">来源：<a href="http://zh.wikipedia.org/zh-cn/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA" target="_blank" rel="external">http://zh.wikipedia.org/zh-cn/有限状态机</a>&nbsp;<a href="#fnref1">&#8617;</a></li><li id="fn2">为了便于理解，此处描述的状态机及状态转移图省略了一些内容，例如没有标明开始状态&nbsp;<a href="#fnref2">&#8617;</a></li><li id="fn3">Programming Basics 针对初学者的互动编程学习网站，网址为：<a href="http://programmingbasics.org" target="_blank" rel="external">http://programmingbasics.org</a>&nbsp;<a href="#fnref3">&#8617;</a></li><li id="fn4">根据 <a href="http://www.ti.com/mcu/docs/litabsmultiplefilelist.tsp?sectionId=96&amp;tabId=1502&amp;literatureNumber=slaa402a&amp;docCategoryId=1&amp;familyId=342" target="_blank" rel="external">Finite State Machines for MSP430 (Rev. A)</a> 翻译&nbsp;<a href="#fnref4">&#8617;</a></li><li id="fn5">改编自<a href="http://book.douban.com/subject/3413850/" target="_blank" rel="external">《新概念51单片机C语言教程》</a>中相关内容&nbsp;<a href="#fnref5">&#8617;</a></li><li id="fn6">其实 MP3 播放程序也可以通过有限状态机实现，因为为了实现 MP3 播放持续时间较长（一首歌的时间），而且需要完成多个步骤（打开文件、读取文件、将数据发送到 MP3 解码芯片、告诉 MP3 解码芯片音乐播放完毕等）&nbsp;<a href="#fnref6">&#8617;</a></li></ol></div>
+
+			  		
+			  		
+			  		<!-- google Adsense -->
+			  		
+					
+			  	</div>
+				
+		  	</article>
+		  	
+		  	
+		  	<!-- meta (categories , tags) -->
+		  	
+		  	<div class="meta-content">
+		  	
+		  		
+		  		<div class="meta-wrapper">
+				  	<h6 class="categories">Category</h6>
+				  	<div class="article-categories">
+						<ul class="article-categories-list">
+							
+					    		<li class="article-categories-list-item">
+					    			<a class="article-categories-list-link" href="/categories/学习笔记/" class="link-gaTrack" data-linkType="link-categories">
+					    				学习笔记
+					    			</a>
+					    		</li>
+							
+						</ul>
+					</div>
+				</div>
+				
+				
+				
+				<div class="meta-wrapper">
+				  	<h6 class="tag">Tag</h6>
+				  	<div class="article-tag">
+						<ul class="article-tag-list">
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/单片机/" class="link-gaTrack" data-linkType="link-tag">
+					    				单片机
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/多任务/" class="link-gaTrack" data-linkType="link-tag">
+					    				多任务
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/有限状态机/" class="link-gaTrack" data-linkType="link-tag">
+					    				有限状态机
+					    			</a>
+					    		</li>
+							
+					    		<li class="article-tag-list-item">
+					    			<a class="article-tag-list-link" href="/tags/状态机/" class="link-gaTrack" data-linkType="link-tag">
+					    				状态机
+					    			</a>
+					    		</li>
+							
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+		  	
+		  	
+		  	<!-- article nav -->
+		  	
+			<nav id="article-nav">
+			  
+			  <a href="/2015/hack-hexo-theme-landscape/" id="article-nav-newer" class="article-nav-link-wrap">
+			    <strong class="article-nav-caption">Newer</strong>
+			    <div class="article-nav-title">
+			      
+			        Hexo 主题 Landscape 改造小记
+			      
+			    </div>
+			  </a>
+			  
+			  
+			  <a href="/2014/diy-websites/" id="article-nav-older" class="article-nav-link-wrap">
+			    <strong class="article-nav-caption">Older</strong>
+			    <div class="article-nav-title">
+			      
+			        我常去的 DIY 网站
+			      
+			    </div>
+			  </a>
+			  
+			</nav>
+			
+			
+		</div>
+		
+		
+		<footer id="footer">
+		
+			
+			
+			
+			
+			<div class="homeLink">
+		  		<a href="/">Home</a>
+		  	</div>
+			
+			
+			<div class="copyright-tool">
+				<div class="copyright-title">
+					<span>
+					&copy; 2017&nbsp;Blanboom
+					</span>
+				</div>
+				
+			</div>
+			
+		</footer>
+		
+		
+	</div>
+	
+	
+  	<div id="totop"><a href="#"></a></div>
+  	
+  	
+  </body>
+</html>

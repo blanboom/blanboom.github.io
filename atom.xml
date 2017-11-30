@@ -1,0 +1,1350 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Blanboom</title>
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://blanboom.org/"/>
+  <updated>2017-11-30T14:08:02.639Z</updated>
+  <id>https://blanboom.org/</id>
+  
+  <author>
+    <name>Blanboom</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>AirTerminal: 用于Raspberry Pi等设备的蓝牙终端</title>
+    <link href="https://blanboom.org/2017/airterminal/"/>
+    <id>https://blanboom.org/2017/airterminal/</id>
+    <published>2017-11-30T14:04:00.000Z</published>
+    <updated>2017-11-30T14:08:02.639Z</updated>
+    
+    <content type="html"><![CDATA[<p>AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。</p>
+<p>经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal 已在 App Store 上架，可使用此链接下载：<a href="https://itunes.apple.com/cn/app/id1296588408" target="_blank" rel="external">https://itunes.apple.com/cn/app/id1296588408</a></p>
+<p><img src="/images/2017/10/airterm.png" alt="AirTerminal with screenfetch"></p>
+<a id="more"></a>
+<p>在我大学毕业之前，只有一台旧笔记本电脑，在图书馆或实验室等比较安静的地方，有时候 CPU 比较忙，风扇突然狂转，发出比较大的噪音，影响到周围的同学。</p>
+<p>那时候刚好有了一个平板，打算用 Raspberry Pi Zero 加上锂电池，做一个能够随身携带的小电脑，无线连接到平板后，在平板上使用 Raspberry Pi 的 Linux 环境，以取代自己的笔记本。</p>
+<p>由于学校网络的限制，平板和 Raspberry Pi 无法同时连接到 Wi-Fi, 也就没有办法使用 SSH 等工具。这时候就有了做一个 App，使平板通过蓝牙与 Raspberry Pi 连接的想法。</p>
+<p>毕业之后，已经不再有这种需求，这时候主要是以调试工具的目的进行 AirTerminal 的开发，以便于使 iPad/iPhone 连接无法访问网络的嵌入式设备，或在网络故障时，通过 AirTerminal 进行应急操作。</p>
+<h1 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h1><ul>
+<li>使用 iPad 连接一个迷你 Linux 设备，代替电脑进行使用</li>
+<li>对嵌入式设备进行开发和调试</li>
+<li>在设备发生故障，网络连接、SSH 不可用时，使用 AirTerminal 和蓝牙串口透传模块，对设备进行应急处理</li>
+</ul>
+<h1 id="功能与特色"><a href="#功能与特色" class="headerlink" title="功能与特色"></a>功能与特色</h1><ul>
+<li>全功能终端，支持 bash, vim, top, tmux 等程序</li>
+<li>支持外接键盘与蓝牙键盘</li>
+<li>内置 ESC, TAB, CTL, 方向键等常用按键</li>
+<li>内置 “Fit” 按键，可通过该按键自动输入 stty 命令，调整终端大小</li>
+<li>支持主模式 (central) 和从模式 (peripheral)</li>
+</ul>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><ol>
+<li>由于 Raspberry Pi 3 的板载蓝牙目前不支持串口透传，目前 AirTerminal 不能直接支持 Raspberry Pi 3 上的板载蓝牙。</li>
+<li>DFRobot 的 <a href="http://www.dfrobot.com.cn/goods-1065.html" target="_blank" rel="external">USB BLE Link</a> (<a href="https://www.dfrobot.com/product-1220.html" target="_blank" rel="external">Bluno Link</a>)会将 USB 串口输入的数据，通过 USB 串口原路返回输出。所以 AirTerminal 和 USB BLE Link 配合使用会出现异常。</li>
+<li>提高串口波特率，可以带来更好的使用体验。</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。&lt;/p&gt;
+&lt;p&gt;经历了 Apple 谜一样的审核流程（等待审核用了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal 已在 App Store 上架，可使用此链接下载：&lt;a href=&quot;https://itunes.apple.com/cn/app/id1296588408&quot;&gt;https://itunes.apple.com/cn/app/id1296588408&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2017/10/airterm.png&quot; alt=&quot;AirTerminal with screenfetch&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="蓝牙" scheme="https://blanboom.org/tags/%E8%93%9D%E7%89%99/"/>
+    
+      <category term="iOS" scheme="https://blanboom.org/tags/iOS/"/>
+    
+      <category term="BLE" scheme="https://blanboom.org/tags/BLE/"/>
+    
+      <category term="AirTerminal" scheme="https://blanboom.org/tags/AirTerminal/"/>
+    
+      <category term="终端" scheme="https://blanboom.org/tags/%E7%BB%88%E7%AB%AF/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>RT1900ac 折腾笔记：安装 Homebridge 和 Plex Media Server</title>
+    <link href="https://blanboom.org/2017/plex-on-rt1900ac/"/>
+    <id>https://blanboom.org/2017/plex-on-rt1900ac/</id>
+    <published>2017-06-10T02:12:00.000Z</published>
+    <updated>2017-09-10T10:20:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://www.synology.com/zh-cn/products/RT1900ac" target="_blank" rel="external">RT1900ac</a> 是群晖 (Synology) 推出的第一款无线路由器，其操作系统 <a href="https://www.synology.com/zh-cn/srm" target="_blank" rel="external">SRM</a> 相当于简化版的 <a href="https://www.synology.com/zh-cn/dsm" target="_blank" rel="external">DSM</a>（群晖 <a href="https://zh.wikipedia.org/wiki/網路附加儲存" target="_blank" rel="external">NAS</a> 所使用的操作系统），在软件上较有优势。</p>
+<p>可能是因为硬件性能，或是其他方面的考虑，群晖官方一直没有把其 NAS 上的大部分软件移植到 SRM 上，例如 <a href="https://www.synology.com/zh-cn/dsm/feature/cloud_sync" target="_blank" rel="external">Cloud Sync</a>, <a href="https://www.synology.com/zh-cn/dsm/feature/video_station" target="_blank" rel="external">Video Station</a> 等，此外一些第三方软件，例如 <a href="https://www.plex.tv" target="_blank" rel="external">Plex Media Server</a>, 也没有推出兼容 SRM 的版本。</p>
+<p>最近在网上看到了一篇<a href="http://wegotserved.com/2017/02/17/how-run-plex-media-server-on-synology-rt2600ac-router/" target="_blank" rel="external">在 RT2600ac 上安装 Plex Media Server 的教程</a>，于是又有了折腾路由器的想法，开始在 RT1900ac 上安装自己需要软件。</p>
+<p><img src="/images/2017/09/plex-on-srm.png" alt="运行在 RT1900ac 路由器上的 Plex Media Server"></p>
+<a id="more"></a>
+<h1 id="安装-Plex-Media-Server"><a href="#安装-Plex-Media-Server" class="headerlink" title="安装 Plex Media Server"></a>安装 Plex Media Server</h1><p><a href="">Plex Media Server</a> 是一套功能较为丰富的媒体服务器软件，能够集中管理电影、照片、音乐等媒体，支持在 PC、服务器、NAS 等设备上安装，同时提供了电脑、手机、机顶盒和游戏机上的客户端。Plex Media Server 提供了群晖 NAS 的版本，但不包含 RT1900ac.</p>
+<p>由于 RT1900ac 采用的是双核 1GHz 的 ARM 处理器，而群晖部分型号的 NAS 也采用了 ARM 处理器，所以 ARM 版本的 Plex Media Server, 经修改之后，也可以在路由器上运行。</p>
+<p>具体的安装过程，参考这篇文章：</p>
+<p><a href="http://wegotserved.com/2017/02/17/how-run-plex-media-server-on-synology-rt2600ac-router/" target="_blank" rel="external">How to: Run Plex Media Server on the Synology RT2600ac Router</a></p>
+<p>其中安装包 .spk 文件中的 INFO 文件，包含了该软件支持的 CPU 架构。原文为了支持 RT2600ac, 添加了 “ipq806x”, 对于 RT1900ac, 修改为 “northstarplus” 即可。</p>
+<p><img src="/images/2017/09/plex-spk-info.png" alt="修改 .spk 中的 INFO 文件"></p>
+<p>经过测试，按照此教程，能够在 RT1900ac 上正常安装 Plex Media Server, 使用一段时间后，没发现太大问题。不过，由于 RT1900ac 的 CPU 和内存有限，建立索引需要消耗较长时间，转码功能也基本不可用。所以想要体验完整功能，还是需要一台 NAS.</p>
+<p>按照这种方法，也可以安装 DSM 上的其他软件，但其中缺少的 lib 可能需要手动添加。相关的安装方法可参考这篇文章：</p>
+<p><a href="https://blog.rieke.tv/audio-station-on-synology-rt1900ac-router/" target="_blank" rel="external">Audio Station on Synology RT1900ac router</a></p>
+<h1 id="安装-Homebridge"><a href="#安装-Homebridge" class="headerlink" title="安装 Homebridge"></a>安装 Homebridge</h1><p><a href="https://github.com/nfarina/homebridge" target="_blank" rel="external">Homebridge</a> 是一个兼容 HomeKit 的家居自动化服务器，通过插件，能够将多种不同种类的智能硬件接入 HomeKit. 在国内，常见的用法是将 <a href="https://www.yeelight.com/zh_CN/" target="_blank" rel="external">Yeelight</a>, 或者小米网关与 Homebridge 连接，实现通过 iOS HomeKit 控制智能家居硬件。</p>
+<p>做为一个 Node.js 项目，首先想到的安装方法，就是通过 <a href="https://github.com/Entware-ng/Entware-ng" target="_blank" rel="external">Entware-ng</a> 安装 Node.js 和 npm, 再通过 npm 安装 node.js. 但发现 Homebridge 需要依赖 mdns 等组件，而 mdns 包含 C/C++ 代码，编译过程中需要 avahi 的 lib 和头文件，而这些文件 Entware-ng 没有提供。自己编译 avahi 觉得太麻烦，所以开始尝试其他方法。</p>
+<p>于是又找到了 <a href="https://github.com/Entware-for-kernel-3x/Entware-ng-3x" target="_blank" rel="external">Entware-ng-3x</a>, 这是一个 Entware-ng 的 fork, 用于 3.x 内核，同时提供了安装 <a href="https://www.debian.org/index.zh-cn.html" target="_blank" rel="external">Debian</a> chroot 环境的工具，安装后能够方便地 chroot 到 debian 环境，在 RT1900ac 上使用「完整」的 Linux。</p>
+<p>首先需要安装 Entwarw-ng-3x, 安装方法与在 DSM 上的安装基本没有区别，具体可参考这三篇文档：</p>
+<ul>
+<li><a href="https://github.com/Entware-for-kernel-3x/Entware-ng-3x/wiki/Install-on-Synology-NAS" target="_blank" rel="external">Install on Synology NAS</a> (Entware-ng-3x)</li>
+<li><a href="https://github.com/Entware-ng/Entware-ng/wiki/Install-on-Synology-NAS" target="_blank" rel="external">Install on Synology NAS</a> (Entware-ng)</li>
+<li><a href="https://github.com/Entware-for-kernel-3x/Entware-ng-3x/wiki/Installing-Debian-chroot-environment" target="_blank" rel="external">Installing Debian chroot environment</a></li>
+</ul>
+<p>安装过程中，有这几点需要稍加留意：</p>
+<ol>
+<li>Entware-ng-3x 和 debian 环境需要占用较大空间，在外界移动硬盘的情况下，建议安装在 <code>/volumeUSB1/usbshare/@entware</code> 目录</li>
+<li>安装 debian 环境前，最好修改 <code>/opt/bin/install-debian</code> 文件，将软件源修改为国内源，例如 <code>http://mirrors.ustc.edu.cn/debian/</code>，以提高下载速度</li>
+<li>由于 RT1900ac 的 CPU 支持硬件浮点运算，可在安装前，将 <code>/opt/bin/install-debian</code> 中的 <code>ARCH=armel</code> 修改为 <code>ARCH=armhf</code>, 从而提高程序运行效率</li>
+</ol>
+<p>安装完成后，通过 <code>start-debian</code> 即可进入 debian 环境。后续通过<a href="https://medium.com/@gregwym/setup-homebridge-on-synology-nas-without-docker-f42edd174d0e" target="_blank" rel="external">这篇教程</a>即可安装 HomeBridge, 此处不再详细介绍。</p>
+<p>chroot 环境下的 debian 服务无法开机自动启动，如果需要 HomeBridge 开机自动运行，还需修改 <code>/opt/debian/chroot-services.list</code> 文件，添加 <code>dbus</code>, <code>avahi-daemon</code>, <code>homebridge</code> 三行内容。</p>
+<p><img src="/images/2017/09/debian-chroot-service.png" alt="debian chroot 服务列表"></p>
+<p>最后，可根据自己的情况安装合适的 HomeBridge 插件，即可在 iOS 上对相关硬件设备的控制。</p>
+<p><img src="/images/2017/09/ios-homekit.png" alt="iOS Home App"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://www.synology.com/zh-cn/products/RT1900ac&quot;&gt;RT1900ac&lt;/a&gt; 是群晖 (Synology) 推出的第一款无线路由器，其操作系统 &lt;a href=&quot;https://www.synology.com/zh-cn/srm&quot;&gt;SRM&lt;/a&gt; 相当于简化版的 &lt;a href=&quot;https://www.synology.com/zh-cn/dsm&quot;&gt;DSM&lt;/a&gt;（群晖 &lt;a href=&quot;https://zh.wikipedia.org/wiki/網路附加儲存&quot;&gt;NAS&lt;/a&gt; 所使用的操作系统），在软件上较有优势。&lt;/p&gt;
+&lt;p&gt;可能是因为硬件性能，或是其他方面的考虑，群晖官方一直没有把其 NAS 上的大部分软件移植到 SRM 上，例如 &lt;a href=&quot;https://www.synology.com/zh-cn/dsm/feature/cloud_sync&quot;&gt;Cloud Sync&lt;/a&gt;, &lt;a href=&quot;https://www.synology.com/zh-cn/dsm/feature/video_station&quot;&gt;Video Station&lt;/a&gt; 等，此外一些第三方软件，例如 &lt;a href=&quot;https://www.plex.tv&quot;&gt;Plex Media Server&lt;/a&gt;, 也没有推出兼容 SRM 的版本。&lt;/p&gt;
+&lt;p&gt;最近在网上看到了一篇&lt;a href=&quot;http://wegotserved.com/2017/02/17/how-run-plex-media-server-on-synology-rt2600ac-router/&quot;&gt;在 RT2600ac 上安装 Plex Media Server 的教程&lt;/a&gt;，于是又有了折腾路由器的想法，开始在 RT1900ac 上安装自己需要软件。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2017/09/plex-on-srm.png&quot; alt=&quot;运行在 RT1900ac 路由器上的 Plex Media Server&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="群晖" scheme="https://blanboom.org/tags/%E7%BE%A4%E6%99%96/"/>
+    
+      <category term="Synology" scheme="https://blanboom.org/tags/Synology/"/>
+    
+      <category term="RT1900ac" scheme="https://blanboom.org/tags/RT1900ac/"/>
+    
+      <category term="路由器" scheme="https://blanboom.org/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+      <category term="NAS" scheme="https://blanboom.org/tags/NAS/"/>
+    
+      <category term="Plex" scheme="https://blanboom.org/tags/Plex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一道智力题</title>
+    <link href="https://blanboom.org/2016/hunter-wolf/"/>
+    <id>https://blanboom.org/2016/hunter-wolf/</id>
+    <published>2016-06-19T02:12:00.000Z</published>
+    <updated>2016-06-19T03:03:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在同学的 QQ 空间上，发现了这样一道智力题：</p>
+<blockquote>
+<p>有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。<br>如果猎人离开，狼就会把所有人吃掉。<br>如果男人离开，女人会把两个小男孩掐死。<br>如果女人离开，男人会把两个小女孩掐死。<br>河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。<br>如何使他们全部过河？</p>
+</blockquote>
+<p>看到这道题，首先想到的是<a href="https://www.zhihu.com/question/29968331" target="_blank" rel="external">农夫过河问题</a>。既然这两个问题十分相似，那我就尝试按照农夫过河问题的思路，通过程序来找出该题的解。</p>
+<a id="more"></a>
+<p>程序代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/local/bin/python3</span></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 问题：</span></div><div class="line"><span class="comment"># 有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩</span></div><div class="line"><span class="comment"># 如果猎人离开，狼就会把所有人吃掉</span></div><div class="line"><span class="comment"># 如果男人离开，女人会把两个小男孩掐死</span></div><div class="line"><span class="comment"># 如果女人离开，男人会把两个小女孩掐死</span></div><div class="line"><span class="comment"># 河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船</span></div><div class="line"><span class="comment"># 如何使他们全部过河？</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 思路：</span></div><div class="line"><span class="comment"># 与农夫过河问题类似，参考 https://www.zhihu.com/question/29968331</span></div><div class="line"><span class="comment"># 一共有 8 个人（包含狼），每个人有两个状态：分别为在河的一侧，以及在河的另一侧</span></div><div class="line"><span class="comment"># 这两种状态可用一个二进制位表示，0 代表在河的一侧，1 代表在河的另一侧</span></div><div class="line"><span class="comment"># 则可用一个 8 位二进制数表示这 8 个人的状态，进行组合，一共有 256 个状态</span></div><div class="line"><span class="comment"># 通过坐船，可以使一种状态转变为另一种状态</span></div><div class="line"><span class="comment"># 如果状态从 00000000 转换到 11111111, 则说明所有人均到达河的另一侧 </span></div><div class="line"><span class="comment"># 将两种可以相互转变的状态相互连接，可以构建出一个用于表示状态转移情况的图</span></div><div class="line"><span class="comment"># 在图中找到一条从 00000000 到 11111111 的路径，即可解决该问题</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########################################</span></div><div class="line"><span class="comment"># 数据存储格式：</span></div><div class="line"><span class="comment"># 使用 8 位二进制数进行表示，从高位到低位分别表示男人，男孩，男孩，女人，女孩，女孩，狼的状态 </span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 船允许的所有状态，1 代表在船上</span></div><div class="line"><span class="comment"># 将两个状态进行异或操作，发生变化的位就会置一，则说明置一的位所对应的人是在船上</span></div><div class="line"><span class="comment"># 但是，船的行驶是有方向的，例如从 10000000 到 01000000 的状态是无法通过一次乘船达到的</span></div><div class="line"><span class="comment"># 所以需要进行进一步判断，具体方法见下面的代码</span></div><div class="line">boatAllowedStates = [</div><div class="line">    <span class="number">0b11000000</span>, <span class="number">0b10100000</span>, <span class="number">0b00011000</span>, <span class="number">0b00010100</span>, <span class="number">0b10000010</span>,</div><div class="line">    <span class="number">0b01000010</span>, <span class="number">0b00100010</span>, <span class="number">0b00010010</span>, <span class="number">0b00001010</span>, <span class="number">0b00000110</span>,</div><div class="line">    <span class="number">0b00000011</span>, <span class="number">0b10010000</span>, <span class="number">0b10000000</span>, <span class="number">0b00010000</span>, <span class="number">0b00000010</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="comment"># 以邻接矩阵的形式存储可能的状态转移情况</span></div><div class="line"><span class="comment"># 矩阵的索引就是用于表示状态的 8 位二进制数（0～255）</span></div><div class="line">statesGraph = [([<span class="number">0</span>] * <span class="number">256</span>) <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">256</span>)] <span class="comment"># 创建 256x256 二维数组</span></div><div class="line"></div><div class="line"><span class="comment"># 判断是否为危险的状态</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">is_dangerous</span><span class="params">(x)</span>:</span></div><div class="line">    <span class="comment"># 第一种不安全的情况：男人不在，女人在，男孩在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b10000000</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00010000</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b01100000</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b10000000</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00010000</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b01100000</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="comment"># 第二种不安全的情况：女人不在，男人在，女孩在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b00010000</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b10000000</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00001100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b00010000</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b10000000</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00001100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="comment"># 第三种不安全的情况：猎人不在，狼在，其他人在</span></div><div class="line">    <span class="keyword">if</span> ( x &amp; <span class="number">0b00000010</span>) == <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b00000001</span>) != <span class="number">0</span> <span class="keyword">and</span> ( x &amp; <span class="number">0b11111100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">if</span> (~x &amp; <span class="number">0b00000010</span>) == <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b00000001</span>) != <span class="number">0</span> <span class="keyword">and</span> (~x &amp; <span class="number">0b11111100</span>) != <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">False</span></div><div class="line"></div><div class="line"><span class="comment"># 构建该邻接矩阵</span></div><div class="line"><span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">    <span class="keyword">if</span> is_dangerous(x):      <span class="comment"># 判断 x 的状态是否危险 </span></div><div class="line">        <span class="keyword">continue</span> </div><div class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">        <span class="keyword">if</span> is_dangerous(y):  <span class="comment"># 判断 y 的状态是否危险</span></div><div class="line">            <span class="keyword">continue</span></div><div class="line">        <span class="comment"># 如果通过坐船，可以使状态 x 转变为状态 y, 则使矩阵对应位置为 1</span></div><div class="line">        tmp = x ^ y</div><div class="line">        <span class="keyword">if</span> tmp <span class="keyword">in</span> boatAllowedStates: </div><div class="line">            <span class="comment"># 进一步判断，排除类似 10000000 到 01000000 的情况</span></div><div class="line">            <span class="keyword">if</span> tmp &amp; x ^ tmp == <span class="number">0</span> <span class="keyword">or</span> tmp &amp; x ^ tmp == tmp:</div><div class="line">                statesGraph[x][y] = <span class="number">1</span>    <span class="comment"># 连接图中能够能够转换的状态</span></div><div class="line"></div><div class="line"><span class="comment"># 通过图的深度优先搜索算法，找出一条从 0b00000000 到 0b11111111 的路径</span></div><div class="line"><span class="comment"># ⚠️<span class="doctag">TODO:</span> </span></div><div class="line"><span class="comment"># 此时仅仅是找到了一条能够到达的路径，不一定是最佳的结果</span></div><div class="line"><span class="comment"># 可考虑直接找出所有可行的结果</span></div><div class="line"><span class="comment"># 或使用最短路径算法，找出乘船次数最少的结果</span></div><div class="line">visited = [<span class="number">0</span>] * <span class="number">256</span> <span class="comment"># 用在图的深度优先搜索中，已访问的状态</span></div><div class="line">path = [<span class="number">257</span>] * <span class="number">256</span>  <span class="comment"># 用于存储路径，数组内元素为下一个状态, 257 代表尚未初始化</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">dfs_with_path</span><span class="params">(src)</span>:</span></div><div class="line">    visited[src] = <span class="number">1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">256</span>):</div><div class="line">        <span class="keyword">if</span> statesGraph[src][i] == <span class="number">1</span> <span class="keyword">and</span> visited[i] == <span class="number">0</span> <span class="keyword">and</span> visited[<span class="number">0b11111111</span>] == <span class="number">0</span>:</div><div class="line">            path[src] = i</div><div class="line">            dfs_with_path(i)</div><div class="line"></div><div class="line">dfs_with_path(<span class="number">0b00000000</span>)</div><div class="line"></div><div class="line"><span class="comment"># 将路径显示在屏幕上</span></div><div class="line">tmp_path = <span class="number">0</span></div><div class="line"><span class="keyword">while</span> tmp_path != <span class="number">0b11111111</span>:</div><div class="line">    print(<span class="string">'&#123;0:08b&#125;'</span>.format(tmp_path))</div><div class="line">    tmp_path = path[tmp_path]</div><div class="line">    <span class="keyword">if</span>(tmp_path == <span class="number">257</span>):</div><div class="line">        <span class="comment"># 257 在本程序中代表未初始化的值，如果遇到 257，说明没找到这样的路径</span></div><div class="line">        print(<span class="string">"Not found!"</span>)</div><div class="line">        exit()</div><div class="line">print(<span class="string">'&#123;0:08b&#125;'</span>.format(<span class="number">0b11111111</span>))</div><div class="line">print(<span class="string">"Found!"</span>)</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在同学的 QQ 空间上，发现了这样一道智力题：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;有一条河，河边有一个猎人牵着一头狼，一个男人带着两个小男孩，还有一个女人带着两个小女孩。&lt;br&gt;如果猎人离开，狼就会把所有人吃掉。&lt;br&gt;如果男人离开，女人会把两个小男孩掐死。&lt;br&gt;如果女人离开，男人会把两个小女孩掐死。&lt;br&gt;河里有一条船，船上只能乘坐两人（狼算一人），只有猎人、男人、女人会划船。&lt;br&gt;如何使他们全部过河？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;看到这道题，首先想到的是&lt;a href=&quot;https://www.zhihu.com/question/29968331&quot;&gt;农夫过河问题&lt;/a&gt;。既然这两个问题十分相似，那我就尝试按照农夫过河问题的思路，通过程序来找出该题的解。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="https://blanboom.org/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法" scheme="https://blanboom.org/tags/%E7%AE%97%E6%B3%95/"/>
+    
+      <category term="图" scheme="https://blanboom.org/tags/%E5%9B%BE/"/>
+    
+      <category term="智力题" scheme="https://blanboom.org/tags/%E6%99%BA%E5%8A%9B%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HackerRemote: 蓝牙遥控器 App, 支持数据的双向收发 (iOS)</title>
+    <link href="https://blanboom.org/2016/hackerremote/"/>
+    <id>https://blanboom.org/2016/hackerremote/</id>
+    <published>2016-06-06T07:12:00.000Z</published>
+    <updated>2017-06-02T13:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是我前段时间学习 Swift 时的练手作品，也是我的第一个 iOS App. </p>
+<p>HackerRemote 是一个游戏手柄形状的蓝牙 (BLE) 遥控器，可搭配 <a href="http://www.dfrobot.com.cn/goods-823.html" target="_blank" rel="external">DFRobot Bluno</a> 或蓝牙转串口模块，用于各种需要手机遥控的电子制作。</p>
+<p>除了能将数据发送至蓝牙设备，该 App 还可以从设备中接收数据（例如电池电量、飞行器飞行高度等），并显示在界面上，方便查看设备信息，对设备进行调试。</p>
+<p><img src="/images/2016/06/hackerremote.jpg" alt="HackerRemote 截图"></p>
+<p>App 的界面还比较简陋，在功能上，还有一些想法尚未实现。我会在空闲时间，根据情况对其进行进一步完善。</p>
+<p>下载链接：</p>
+<p><a href="https://itunes.apple.com/cn/app/id1120243546" target="_blank" rel="external">https://itunes.apple.com/cn/app/id1120243546</a></p>
+<a id="more"></a>
+<p>以下为 App 的使用方法与功能介绍：</p>
+<h1 id="连接蓝牙设备"><a href="#连接蓝牙设备" class="headerlink" title="连接蓝牙设备"></a>连接蓝牙设备</h1><ol>
+<li>通过屏幕右上角的 Scan 按钮，搜索并选择需要连接的蓝牙设备。</li>
+<li>输入蓝牙转串口模块的串口部分所对应的 Service UUID, 以及 RX, TX 引脚所对应的 UUID.</li>
+<li>通过屏幕下方的 Connect 按钮，连接蓝牙设备，如果连接成功，即可进入遥控器界面。</li>
+</ol>
+<p>Service UUID, TX UUID, RX UUID 的具体值请参考蓝牙转串口模块的官方文档。例如 DFRobot Bluno, 其这三项值分别为 DFB0, DFB1, DFB1.</p>
+<p>如果不需要接收数据，也可将 RX UUID 留空。</p>
+<h1 id="向蓝牙设备发送数据"><a href="#向蓝牙设备发送数据" class="headerlink" title="向蓝牙设备发送数据"></a>向蓝牙设备发送数据</h1><p>遥控器界面共有 9 个按键，每个按键对应一个字母。当按键按下后，发送按键对应的大写字母，当按键释放后，发送按键对应的小写字母。</p>
+<p>例如当 A 键按下后，发送字母 ”A”. 当 A 键释放后，发送字母 “a”.</p>
+<h1 id="接收数据"><a href="#接收数据" class="headerlink" title="接收数据"></a>接收数据</h1><p>当输入 RX UUID 并连接蓝牙设备后，可在软件界面中显示蓝牙设备发送的字符串。</p>
+<p>目前只支持显示单行字符串，同时，仅支持通过查询的方式获取数据（每隔 0.5 秒更新一次数据）。在下一个版本中，将会对此进行优化。</p>
+<hr>
+<h1 id="1-1-版本更新-2016-06-24"><a href="#1-1-版本更新-2016-06-24" class="headerlink" title="1.1 版本更新 (2016-06-24)"></a>1.1 版本更新 (2016-06-24)</h1><ul>
+<li>添加设置菜单，可设置数据接收的方式（Notify, 轮询）</li>
+<li>程序界面微调，使之更符合正常的操作逻辑</li>
+<li>添加演示模式，方便在无 BLE 设备的情况下体验该 App</li>
+<li>自动保存上次输入的 UUID, 无需在下一次使用时重复填写</li>
+<li>图标细节调整</li>
+<li>程序代码迁移至 Swift 3</li>
+<li>更新至 iOS 10 SDK</li>
+</ul>
+<p>由于使用了 beta 版本 iOS 10 SDK, 需要等到 iOS 10 正式版发布后才能提交到 App Store.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是我前段时间学习 Swift 时的练手作品，也是我的第一个 iOS App. &lt;/p&gt;
+&lt;p&gt;HackerRemote 是一个游戏手柄形状的蓝牙 (BLE) 遥控器，可搭配 &lt;a href=&quot;http://www.dfrobot.com.cn/goods-823.html&quot;&gt;DFRobot Bluno&lt;/a&gt; 或蓝牙转串口模块，用于各种需要手机遥控的电子制作。&lt;/p&gt;
+&lt;p&gt;除了能将数据发送至蓝牙设备，该 App 还可以从设备中接收数据（例如电池电量、飞行器飞行高度等），并显示在界面上，方便查看设备信息，对设备进行调试。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2016/06/hackerremote.jpg&quot; alt=&quot;HackerRemote 截图&quot;&gt;&lt;/p&gt;
+&lt;p&gt;App 的界面还比较简陋，在功能上，还有一些想法尚未实现。我会在空闲时间，根据情况对其进行进一步完善。&lt;/p&gt;
+&lt;p&gt;下载链接：&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://itunes.apple.com/cn/app/id1120243546&quot;&gt;https://itunes.apple.com/cn/app/id1120243546&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="蓝牙" scheme="https://blanboom.org/tags/%E8%93%9D%E7%89%99/"/>
+    
+      <category term="iOS" scheme="https://blanboom.org/tags/iOS/"/>
+    
+      <category term="BLE" scheme="https://blanboom.org/tags/BLE/"/>
+    
+      <category term="HackerRemote" scheme="https://blanboom.org/tags/HackerRemote/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 C 和 Allegro 实现的 NES 模拟器</title>
+    <link href="https://blanboom.org/2016/nes-emulator/"/>
+    <id>https://blanboom.org/2016/nes-emulator/</id>
+    <published>2016-04-20T12:39:00.000Z</published>
+    <updated>2016-06-18T12:34:38.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>NES (Nintendo Entertainment System, <a href="https://en.wikipedia.org/wiki/Nintendo_Entertainment_System" target="_blank" rel="external">Wikipedia</a>) 是历史上一款著名的游戏机，由任天堂于 1983 年推出，又被称做 FC (Family Computer) 或红白机。在国内，或许大家对「小霸王学习机」这个名字更加熟悉，应该有不少人就是在这台学习机上第一次接触了电子游戏。其实，「小霸王学习机」就是 NES 的山寨版，兼容 NES 游戏，在硬件上与 NES 基本相同。</p>
+<p>即使对游戏不感兴趣的人，听到「超级马里奥」（超级玛丽）等，也应该不会陌生。而这些游戏角色，正是由于 NES 的普及，才变得更加知名。</p>
+<p>在 NES 推出的时候，计算机多媒体技术并不是十分发达。而且不论是 NES，还是当时流行的 Apple II，其内存只有几 KB 到几百 KB. 为了能够流畅地显示游戏画面、播放游戏声音，NES 采用了不少巧妙的技术。</p>
+<a id="more"></a>
+<h1 id="我的-NES-模拟器"><a href="#我的-NES-模拟器" class="headerlink" title="我的 NES 模拟器"></a>我的 NES 模拟器</h1><p>由于 NES 已经是上个世纪的硬件，目前已经存在许多 NES 模拟器，可以运行在电脑、手机、游戏机甚至 STM32 之类的单片机上。而我只做这一 NES 模拟器，只是是为了让自己能够更加清晰地理解计算机底层的工作原理（<s>顺便做为毕设的一部分</s>）。如果需要在自己的程序中使用 NES 模拟器，建议参考更加成熟的项目。</p>
+<p>目前，该模拟器具有下列功能：</p>
+<ol>
+<li>运行基本的 NES 程序</li>
+<li>使用 Allegro 显示游戏画面</li>
+<li>反汇编</li>
+<li>显示 NES ROM 的相关信息</li>
+<li>在模拟器运行的过程中，显示 CPU 和 PPU 寄存器上的数值</li>
+</ol>
+<p>一些较为复杂的游戏，在其卡带中，除了 ROM 和 RAM 之外，还内置有内存控制器等芯片，或者使用了未在 NES CPU (6502) 文档中公开的特殊指令。这些游戏在本模拟器中无法运行。</p>
+<p>模拟器的源代码、使用方法、编译方法已经放在 GitHub: <a href="https://github.com/blanboom/bEMU" target="_blank" rel="external">https://github.com/blanboom/bEMU</a></p>
+<h1 id="资料整理"><a href="#资料整理" class="headerlink" title="资料整理"></a>资料整理</h1><p>这个模拟器中的代码并非全部由本人编写，而是参考了 <a href="https://github.com/NJUOS/LiteNES" target="_blank" rel="external">LiteNES</a>, <a href="https://github.com/holodnak/nesemu2" target="_blank" rel="external">nesemu2</a>, <a href="https://github.com/mwillsey/NES" target="_blank" rel="external">mwillsey’s NES</a> 等项目。在此对作者表示感谢。</p>
+<p>另外，在完成这一模拟器中，发现了许多有用的资料和链接。现在整理在此处，希望能够对更多对 NES 感兴趣的人带来帮助。</p>
+<ul>
+<li><a href="http://wiki.nesdev.com" target="_blank" rel="external">Nesdev Wiki</a><br>提供 NES 开发的相关信息，内容较为全面</li>
+<li><a href="http://www.6502.org" target="_blank" rel="external">6502.org</a><br>提供 6502 CPU 的文档、教程，以及与之相关的个人项目汇总</li>
+<li><a href="http://ewind.us/tags/NES/" target="_blank" rel="external">ewind 的 NES 模拟器笔记</a> (JavaScript)</li>
+<li><a href="https://yq.aliyun.com/articles/5784" target="_blank" rel="external">NESASM 教程</a><br>使用汇编语言开发 NES 程序的教程</li>
+<li><a href="http://nwidger.github.io/blog/post/writing-an-nes-emulator-in-go-part-1/" target="_blank" rel="external">Writing an NES emulator in Go</a></li>
+<li><a href="http://skilldrick.github.io/easy6502/" target="_blank" rel="external">Easy 6502 by skilldrick</a><br>互动式 6502 汇编教程</li>
+<li><a href="https://courses.cit.cornell.edu/ee476/FinalProjects/s2009/bhp7_teg25/bhp7_teg25/" target="_blank" rel="external">NES EMULATION by Tom Gowing and Brian Pescatore</a><br>使用 AVR 单片机的 NES 模拟器</li>
+<li><a href="http://49.212.183.201/6502/6502_report.htm" target="_blank" rel="external">6502CPU以及NES游戏机系统</a></li>
+<li><a href="https://www.zhihu.com/question/32899950" target="_blank" rel="external">NES 光枪的工作原理</a></li>
+</ul>
+<h1 id="调试与优化"><a href="#调试与优化" class="headerlink" title="调试与优化"></a>调试与优化</h1><h2 id="NES-测试程序"><a href="#NES-测试程序" class="headerlink" title="NES 测试程序"></a>NES 测试程序</h2><p>完成 NES 模拟器后，需要对 CPU 的各个指令、PPU 的各项功能进行测试，确定模拟器是否运行正常。这时候，通过测试程序，能够更方便地完成这些功能。</p>
+<p>在调试模拟器的过程中，我使用了 NEStress 和 nestest 两个测试程序。其中，NEStress 可以对 CPU、PPU、APU、IO 等进行测试，而 nestest 仅仅用于对 CPU 的测试，但比 NEStress 覆盖更多的指令。</p>
+<p>这些测试程序的下载地址可从这里找到：<a href="http://wiki.nesdev.com/w/index.php/Emulator_tests" target="_blank" rel="external">http://wiki.nesdev.com/w/index.php/Emulator_tests</a></p>
+<h2 id="通过-SIGINFO-显示调试信息"><a href="#通过-SIGINFO-显示调试信息" class="headerlink" title="通过 SIGINFO 显示调试信息"></a>通过 SIGINFO 显示调试信息</h2><p>在本模拟器中，还增加了显示 CPU、PPU 状态信息的功能。模拟器运行过程中，可通过 Ctrl+T，发送 SIGINFO，随时查看相关信息。</p>
+<p>相关程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sig_info</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">/* 显示时间 */</span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">time_t</span> timer;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">struct</span> tm * timeinfo;</div><div class="line">    time(&amp;timer);</div><div class="line">    timeinfo = localtime(&amp;timer);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>, asctime(timeinfo));</div><div class="line"> </div><div class="line">    cpu_debugger();</div><div class="line">    ppu_debugger();</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"--------------------------------------------\n\n"</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h2 id="CPU-模拟器的优化技巧"><a href="#CPU-模拟器的优化技巧" class="headerlink" title="CPU 模拟器的优化技巧"></a>CPU 模拟器的优化技巧</h2><p>这篇文章介绍了作者在对 6502 模拟器的一些优化技巧，可供参考：<a href="http://www.slack.net/~ant/nes-emu/6502.html" target="_blank" rel="external">http://www.slack.net/~ant/nes-emu/6502.html</a></p>
+<h1 id="其他想法"><a href="#其他想法" class="headerlink" title="其他想法"></a>其他想法</h1><p>关于这个模拟器的更多打算。如果以后有时间，可能会考虑将其实现。</p>
+<h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><p>将 CPU 与 PPU 通过两个线程实现，两者并行执行，有可能能提高效率。不过需要面临两者之间的同步问题。</p>
+<h2 id="通过-FPGA-制作「片上-NES」"><a href="#通过-FPGA-制作「片上-NES」" class="headerlink" title="通过 FPGA 制作「片上 NES」"></a>通过 FPGA 制作「片上 NES」</h2><p>通过 FPGA，以硬件的方式实现 CPU 和 PPU，加深对 CPU 硬件结构的理解。</p>
+<h2 id="扩展至-32-位"><a href="#扩展至-32-位" class="headerlink" title="扩展至 32 位"></a>扩展至 32 位</h2><p>尝试将 CPU 扩展至 32 位，扩充指令集，并兼容 6502 原有的指令集。</p>
+<h2 id="移植到-3DS"><a href="#移植到-3DS" class="headerlink" title="移植到 3DS"></a>移植到 3DS</h2><p>将模拟器移植到 3DS 上。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;NES (Nintendo Entertainment System, &lt;a href=&quot;https://en.wikipedia.org/wiki/Nintendo_Entertainment_System&quot;&gt;Wikipedia&lt;/a&gt;) 是历史上一款著名的游戏机，由任天堂于 1983 年推出，又被称做 FC (Family Computer) 或红白机。在国内，或许大家对「小霸王学习机」这个名字更加熟悉，应该有不少人就是在这台学习机上第一次接触了电子游戏。其实，「小霸王学习机」就是 NES 的山寨版，兼容 NES 游戏，在硬件上与 NES 基本相同。&lt;/p&gt;
+&lt;p&gt;即使对游戏不感兴趣的人，听到「超级马里奥」（超级玛丽）等，也应该不会陌生。而这些游戏角色，正是由于 NES 的普及，才变得更加知名。&lt;/p&gt;
+&lt;p&gt;在 NES 推出的时候，计算机多媒体技术并不是十分发达。而且不论是 NES，还是当时流行的 Apple II，其内存只有几 KB 到几百 KB. 为了能够流畅地显示游戏画面、播放游戏声音，NES 采用了不少巧妙的技术。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="NES" scheme="https://blanboom.org/tags/NES/"/>
+    
+      <category term="Famicom" scheme="https://blanboom.org/tags/Famicom/"/>
+    
+      <category term="C" scheme="https://blanboom.org/tags/C/"/>
+    
+      <category term="Allegro" scheme="https://blanboom.org/tags/Allegro/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>四位辉光管时钟</title>
+    <link href="https://blanboom.org/2016/nixie-clock-lite/"/>
+    <id>https://blanboom.org/2016/nixie-clock-lite/</id>
+    <published>2016-03-07T04:00:00.000Z</published>
+    <updated>2017-06-02T13:33:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://blanboom.org/2014/qs30-1-nixie-clock">上次做的辉光管时钟</a>在外观上还有一些不满意的地方。所以最近这几天，我又新做了一个辉光管时钟。不同于上次，为了节省时间，电路和 PCB 都没有自己设计，而是直接采用成品模块。这样制作难度大大下降，同时能够更快地完成制作。</p>
+<p><img src="/images/2016/03/nixie-photo-1.jpg" alt="辉光管时钟"></p>
+<a id="more"></a>
+<p><img src="/images/2016/03/nixie-photo-2.jpg" alt="辉光管时钟"></p>
+<p><img src="/images/2016/03/nixie-photo-3.jpg" alt="辉光管时钟"></p>
+<h1 id="电路"><a href="#电路" class="headerlink" title="电路"></a>电路</h1><p>在电路上，全部使用成品模块进行制作，通过简单的导线连接即可完成。具体介绍如下：</p>
+<p><img src="/images/2016/03/nixie-circuit.png" alt="电路"></p>
+<p><strong>1) Arduino 兼容控制板</strong></p>
+<p>控制板采用 <a href="http://www.dfrobot.com.cn/goods.php?id=1097" target="_blank" rel="external">Bluno Beetle</a>. Bluno Beetle 是一块兼容 Arduino Uno 的开发板，体积较小，且内置了蓝牙 4.0 功能。使用这块板子不仅可以节省空间，还支持无线下载程序，并能通过蓝牙实现更多功能。</p>
+<p><strong>2) 实时时钟与温度传感器</strong></p>
+<p>实时时钟模块采用 <a href="http://www.dfrobot.com.cn/goods.php?id=535" target="_blank" rel="external">DFRobot 的 DS1307 模块</a>，用于在掉电的情况下维持时间。另外，这一模块预留了 DS18B20 温度传感器的焊盘，焊接上温度传感器，即可测量温度。</p>
+<p><strong>3) 滚珠开关</strong></p>
+<p>考虑到外观和制作的难易程度，我没有在其中安装按键或微动开关。时间调整和闹钟设置均通过蓝牙完成。但是当闹钟响起的时候，用手机之类的设备关闭闹钟比较麻烦，这是通过滚珠开关，轻拍辉光管时钟，即可方便地停止闹钟。</p>
+<p><strong>4) 辉光管模块</strong></p>
+<p>直接使用<a href="https://item.taobao.com/item.htm?id=15397910473" target="_blank" rel="external">成品辉光管模块</a>，能够避免复杂的电源电路设计工作。该模块供电电压为 5V，可直接使用 USB 供电。</p>
+<h1 id="外壳"><a href="#外壳" class="headerlink" title="外壳"></a>外壳</h1><p>上次制作的辉光管时钟，只有上下两片亚克力板起到保护作用，在外观上似乎有点简陋。所以这一次制作一个完整的亚克力外壳。</p>
+<p><img src="/images/2016/03/nixie-case.png" alt="外壳"></p>
+<p>外壳采用 3mm 黑茶色透明亚克力板制作而成，其中，顶部和侧面通过胶水固定，成为一个底部开口的亚克力盒子。所有模块放置于底板，通过螺丝和铜柱与亚克力盒相连，可以自由拆卸。</p>
+<p>由于不会使用用 <a href="http://www.autodesk.com.cn/products/autocad/overview" target="_blank" rel="external">AutoCAD</a> 和 <a href="http://www.coreldraw.com/" target="_blank" rel="external">CorelDRAW</a>，我选择用自己比较熟悉的 PCB 设计软件 <a href="http://www.altium.com" target="_blank" rel="external">Altium Designer</a> 进行外壳的初步设计，然后导出为 PDF 格式，在 <a href="https://affinity.serif.com" target="_blank" rel="external">Affinity Designer</a> 中进行进一步处理，即可在淘宝上进行亚克力板的定做。（其实只用 Altium Designer 或者只用 Affinity Designer 均可直接完成外壳图纸的绘制，我只是选择了对于自己来说最方便的方法）</p>
+<p>另外，由于辉光管的视角有限，当辉光管时钟斜放于桌面时，显示效果最好。所以我打算在时钟底部安装亚克力铰链，从而能够更方便地斜放在桌面上。</p>
+<h1 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h1><p>由于使用 Arduino 兼容的开发板，软件开发会变得更加容易。</p>
+<p>另外，这也是我首次使用 <a href="http://platformio.org" target="_blank" rel="external">PlatformIO</a>, 这是一个兼容 Arduino 和 MBED 的跨平台构建系统，与 <a href="https://www.arduino.cc/en/Main/Software" target="_blank" rel="external">Arduino IDE</a> 相比，功能更加强大。如果觉得 Arduino IDE 不好用，可以尝试下这个。</p>
+<p>目前，基本的时钟功能（包括阴极中毒保护）已经完成。</p>
+<p>GitHub 地址：<a href="https://github.com/blanboom/NixieClockLite" target="_blank" rel="external">https://github.com/blanboom/NixieClockLite</a></p>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>还有几个月就要毕业，这件作品应该会成为我大学期间最后一个独立完成的电子制作。接下来，就要看书和准备毕业设计了。</p>
+<p>上个学期，通过校园招聘，我找到了一份软件开发相关的工作，也算是从 EE 转向 CS 了。毕业之后，接触电子和嵌入式的机会可能会逐渐变少，希望自己对电子 DIY 的兴趣不会改变。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://blanboom.org/2014/qs30-1-nixie-clock&quot;&gt;上次做的辉光管时钟&lt;/a&gt;在外观上还有一些不满意的地方。所以最近这几天，我又新做了一个辉光管时钟。不同于上次，为了节省时间，电路和 PCB 都没有自己设计，而是直接采用成品模块。这样制作难度大大下降，同时能够更快地完成制作。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2016/03/nixie-photo-1.jpg&quot; alt=&quot;辉光管时钟&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="电子与制作" scheme="https://blanboom.org/categories/%E7%94%B5%E5%AD%90%E4%B8%8E%E5%88%B6%E4%BD%9C/"/>
+    
+    
+      <category term="Arduino" scheme="https://blanboom.org/tags/Arduino/"/>
+    
+      <category term="时钟" scheme="https://blanboom.org/tags/%E6%97%B6%E9%92%9F/"/>
+    
+      <category term="辉光管" scheme="https://blanboom.org/tags/%E8%BE%89%E5%85%89%E7%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2015 电赛风力摆题：我的方案</title>
+    <link href="https://blanboom.org/2015/wind-pendulum/"/>
+    <id>https://blanboom.org/2015/wind-pendulum/</id>
+    <published>2015-08-27T06:14:40.000Z</published>
+    <updated>2017-06-02T13:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：</p>
+<blockquote>
+<p>一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。</p>
+</blockquote>
+<p>趁这段时间，整理一下我们组的方案。</p>
+<a id="more"></a>
+<h1 id="总体方案"><a href="#总体方案" class="headerlink" title="总体方案"></a>总体方案</h1><p>作品的机械结构由我的队友完成。支架使用铝型材制作，通过万向节与摆杆相连，底部是由细碳纤杆做成的立方体，四个电机固定在立方体的四个侧面上。</p>
+<p><img src="/images/2015/08/pendulum_1.jpg" alt="风力摆照片"></p>
+<p>该题的电路比较简单，Arduno MEGA 2560 产生四路 PWM 波，通过 PMV31XN 驱动各个电机；MPU-6050 用于获取摆的运动状态。为了方便设置，作品上还安装了三个微动开关和一个 SSD1306 OLED 显示屏。</p>
+<p><img src="/images/2015/08/pendulum_3.png" alt="风力摆示意图"></p>
+<p>MPU-6050 固定在摆杆上，传感器 X, Y 轴的方向与两组电机轴的方向一致。（类似于四旋翼中的 “+” 模式。）</p>
+<h1 id="基本要求一：起摆"><a href="#基本要求一：起摆" class="headerlink" title="基本要求一：起摆"></a>基本要求一：起摆</h1><p>题目的要求如下：</p>
+<blockquote>
+<p>从静止开始,15s 内控制风力摆做类似自由摆运动，使激光笔稳定地<br>在地面画出一条长度不短于 50cm 的直线段，其线性度偏差不大于 ±2.5cm，并且具有较好的重复性。</p>
+</blockquote>
+<p>自由摆的摆动相当于左右方向的往复运动，在没有外力的情况下，由于阻力的影响，摆幅会逐渐降低。而在摆运动的过程中，不断给摆补充能量，就会使摆幅不断增大。</p>
+<p>按照我们的方案，风力摆向左摆动时，给风力摆施加向左的力，向右运动时施加向右的力，风力摆就会越摆越高。从 MPU-6050 中读取的角速度正负，正好对应摆动的左右方向。</p>
+<p>程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode1</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    initMPU_NoDMP();        <span class="comment">// 初始化 MPU-6050</span></div><div class="line">    Serial.println(<span class="string">"App mode1 initialized!"</span>);</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();  <span class="comment">// 从 MPU-6050 读取角速度和加速度</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;         <span class="comment">// 如果 X 轴的角速度大于 0</span></div><div class="line">            motorOutput13(<span class="number">255</span>);  <span class="comment">// 电机 1 转动，给风力摆正方向的力</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(<span class="number">-255</span>); <span class="comment">// 电机 3 转动，给风力摆反方向的力</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        delay(<span class="number">50</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求二：完成幅度可控的摆动"><a href="#基本要求二：完成幅度可控的摆动" class="headerlink" title="基本要求二：完成幅度可控的摆动"></a>基本要求二：完成幅度可控的摆动</h1><blockquote>
+<p>从静止开始，15s 内完成幅度可控的摆动。画出长度在 30~60cm 间可设置，长度偏差不大于 ±2.5cm 的直线段，并且具有较好的重复性。</p>
+</blockquote>
+<p>将题目中的线段长度换算为风力摆需要达到的摆动幅度（角度）。在风力摆运动的过程中，通过 MPU-6050 实时获取目前的摆动幅度，通过 PID 算法控制电机转速，即可使风力摆逐渐达到要求的摆幅。</p>
+<p>对于摆动幅度的获取，首先通过 MPU-6050 读取角速度，角速度为 0 时，说明风力摆已到达最高点。此时，可通过 MPU-6050 的 DMP 读取四元数，并换算为摆幅角度。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode2</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> theta_in, theta_out, theta_set, theta_last = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(&amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">5.0</span>, <span class="number">1.3</span>, <span class="number">2.0</span>, DIRECT)</span></span>;</div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode2 initialized!"</span>);</div><div class="line">    theta_set = interface_input_length();   <span class="comment">// 输入长度</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(theta_set &lt;= <span class="number">35</span>) &#123; theta_pid.SetTunings(<span class="number">1.0</span>, <span class="number">0.7</span>, <span class="number">1.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(theta_set &lt;= <span class="number">45</span>) &#123; theta_pid.SetTunings(<span class="number">8.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;</div><div class="line">    <span class="keyword">else</span> &#123; theta_pid.SetTunings(<span class="number">5.0</span>, <span class="number">7.0</span>, <span class="number">2.0</span>); &#125;  <span class="comment">// 设置 PID 参数</span></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set = <span class="built_in">atan</span>((theta_set / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set *= <span class="number">180</span> /M_PI;    <span class="comment">// 将长度换算为以角度为单位的摆动幅度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    initMPU();</div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;   </div><div class="line">            <span class="comment">// 角速度为 0，摆动到最高点，获取此时摆动幅度</span></div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;  <span class="comment">// 将 pitch 和 roll 换算为摆动幅度</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;      <span class="comment">// 两次的摆动幅度（最大摆动角度）取平均值</span></div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();  <span class="comment">// 计算 PID</span></div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        Serial.println(theta_in);</div><div class="line">        Serial.println(<span class="string">", "</span>);</div><div class="line">        Serial.println(theta_out);</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">100</span>; &#125; <span class="comment">// 保证在静止的时候依旧能摆起来</span></div><div class="line">        <span class="keyword">if</span>(gx &gt; <span class="number">0</span>) &#123;</div><div class="line">            motorOutput13(theta_out);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-theta_out);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line"></div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();           <span class="comment">// 获取 yaw, roll, pitch</span></div><div class="line">        getMotion6_NoDMP(); <span class="comment">// 获取角速度和加速度</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求三：按照指定方向摆动"><a href="#基本要求三：按照指定方向摆动" class="headerlink" title="基本要求三：按照指定方向摆动"></a>基本要求三：按照指定方向摆动</h1><blockquote>
+<p>可设定摆动方向，风力摆从静止开始，15s 内按照设置的方向（角度）摆动，画出不短于 20cm 的直线段。</p>
+</blockquote>
+<p>根据力的合成与分解，控制两对电机的转速，即可做到按照指定方向摆动。其余部分与基础要求一类似。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode3</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">uint16_t</span> angle_input = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int16_t</span> motor_val1, motor_val2;</div><div class="line"></div><div class="line">    initMPU_NoDMP();</div><div class="line">    Serial.println(<span class="string">"App mode3 initialized!"</span>);</div><div class="line">    Serial.println(<span class="string">"Input radius:"</span>);</div><div class="line">    angle_input = interface_input_angle();  <span class="comment">//输入角度</span></div><div class="line"></div><div class="line">    <span class="comment">//if(angle_input == 120) &#123; angle_input = 130; &#125;  // 手动修正误差</span></div><div class="line"></div><div class="line">    <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">    motor_val1 = <span class="number">120</span> * <span class="built_in">sin</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line">    motor_val2 = <span class="number">120</span> * <span class="built_in">cos</span>(angle_input * M_PI / <span class="number">180</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (gx &gt; <span class="number">0</span>) &#123;   <span class="comment">// 以 90 度摆动时，只判断 gx 可能会出现问题。由于比赛时间限制，没有来得及修改。</span></div><div class="line">            motorOutput13(motor_val1);</div><div class="line">            motorOutput24(motor_val2);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            motorOutput13(-motor_val1);</div><div class="line">            motorOutput24(-motor_val2);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="基本要求四：制动"><a href="#基本要求四：制动" class="headerlink" title="基本要求四：制动"></a>基本要求四：制动</h1><blockquote>
+<p>将风力摆拉起一定角度 (30°~45°) 放开，5s 内使风力摆制动达到静止状态。</p>
+</blockquote>
+<p>本要求刚好与基本要求一相反，在风力摆运动的过程中，给风力摆一个与运动方向相反的力，即可消耗其能量，使风力摆快速停下。这个力的大小，应该根据摆的运动速度实时调整，防止在摆在接近停止时来回振荡。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode4</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">float</span> kp_x = <span class="number">-0.1</span>, kp_y = <span class="number">-0.1</span>;</div><div class="line">    <span class="keyword">int16_t</span> output_x = <span class="number">0</span>, output_y = <span class="number">0</span>;</div><div class="line">    initMPU_NoDMP();</div><div class="line">    delay(<span class="number">400</span>);</div><div class="line">    Serial.println(<span class="string">"App mode4 initialized!"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 计算两对电机的转速 */</span></div><div class="line">        output_x = gx * kp_x;</div><div class="line">        output_y = gy * kp_y; <span class="comment">// kp_x 和 kp_y 均为负数，说明风机施加的力与运动方向相反</span></div><div class="line"></div><div class="line">        <span class="comment">//Serial.println(output_x);</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(output_x &lt; <span class="number">-255</span>) &#123; output_x = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_x &gt; <span class="number">255</span> ) &#123; output_x =  <span class="number">255</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(output_y &lt; <span class="number">-255</span>) &#123; output_y = <span class="number">-255</span>; &#125;</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(output_y &gt; <span class="number">255</span> ) &#123; output_y =  <span class="number">255</span>; &#125;</div><div class="line"></div><div class="line">        motorOutput13(output_x);</div><div class="line">        motorOutput24(output_y);</div><div class="line"></div><div class="line">        delay(<span class="number">4</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="发挥要求：画圆"><a href="#发挥要求：画圆" class="headerlink" title="发挥要求：画圆"></a>发挥要求：画圆</h1><blockquote>
+<p>(1) 以风力摆静止时激光笔的光点为圆心，驱动风力摆用激光笔在地面画圆，30s 内需重复 3 次；圆半径可在 15~35cm 范围内设置，激光笔画出的轨迹应落在指定半径 ±2.5cm 的圆环内；</p>
+<p>(2) 在发挥部分 (1) 后继续作圆周运动，在距离风力摆 1~2m 距离内用一台 50~60W 台扇在水平方向吹向风力摆，台扇吹 5s 后停止，风力摆能够在 5s 内恢复发挥部分 (1) 规定的圆周运动，激光笔画出符合要求的轨迹;</p>
+</blockquote>
+<p>圆锥摆相当于两个方向相互垂直的单摆的叠加，其相位差为 90 度。所以需要在基础要求二的基础上，对 X, Y 轴分别进行 PID 控制。同时需要提前测量好周期，控制好相位，否则无法画出正圆。</p>
+<p>由于在完成本要求时，已经是比赛的最后一天，参数没调好，再加上程序应该还有更多优化的空间，在实验室调试时，算是勉强完成题目的要求。但在正式比赛的过程中，画出的圆有了较大的变形，再加上参数没调好，出现了振荡的现象，最终成绩不是太好。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">app_mode5</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> <span class="keyword">uint8_t</span> delayTime = <span class="number">120</span>; <span class="comment">// 电机转速更新周期，应根据摆的周期，结合实测结果进行微调，否则画出的圆会出现变形</span></div><div class="line">    <span class="keyword">float</span> currentAngle = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">float</span> i;</div><div class="line"></div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> lastTime = <span class="number">0</span>, currentTime = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in,   theta_out,   theta_set,   theta_last   = <span class="number">0</span>;</div><div class="line">    <span class="keyword">float</span> theta_in_2, theta_out_2, theta_set_2, theta_last_2 = <span class="number">0</span>;</div><div class="line">    <span class="function">PID <span class="title">theta_pid</span><span class="params">(  &amp;theta_in, &amp;theta_out, &amp;theta_set, <span class="number">6.0</span>, <span class="number">1.2</span>, <span class="number">5.1</span>, DIRECT)</span></span>; <span class="comment">// X 方向 PID</span></div><div class="line">    <span class="function">PID <span class="title">theta_pid_2</span><span class="params">(&amp;theta_in_2, &amp;theta_out_2, &amp;theta_set_2, <span class="number">8.0</span>, <span class="number">1.5</span>, <span class="number">3.5</span>, DIRECT)</span></span>;  <span class="comment">// Y 方向 PID</span></div><div class="line">    <span class="keyword">int16_t</span> gx_last = <span class="number">0</span>, gy_last = <span class="number">0</span>;</div><div class="line">    <span class="keyword">bool</span> a = <span class="number">0</span>, a_2 = <span class="number">0</span>;</div><div class="line"></div><div class="line">    theta_pid.SetMode(AUTOMATIC);</div><div class="line">    theta_pid.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid.SetSampleTime(<span class="number">1500</span>);</div><div class="line">    theta_pid_2.SetMode(AUTOMATIC);</div><div class="line">    theta_pid_2.SetOutputLimits(<span class="number">-255</span>, <span class="number">255</span>);</div><div class="line">    theta_pid_2.SetSampleTime(<span class="number">1500</span>);</div><div class="line"></div><div class="line"></div><div class="line">    Serial.println(<span class="string">"App mode5 initialized!"</span>);</div><div class="line">    theta_set = interface_input_radius() * <span class="number">2.0</span> + <span class="number">1.0</span>; <span class="comment">// 输入半径，换算为直径。1.0 为人工误差修正</span></div><div class="line">    theta_set_2 = theta_set;</div><div class="line"></div><div class="line">    initMPU();</div><div class="line"></div><div class="line">    Serial.print(<span class="string">"Length set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". "</span>);</div><div class="line">    theta_set    = <span class="built_in">atan</span>((theta_set   / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set   *= <span class="number">180</span> /M_PI;</div><div class="line">    theta_set_2  = <span class="built_in">atan</span>((theta_set_2 / <span class="number">2</span>) / <span class="number">88.7</span>);</div><div class="line">    theta_set_2 *= <span class="number">180</span> /M_PI; <span class="comment">// 将直径换算为摆动角度</span></div><div class="line">    Serial.print(<span class="string">"Angle set: "</span>);</div><div class="line">    Serial.print(theta_set);</div><div class="line">    Serial.print(<span class="string">". \n"</span>);</div><div class="line"></div><div class="line">    beep();</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(;;) &#123;</div><div class="line">        <span class="keyword">while</span> (!mpuInterrupt &amp;&amp; fifoCount &lt; packetSize) &#123;&#125;</div><div class="line">        getYPR();</div><div class="line">        getMotion6_NoDMP();</div><div class="line"></div><div class="line">        <span class="comment">/* 在 X 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gx == <span class="number">0</span> || (gx &gt; <span class="number">0</span> &amp;&amp; gx_last &lt; <span class="number">0</span>) || (gx &lt; <span class="number">0</span> &amp;&amp; gx_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a == <span class="number">0</span>) &#123;</div><div class="line">                a = <span class="number">1</span>;</div><div class="line">                theta_in = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a = <span class="number">0</span>;</div><div class="line">                theta_in += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in = theta_last;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last = theta_in;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在 Y 方向进行 PID 控制 */</span></div><div class="line">        <span class="keyword">if</span> (gy == <span class="number">0</span> || (gy &gt; <span class="number">0</span> &amp;&amp; gy_last &lt; <span class="number">0</span>) || (gy &lt; <span class="number">0</span> &amp;&amp; gy_last &gt; <span class="number">0</span>)) &#123;</div><div class="line">            <span class="keyword">if</span>(a_2 == <span class="number">0</span>) &#123;</div><div class="line">                a_2 = <span class="number">1</span>;</div><div class="line">                theta_in_2 = <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                a_2 = <span class="number">0</span>;</div><div class="line">                theta_in_2 += <span class="built_in">atan</span>(<span class="built_in">sqrt</span>(<span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">1</span>]), <span class="number">2.0</span>) + <span class="built_in">pow</span>(<span class="built_in">tan</span>(ypr[<span class="number">2</span>]), <span class="number">2.0</span>))) * <span class="number">180.0</span> / M_PI;</div><div class="line">                theta_in_2 /= <span class="number">2.0</span>;</div><div class="line">                <span class="keyword">if</span>(theta_in_2 &gt; <span class="number">80</span>) &#123;</div><div class="line">                    theta_in_2 = theta_last_2;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    theta_pid_2.Compute();</div><div class="line">                &#125;</div><div class="line">                theta_last_2 = theta_in_2;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out) &lt; <span class="number">2</span>) &#123; theta_out = <span class="number">60.0</span>; &#125;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">abs</span>(theta_out_2) &lt; <span class="number">2</span>) &#123; theta_out_2 = <span class="number">60.0</span>; &#125;</div><div class="line"></div><div class="line">        <span class="comment">/* 在指定的时间间隔更新电机转速 */</span></div><div class="line">        currentTime = millis();</div><div class="line">        i = (currentTime - lastTime) / delayTime;</div><div class="line">        <span class="keyword">if</span>(i &gt; <span class="number">0</span>)&#123;</div><div class="line">            currentAngle += <span class="number">30.0</span> * i;</div><div class="line">            <span class="keyword">if</span>(currentAngle &gt;= <span class="number">360</span>) &#123; currentAngle = <span class="number">0.0</span>; &#125;</div><div class="line">            motorOutput13(theta_out   * <span class="built_in">sin</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            motorOutput24(theta_out_2 * <span class="built_in">cos</span>(currentAngle * M_PI / <span class="number">180.0</span>));</div><div class="line">            lastTime = currentTime;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        gx_last = gx;</div><div class="line">        gy_last = gy;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2015 年全国大学生电子设计竞赛刚刚结束。我们组选择了 B 题：风力摆控制系统。题目要求如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一长约 60cm~70cm 的细管上端用万向节 固定在支架上,下方悬挂一组(2~4 只)直流 风机,构成一风力摆,如图 1 所示。风力摆上 安装一向下的激光笔,静止时,激光笔的下端 距地面不超过 20cm。设计一测控系统,控制 驱动各风机使风力摆按照一定规律运动,激光 笔在地面画出要求的轨迹。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;趁这段时间，整理一下我们组的方案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="https://blanboom.org/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Arduino" scheme="https://blanboom.org/tags/Arduino/"/>
+    
+      <category term="风力摆" scheme="https://blanboom.org/tags/%E9%A3%8E%E5%8A%9B%E6%91%86/"/>
+    
+      <category term="MPU-6050" scheme="https://blanboom.org/tags/MPU-6050/"/>
+    
+      <category term="陀螺仪" scheme="https://blanboom.org/tags/%E9%99%80%E8%9E%BA%E4%BB%AA/"/>
+    
+      <category term="电赛" scheme="https://blanboom.org/tags/%E7%94%B5%E8%B5%9B/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>欢迎与我合作参加 2015 年创新项目</title>
+    <link href="https://blanboom.org/2015/join-me/"/>
+    <id>https://blanboom.org/2015/join-me/</id>
+    <published>2015-03-02T08:54:00.000Z</published>
+    <updated>2015-03-25T03:21:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>(2015-03-25 Update: 找到队友，项目已申报并开始准备制作。)</p>
+<p>打算参加今年的大学生创新创业训练计划项目，欢迎<strong>感兴趣</strong>的同学和我组队。具体请看下文介绍。</p>
+<a id="more"></a>
+<h1 id="What"><a href="#What" class="headerlink" title="What"></a>What</h1><h2 id="什么是创新创业训练计划项目"><a href="#什么是创新创业训练计划项目" class="headerlink" title="什么是创新创业训练计划项目"></a>什么是创新创业训练计划项目</h2><p>大学生创新创业训练计划是教育部为了「增强高校学生的创新能力和在创新基础上的创业能力」而设立的，具体包括创新训练项目、创业训练项目和创业实践项目三类，国家或学校为其提供<strong>经费支持</strong>。对于大部分工科生，更关注其中的「<strong>创新训练项目</strong>」。</p>
+<p>在我看来，要实现真正有用的创新，是一个比较困难的过程，需要长期的积累。靠「创新项目」之类的方式，对提升创新能力似乎没太大帮助。但是，作为学生，通过这一形式学习新知识、提升实践能力、实现自己的想法，也是十分值得的。</p>
+<h2 id="我要申报的项目：睡眠助手"><a href="#我要申报的项目：睡眠助手" class="headerlink" title="我要申报的项目：睡眠助手"></a>我要申报的项目：睡眠助手</h2><p>我要申报的项目是「睡眠助手」，这是一个与睡眠相关的作品，灵感来源于 <a href="http://www.sleepcycle.com" target="_blank" rel="external">Sleep Cycle</a>，能够实现睡眠辅助、睡眠质量监测、智能闹钟等，同时可通过无线的方式连接其他设备，实现一些更加「智能」的功能。</p>
+<p>虽然市场上已经有了很多监测睡眠质量的软硬件产品，但<strong>本作品在睡眠质量监测之外，还有许多新的功能和创意</strong>。不过根据我的计划，一些细节暂时不方便在此处公开，如果感兴趣，请与我邮件联系。</p>
+<p>对于本项目，需要在<strong>一年的时间</strong>内完成作品的设计与制作。同时，对于睡眠质量监测功能，还需要通过与专业医疗设备的对比，优化算法，验证其的效果与精度。</p>
+<h1 id="Why"><a href="#Why" class="headerlink" title="Why"></a>Why</h1><h2 id="本项目的优势"><a href="#本项目的优势" class="headerlink" title="本项目的优势"></a>本项目的优势</h2><ul>
+<li>之前已完成本作品的核心部分，项目基本上<strong>可行</strong></li>
+<li>本项目不属于那种「打酱油」、用一两个晚上就能完成的项目。通过这一项目，可以<strong>学到真正有用的知识</strong></li>
+<li>项目具有一定的「挑战性」，通过完成此项目，能够获得更大的<strong>成就感</strong></li>
+<li>本作品具有其<strong>新颖</strong>、<strong>独特</strong>之处，而不是千篇一律的「小车」、「飞行器」、「环境监测」…</li>
+<li>我已参加过 2013 年国家级大学生创新创业训练计划项目，具有一定的经验</li>
+</ul>
+<h2 id="但是，有这么几点需要稍稍注意一下"><a href="#但是，有这么几点需要稍稍注意一下" class="headerlink" title="但是，有这么几点需要稍稍注意一下"></a>但是，有这么几点需要稍稍注意一下</h2><ul>
+<li><strong>时间与精力</strong>：<br>参与本项目，可能会花费大量时间。如果自己还有其他计划（例如参与数学建模、ACM、挑战杯、科研训练，或者考研复习等），建议慎重考虑。</li>
+<li><strong>失败</strong>：<br>目前便携式、非可穿戴式睡眠质量监测设备的研究还不是很多。是否能在一年时间内实现<strong>可靠、准确的</strong>睡眠质量监测，目前还不确定。所以，如果以后面临了这方面的失败，可能要暂时放弃此功能，先把其他功能完成。</li>
+<li><strong>能否申报通过</strong>：<br>由于非医用的睡眠质量监测设备对于大部分人来说还比较陌生。在申报项目的过程中，可能会面临难以向老师解释清楚、项目无法申报等问题（虽然概率不大），这一点需要提前做一下心理准备。</li>
+</ul>
+<p>建议考虑该项目的优缺点，根据自己的情况选择是否参加。</p>
+<h1 id="How"><a href="#How" class="headerlink" title="How"></a>How</h1><p>参与本项目，需要掌握这些知识和技能：</p>
+<ul>
+<li>电路设计<ul>
+<li>主要涉及 STM32 单片机、传感器、MP3 解码芯片、音频放大器等的应用</li>
+</ul>
+</li>
+<li>PCB 布线<ul>
+<li>本项目不包含高频、大功率电路，布线不会过于复杂</li>
+<li>但是，因为电路中有音频解码、放大部分。在提升音质方面，可能要多做一些考虑</li>
+</ul>
+</li>
+<li>单片机程序开发<ul>
+<li>涉及到 STM32 单片机的开发</li>
+<li>涉及到嵌入式实时操作系统（打算用 Nuttx）、文件系统、GUI 等知识</li>
+<li>为了实现监测睡眠质量的功能，需要寻找或自行设计算法对传感器数据进行整合与分析</li>
+<li>可能会使用一门脚本语言（Lua、Python 等）实现功能的扩展</li>
+</ul>
+</li>
+<li>手机应用开发<ul>
+<li>如果时间允许，可以考虑制作一个与硬件配套使用的 APP</li>
+<li>需要掌握通过蓝牙 4.0 与其他设备通信</li>
+</ul>
+</li>
+<li>外观设计<ul>
+<li>设计该作品的外观，同时需要兼顾电路与 PCB 的设计</li>
+</ul>
+</li>
+</ul>
+<p>如果感觉自己擅长这些方面中的任意一点，或者能够<strong>证明</strong>自己具有足够的<strong>自学能力</strong>和<strong>自我解决问题的能力</strong>，欢迎与我联系。我的邮箱是：i[at]blanboom.org</p>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p>除了睡眠助手，我还在进行另一个制作：一个具有联网和消息推送功能的 LED 点阵屏。如果对这个作品感兴趣，也可以与我合作完成。</p>
+<p>作品简介请参考此处：<a href="https://github.com/blanboom/aMatrix_Firmware" target="_blank" rel="external">https://github.com/blanboom/aMatrix_Firmware</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;(2015-03-25 Update: 找到队友，项目已申报并开始准备制作。)&lt;/p&gt;
+&lt;p&gt;打算参加今年的大学生创新创业训练计划项目，欢迎&lt;strong&gt;感兴趣&lt;/strong&gt;的同学和我组队。具体请看下文介绍。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="电子与制作" scheme="https://blanboom.org/categories/%E7%94%B5%E5%AD%90%E4%B8%8E%E5%88%B6%E4%BD%9C/"/>
+    
+    
+      <category term="STM32" scheme="https://blanboom.org/tags/STM32/"/>
+    
+      <category term="睡眠" scheme="https://blanboom.org/tags/%E7%9D%A1%E7%9C%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hexo 主题 Landscape 改造小记</title>
+    <link href="https://blanboom.org/2015/hack-hexo-theme-landscape/"/>
+    <id>https://blanboom.org/2015/hack-hexo-theme-landscape/</id>
+    <published>2015-02-07T10:31:00.000Z</published>
+    <updated>2017-06-02T13:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨晚更新 Hexo 后，发现新版 Hexo 自带的主题 <a href="https://github.com/hexojs/hexo-theme-landscape" target="_blank" rel="external">Landscape</a> 不错，就决定使用这一款主题。同时，对 Landscape 中一些不太符合自己使用习惯的地方进行了修改。</p>
+<h4 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h4><ol>
+<li><a href="#toc_0">自动切换 banner 图片</a></li>
+<li><a href="#toc_1">更改引文样式</a></li>
+<li><a href="#toc_2">更改标题样式</a></li>
+<li><a href="#toc_3">优化字体方案</a></li>
+<li><a href="#toc_4">修改分享按钮</a></li>
+<li><a href="#toc_5">替换 Google Javascript 库和字体库</a></li>
+</ol>
+<a id="more"></a>
+<h1 id="toc_0">1. 自动切换 banner 图片</h1>
+
+<p>更换主题后，打开网页，首先看到的是顶部大大的 banner 图片。不过，默认的 banner，只能固定显示一张图片。如果这张图片能替换成自己作品的照片，并且能自动随机切换，效果应该会更好。</p>
+<p>上网搜索了一下，刚好有人有同样的想法。使用 Javascript 即可实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">    &lt;% if (theme.switch_banner)&#123; %&gt;</div><div class="line">    var number_of_banners = 6;</div><div class="line">    var randnum = Math.floor(Math.random() * number_of_banners + 1);</div><div class="line">    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner" + randnum + ".jpg)";</div><div class="line">    &lt;% &#125; else &#123; %&gt;</div><div class="line">    document.getElementById("banner").style.backgroundImage = "url(/css/images/banner.jpg)";</div><div class="line">    &lt;% &#125; %&gt;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<p>详细的操作步骤请参考：<a href="http://kuangqi.me/tricks/hexo-banner-auto-switcher/" target="_blank" rel="external">自动随机切换Hexo博客的banner图片</a></p>
+<h1 id="toc_1">2. 更改引文样式</h1>
+
+<p>Hexo 默认的引文样式为大字号居中显示，但是对我来说，<code>blockquote</code> 被更多地用来展示内容的层级关系。所以，我对 <code>blockquote</code> 的样式进行了简单的修改：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">font-family</span>: <span class="selector-tag">font-sans</span></div><div class="line"><span class="selector-tag">border-left</span>: 5<span class="selector-tag">px</span> <span class="selector-tag">solid</span> <span class="selector-id">#DDD</span></div><div class="line"><span class="selector-tag">margin</span>: 15<span class="selector-tag">px</span> 0 0 2<span class="selector-tag">px</span></div><div class="line"><span class="selector-tag">padding-left</span>: 20<span class="selector-tag">px</span></div></pre></td></tr></table></figure>
+<p>效果如图所示：</p>
+<p><img src="/images/2015/02/hexo_theme_blockquote.png" alt="引文样式"></p>
+<h1 id="toc_2">3. 更改标题样式</h1>
+
+<p>在一级标题下加上浅色背景，二级标题下加浅色下划线，能使文章层次更加清晰，便于阅读。可在 <code>article.styl</code> 的 <code>.article-entry</code> 合适位置添加如下内容：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">h1</span></div><div class="line">  <span class="selector-tag">padding</span>: 7<span class="selector-tag">px</span> 6<span class="selector-tag">px</span> 7<span class="selector-tag">px</span> 0<span class="selector-tag">px</span>;</div><div class="line">  <span class="selector-tag">background</span>: <span class="selector-id">#dddddd</span>;</div><div class="line"><span class="selector-tag">h2</span></div><div class="line">  <span class="selector-tag">border-bottom</span>: 1<span class="selector-tag">px</span> <span class="selector-id">#d8d8d8</span> <span class="selector-tag">solid</span>;</div></pre></td></tr></table></figure>
+<p>显示效果如下：</p>
+<p><img src="/images/2015/02/hexo_theme_title.png" alt="标题样式"></p>
+<h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ul>
+<li><a href="http://www.windson.in/?p=573" target="_blank" rel="external">关于可能吧排版的一些分享</a></li>
+<li><a href="http://wangyueblog.com/2010/08/27/blog-post-layout/" target="_blank" rel="external">再谈博客文章排版</a></li>
+</ul>
+<h1 id="toc_3">4. 优化字体方案</h1>
+
+<p>为了是网页在各个操作系统中都能显示出高质量的中英文字体，对默认的字体方案稍作修改：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">font-sans = "Helvetica Neue", "Helvetica", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans CN", "WenQuanYi Micro Hei", Arial, sans-serif</div></pre></td></tr></table></figure>
+<p>通过上述代码，可以在 OS X 操作系统下默认显示 Hiragino Sans GB （冬青黑体简体中文），Windows 操作系统下默认显示微软雅黑，Linux 操作系统下默认显示思源黑体或文泉驿微米黑。但在 iOS 等系统里，默认只能以 黑体-简 显示中文，显示效果不太理想（尤其是显示粗体文本时）。</p>
+<h4 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料:"></a>参考资料:</h4><ul>
+<li><a href="http://www.zhihu.com/question/19911793" target="_blank" rel="external">如何保证网页的字体在各平台都尽量显示为最高质量的黑体？</a></li>
+<li><a href="http://ptbsare.org/2014/09/24/谈谈网页设计中的字体设定/" target="_blank" rel="external">谈谈网页设计中的字体设定</a></li>
+</ul>
+<h1 id="toc_4">5. 修改分享按钮</h1>
+
+<p>Landscape 主题提供了分享功能，可以将文章分享到 Facebook，Twitter 等网站。但在国内，这些网站用户不多，所以我将其替换成了新浪微博等国内社交网站。</p>
+<p>在 <code>source/js/script.js</code> 中，可以找到 <code>&#39;&lt;div class=&quot;article-share-links&quot;&gt;&#39;,</code>，下面的四个链接就是 Facebook 等社交网站的分享链接。将其替换成如下代码，即可实现分享到国内社交网站：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">'<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://service.weibo.com/share/share.php?&amp;title=' + encodedUrl + '"</span> <span class="attr">class</span>=<span class="string">"article-share-sina"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">title</span>=<span class="string">"微博"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>',</div><div class="line">'<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://share.renren.com/share/buttonshare.do?link=' + encodedUrl + '"</span> <span class="attr">class</span>=<span class="string">"article-share-renren"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">title</span>=<span class="string">"人人"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>',</div><div class="line">'<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodedUrl + '"</span> <span class="attr">class</span>=<span class="string">"article-share-qq"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">title</span>=<span class="string">"QQ 空间"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>',</div><div class="line">'<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://v.t.qq.com/share/share.php?url=' + encodedUrl + '"</span> <span class="attr">class</span>=<span class="string">"article-share-tencent"</span> <span class="attr">target</span>=<span class="string">"_blank"</span> <span class="attr">title</span>=<span class="string">"腾讯微博"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span>',</div></pre></td></tr></table></figure>
+<p>同时，还需要替换四个网站的图标。本主题使用 Font Awesome 来显示图标，但内置的 Fone Awesome 版本较旧，无法显示 QQ、腾讯微博等图标，所以，需要<a href="http://fortawesome.github.io/Font-Awesome/" target="_blank" rel="external">下载最新版 Font Awesome</a>，替换掉 <code>source/fonts</code> 中相关文件，并在 <code>source/css/_variables.styl</code> 中的 <code>font-icon-version</code> 修改为最新的 Font Awesome 版本号。</p>
+<p>然后，在 <code>source/css/_partial/article.styl</code> 中，找到四段以 <code>.article-share-***</code> 开头的代码，替换为如下内容：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.article-share-sina</span></div><div class="line">  @<span class="keyword">extend</span> $article-share-link</div><div class="line">  &amp;:before</div><div class="line">    content: <span class="string">"\f18a"</span></div><div class="line">  &amp;:hover</div><div class="line">    background: color-sina</div><div class="line">    text-shadow: <span class="number">0</span> <span class="number">1px</span> darken(color-sina, <span class="number">20%</span>)</div><div class="line"></div><div class="line">.article-share-qq</div><div class="line">  @extend $article-share-link</div><div class="line">  &amp;:before</div><div class="line">    content: <span class="string">"\f1d6"</span></div><div class="line">  &amp;:hover</div><div class="line">    background: color-qq</div><div class="line">    text-shadow: <span class="number">0</span> <span class="number">1px</span> darken(color-qq, <span class="number">20%</span>)</div><div class="line"></div><div class="line">.article-share-renren</div><div class="line">  @extend $article-share-link</div><div class="line">  &amp;:before</div><div class="line">    content: <span class="string">"\f18b"</span></div><div class="line">  &amp;:hover</div><div class="line">    background: color-renren</div><div class="line">    text-shadow: <span class="number">0</span> <span class="number">1px</span> darken(color-renren, <span class="number">20%</span>)</div><div class="line"></div><div class="line">.article-share-tencent</div><div class="line">  @extend $article-share-link</div><div class="line">  &amp;:before</div><div class="line">    content: <span class="string">"\f1d5"</span></div><div class="line">  &amp;:hover</div><div class="line">    background: color-tencent</div><div class="line">    text-shadow: <span class="number">0</span> <span class="number">1px</span> darken(color-tencent, <span class="number">20%</span>)</div></pre></td></tr></table></figure>
+<p>最后，找到 <code>source/css/_variables.styl</code> 中 <code>Colors</code> 部分，最后四行分别为四个社交网站图标的背景色，可根据这些网站的主题色修改。这是我的修改结果：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">color-sina = #ea0020</div><div class="line">color-qq = #518adb</div><div class="line">color-renren = #406ccb</div><div class="line">color-tencent = #33b5eb</div></pre></td></tr></table></figure>
+<p>修改后的效果如下：</p>
+<p><img src="/images/2015/02/hexo_theme_share.png" alt="分享按钮"></p>
+<h4 id="参考资料：-1"><a href="#参考资料：-1" class="headerlink" title="参考资料："></a>参考资料：</h4><ul>
+<li><a href="http://fortawesome.github.io/Font-Awesome/cheatsheet/" target="_blank" rel="external">Font Awesome Cheatsheet</a></li>
+</ul>
+<h1 id="toc_5">6. 替换 Google Javascript 库和字体库</h1>
+
+<p>本主题使用 Google 提供的 JS 库和字体，但 Google API 在国内基本无法访问，导致网站部分功能失效。而新浪、百度、微软、360 均提供类似的服务，可以在在国内正常使用。</p>
+<p>找到 <code>layout/_partial/after-footer.ejs</code> 和 <code>layout/_partial/head.ejs</code> 两个文件，将其中的 <code>googleapis</code> 替换为 <code>useso</code> 即可。</p>
+<h4 id="参考资料-1"><a href="#参考资料-1" class="headerlink" title="参考资料:"></a>参考资料:</h4><ul>
+<li><a href="http://www.zhihu.com/question/20227463" target="_blank" rel="external">国内有哪些靠谱的 Javascript 库 CDN 可用？</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨晚更新 Hexo 后，发现新版 Hexo 自带的主题 &lt;a href=&quot;https://github.com/hexojs/hexo-theme-landscape&quot;&gt;Landscape&lt;/a&gt; 不错，就决定使用这一款主题。同时，对 Landscape 中一些不太符合自己使用习惯的地方进行了修改。&lt;/p&gt;
+&lt;h4 id=&quot;目录：&quot;&gt;&lt;a href=&quot;#目录：&quot; class=&quot;headerlink&quot; title=&quot;目录：&quot;&gt;&lt;/a&gt;目录：&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_0&quot;&gt;自动切换 banner 图片&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_1&quot;&gt;更改引文样式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_2&quot;&gt;更改标题样式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_3&quot;&gt;优化字体方案&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_4&quot;&gt;修改分享按钮&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_5&quot;&gt;替换 Google Javascript 库和字体库&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Hexo" scheme="https://blanboom.org/tags/Hexo/"/>
+    
+      <category term="CSS" scheme="https://blanboom.org/tags/CSS/"/>
+    
+      <category term="HTML" scheme="https://blanboom.org/tags/HTML/"/>
+    
+      <category term="主题" scheme="https://blanboom.org/tags/%E4%B8%BB%E9%A2%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>有限状态机在单片机编程中的应用</title>
+    <link href="https://blanboom.org/2015/finite-state-machine-in-microcontrollers/"/>
+    <id>https://blanboom.org/2015/finite-state-machine-in-microcontrollers/</id>
+    <published>2015-02-06T14:02:00.000Z</published>
+    <updated>2017-06-02T15:36:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：</p>
+<ul>
+<li>一个任务的<strong>执行时间过长</strong>，导致其他任务无法及时执行</li>
+<li>在一些任务中大量使用 delay() 等函数进行软件延时，这些<strong>延时函数占用过多时间</strong>，影响其他任务的执行</li>
+<li>一些复杂任务的程序<strong>逻辑不清晰</strong>，不便于以后对程序进行维护，或添加新功能</li>
+</ul>
+<p>本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务<strong>分解为多个简单任务</strong>，同时使代码<strong>逻辑更加清晰</strong>，从而解决上述问题。</p>
+<h4 id="目录："><a href="#目录：" class="headerlink" title="目录："></a>目录：</h4><ul>
+<li><a href="#toc_0">1. 什么是有限状态机</a></li>
+<li><a href="#toc_1">2. 有限状态机的作用</a><ul>
+<li><a href="#toc_2">2.1 分解耗时过长的任务</a></li>
+<li><a href="#toc_3">2.2 避免软件延时对 CPU 资源造成浪费</a></li>
+<li><a href="#toc_4">2.3 使程序逻辑更加清晰</a></li>
+</ul>
+</li>
+<li><a href="#toc_5">3. 有限状态机的实现</a><ul>
+<li><a href="#toc_6">3.1 通过 switch - case 语句实现</a></li>
+<li><a href="#toc_7">3.2 通过 Arduino 库实现</a></li>
+<li><a href="#toc_8">3.3 其他方式</a></li>
+</ul>
+</li>
+<li><a href="#toc_9">4. 示例一：按键去抖动程序的优化</a><ul>
+<li><a href="#toc_10">4.1 传统的按键去抖动程序</a></li>
+<li><a href="#toc_11">4.2 优化后的按键去抖动程序</a></li>
+</ul>
+</li>
+<li><a href="#toc_12">5. 示例二：通过有限状态机实现的闹钟程序</a></li>
+<li><a href="#toc_13">6. 后记</a></li>
+</ul>
+<a id="more"></a>
+<h1 id="toc_0">1. 什么是有限状态机</h1>
+
+<p>根据维基百科上的定义，有限状态机（finite-state machine, FSM，简称状态机）是表示有限个状态以及在这些状态之间的转移和动作等行为的数学模型。<sup id="fnref1"><a href="#fn1" rel="footnote">1</a></sup></p>
+<p>为了理解这句话，假设自己还有三天就要考试，这时候就要进入紧张的备考状态，将空闲时间用在<strong>复习</strong>上。但是，为了保证足够的精力，<strong>小睡</strong>一会儿也是十分有必要的。那么，什么时候复习，什么时候睡觉呢？可以这样描述：</p>
+<blockquote>
+<p>在复习的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感到瞌睡，<strong>则</strong> 睡觉</p>
+<p><strong>如果</strong> 没有感觉到瞌睡，<strong>则</strong> 继续复习</p>
+</blockquote>
+<p>在小睡的时候：</p>
+<blockquote>
+<p><strong>如果</strong> 感觉不再瞌睡，<strong>则</strong> 开始复习</p>
+<p><strong>如果</strong> 感觉依旧瞌睡，<strong>则</strong> 继续睡觉</p>
+</blockquote>
+</blockquote>
+<p>也可通过一幅简单的示意图（也叫「状态转移图」）表示出来：</p>
+<p><img src="/images/2015/02/fsm_sleep.jpg" alt="图 1  复习与小睡"></p>
+<p>这个例子其实就是一个简单的有限状态机，其中，复习和小睡是两个<strong>状态</strong>，感觉瞌睡和感觉清醒这两个<strong>条件</strong>可以使状态发生<strong>转换</strong>。<sup id="fnref2"><a href="#fn2" rel="footnote">2</a></sup></p>
+<p>另外，Programming Basics<sup id="fnref3"><a href="#fn3" rel="footnote">3</a></sup> 网站上也提供了状态机相关的教程，用形象化的图片解释了什么是有限状态机，可<a href="http://www.programmingbasics.org/zh/beginner/fsm.html" target="_blank" rel="external">通过此链接访问</a>。</p>
+<p>在嵌入式程序设计中，如果一个系统需要处理<strong>一系列连续发生的任务</strong>，或在<strong>不同的模式</strong>下对输入进行不同的处理，常常使用有限状态机实现。例如测量、监测、控制等控制逻辑型应用。<sup id="fnref4"><a href="#fn4" rel="footnote">4</a></sup></p>
+<h1 id="toc_1">2. 有限状态机的作用</h1>
+
+<h2 id="toc_2">2.1 分解耗时过长的任务</h2>
+
+<p>大家应该都知道，CPU 没有并行执行任务的能力。<strong>计算机「同时」运行多个程序，其实是多个程序依次交替执行</strong>，给人以程序同时运行的错觉。各个程序在什么时候开始执行，执行多长时间后切换到下一个程序，由操作系统决定。</p>
+<p>单片机执行多任务也是类似的过程，但由于其资源有限，为了节省对 CPU 和存储空间的占用，在很多情况下没有使用操作系统。这时，<strong>单片机中运行的各个任务必须在一定时间内主动执行完毕，才能保证下一个任务能够及时执行</strong>。</p>
+<p>对于一些需要长时间执行的任务，例如按键去除抖动、读取和播放 MP3 文件等，采用有限状态机的方式，<strong>将任务划分为多个小的步骤（状态），每次只执行其中的一步</strong>。这样，其他任务就有机会「插入」到这个任务之中，确保了各个任务都能按时执行。</p>
+<p><img src="/images/2015/02/fsm_adv_1.jpg" alt="图 2  状态机用于分解耗时过长的任务"></p>
+<h2 id="toc_3">2.2 避免软件延时对 CPU 资源造成浪费</h2>
+
+<p>对于一些简单的程序，可通过 delay(), delay_ms() 之类的函数进行软件延时。这些延时函数，一般是通过将某个变量循环递加或递加，到达一定值后跳出循环，从而<strong>通过消耗 CPU 时间实现了延时</strong>。</p>
+<p>这种方式虽然简单，但在延时函数执行的过程中，其他程序无法运行，消耗了大量 CPU 资源。而通过状态机，<strong>有助于减少软件延时的使用，提高 CPU 利用率</strong>。</p>
+<p><img src="/images/2015/02/fsm_adv_2.jpg" alt="图 3  用状态机避免软件延时"></p>
+<p>请参考下文中的 <strong>示例一：按键去抖动程序的优化</strong>，这一例子展示了如何通过软件延时分解耗时较长的任务，同时减少软件延时的使用。</p>
+<h2 id="toc_4">2.3 使程序逻辑更加清晰</h2>
+
+<p>通过状态机，将一个复杂任务划分为多个状态，可以使程序清晰易懂，便于维护。以后想要添加、删除程序中的功能，都会变得非常容易。</p>
+<p><img src="/images/2015/02/fsm_adv_3.jpg" alt="图 4  用状态机优化程序逻辑"></p>
+<p>下文中的 <strong>示例二：通过状态机实现的闹钟</strong> 展示了如何通过状态机优化程序逻辑。</p>
+<h1 id="toc_5">3. 有限状态机的实现</h1>
+
+<h2 id="toc_6">3.1 通过 switch - case 语句实现</h2>
+
+<p>如果使用 C 语言，switch - case 语句，即可简单地实现有限状态机。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 定义各个状态所对应的数值 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_A 0</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_B 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> STATUS_C 2</span></div><div class="line"></div><div class="line"><span class="comment">/* 该变量的值即为当前状态机所处的状态 */</span></div><div class="line"><span class="keyword">uint8_t</span> currentStatus = STATUS_A;</div><div class="line"></div><div class="line"><span class="comment">/* 通过状态机实现的某个任务，</span></div><div class="line"> * 需要放入 while(1) 等地方循环执行</div><div class="line"> * /</div><div class="line">void fsm_app(void)</div><div class="line">&#123;</div><div class="line">	switch(currentStatus) /* 根据现在的状态执行相应的程序 */</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> STATUS_A:  <span class="comment">/* 状态 A */</span></div><div class="line">		doThingsForStatusA(); <span class="comment">/* 执行状态 A 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_1)&#123; currentStatus = STATUE_B; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_B:  <span class="comment">/* 状态 B */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_2)&#123; currentStatus = STATUE_C; &#125;</div><div class="line">		<span class="keyword">if</span>(condition_3)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> STATUS_C:  <span class="comment">/* 状态 C */</span></div><div class="line">		doThingsForStatusB(); <span class="comment">/* 执行状态 B 中需要执行的任务 */</span></div><div class="line">		<span class="comment">/* 若满足状态转换的条件，则转换到另一个状态 */</span></div><div class="line">		<span class="keyword">if</span>(condition_4)&#123; currentStatus = STATUE_A; &#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		currentStatus = STATUE_A;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过这段程序，即可实现一个具有三个状态的状态机。状态转移图如下图所示：</p>
+<p><img src="/images/2015/02/fsm_example.jpg" alt="图 5  通过 switch - case 语句实现的状态机"></p>
+<h2 id="toc_7">3.2 通过 Arduino 库实现</h2>
+
+<p>对于 Arduino 用户，还可以使用 FSM Library 实现。这一库将有限状态机进行了封装，可以以更简洁的方式实现状态机。</p>
+<p>下载地址及使用说明：<a href="http://playground.arduino.cc/Code/FiniteStateMachine" target="_blank" rel="external">http://playground.arduino.cc/Code/FiniteStateMachine</a></p>
+<h2 id="toc_8">3.3 其他方式</h2>
+
+<p>对于一些更复杂的任务，使用 switch - case 语句，代码可能会太简洁。这时候，使用其他方式实现状态机，可能会更好。具体请查阅相关资料。</p>
+<h1 id="toc_9">4. 示例一：按键去抖动程序的优化</h1>
+
+<h2 id="toc_10">4.1 传统的按键去抖动程序</h2>
+
+<p>初学单片机时，我们接触的按键去抖动程序一般是这样的<sup id="fnref5"><a href="#fn5" rel="footnote">5</a></sup>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">keyscan</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(key1 == <span class="number">0</span>)         <span class="comment">// 如果按键 1 按下</span></div><div class="line">	&#123;</div><div class="line">		delayms(<span class="number">10</span>);      <span class="comment">// 延时 10ms，消除因干扰产生的抖动</span></div><div class="line">			<span class="keyword">if</span>(key1 == <span class="number">0</span>) <span class="comment">// 再次检测按键 1，如果依旧按下</span></div><div class="line">			&#123;</div><div class="line">				doSomething(); <span class="comment">//此时说明按键 1 已按下，执行按键 1 需要执行的任务</span></div><div class="line">				<span class="keyword">while</span>(!key1);  <span class="comment">// 等待按键释放</span></div><div class="line">			&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对应的流程图如下：</p>
+<p><img src="/images/2015/02/psm_keyscan_1.jpg" alt="图 6  传统的按键去抖动程序"></p>
+<p>从流程图中可知，delayms() 延时函数和最后的等待按键释放的程序，会占用过多时间。</p>
+<h2 id="toc_11">4.2 优化后的按键去抖动程序</h2>
+
+<p>如果使用有限状态机的思路，可以按照下图方式实现：</p>
+<p><img src="/images/2015/02/fsm_keyscan_2.jpg" alt="图 7  用状态机实现的按键去抖动程序"></p>
+<p>该状态机有三个状态，分别是<strong>按键未按下</strong>，<strong>等待</strong>，<strong>按键按下</strong>。当按键按下时，则会进入等待状态，若在等待状态中按键一直保持按下，说明按键已经稳定地按下，进入按键按下的状态，等待按键释放。程序代码如下：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* 按键去抖动状态机中的三个状态 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_RELEASE    <span class="comment">// 按键未按下</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_WAITING    <span class="comment">// 等待（消抖）</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KEY_STATE_PRESSED    <span class="comment">// 按键按下（等待释放）</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 等待状态持续时间</span></div><div class="line"> * 需要根据单片机速度和按键消抖程序被调用的速度来进行调整</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> DURIATION_TIME 40</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数的返回值，按下为 1，未按下为 0 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> PRESSED 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NOT_PRESSED 0</span></div><div class="line"></div><div class="line"><span class="comment">/* 按键扫描程序所处的状态</span></div><div class="line"> * 初始状态为：按键按下（KEY_STATE_RELEASE）</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyState = KEY_STATE_RELEASE;</div><div class="line"></div><div class="line"><span class="comment">/* 按键检测函数，通过有限状态机实现</span></div><div class="line"> * 函数在从等待状态转换到按键按下状态时返回 PRESSED，代表按键已被触发</div><div class="line"> * 其他情况返回 NOT_PRESSED</div><div class="line"> */</div><div class="line"><span class="keyword">uint8_t</span> keyDetect(<span class="keyword">void</span>)</div><div class="line">&#123;</div><div class="line">	<span class="keyword">static</span> <span class="keyword">uint8_t</span> duriation;  <span class="comment">// 用于在等待状态中计数</span></div><div class="line">	<span class="keyword">switch</span>(keyState)</div><div class="line">	&#123;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_RELEASE:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_WAITING;  <span class="comment">// 转换至下一个状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;    <span class="comment">// 返回：按键未按下</span></div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_WAITING:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">1</span>)     <span class="comment">// 如果按键按下</span></div><div class="line">		&#123;</div><div class="line">			duriation++;</div><div class="line">			<span class="keyword">if</span>(duriation &gt;= DURIATION_TIME)    <span class="comment">// 如果经过多次检测，按键仍然按下</span></div><div class="line">			&#123;	<span class="comment">// 说明没有抖动了，可以确定按键已按下</span></div><div class="line">				duriation = <span class="number">0</span>;</div><div class="line">				keyState = KEY_STATE_PRESSED;  <span class="comment">// 转换至下一个状态</span></div><div class="line">				<span class="keyword">return</span> PRESSED;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span>  <span class="comment">// 如果此时按键松开</span></div><div class="line">		&#123;	<span class="comment">// 可能存在抖动或干扰</span></div><div class="line">			duriation = <span class="number">0</span>;  <span class="comment">// 清零的目的是便于下次重新计数</span></div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 重新返回按键松开的状态</span></div><div class="line">			<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">case</span> KEY_STATE_PRESSED:</div><div class="line">		<span class="keyword">if</span>(readKey() == <span class="number">0</span>)       <span class="comment">// 如果按键松开</span></div><div class="line">		&#123;</div><div class="line">			keyState = KEY_STATE_RELEASE;  <span class="comment">// 回到按键松开的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		keyState = KEY_STATE_RELEASE;</div><div class="line">		<span class="keyword">return</span> NOT_PRESSED;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>该程序也可经过扩展，实现判断按键双击、长按等功能。只需增加相应的状态和转移条件即可。</p>
+<h1 id="toc_12">5. 示例二：通过有限状态机实现的闹钟程序</h1>
+
+<p>最近正在制作一个闹钟。这个闹钟支持播放 MP3 格式的闹钟声<sup id="fnref6"><a href="#fn6" rel="footnote">6</a></sup>，支持贪睡模式，同时还有一些功能打算以后再添加上。</p>
+<p>为了使程序逻辑更加清晰，也为了更方便地添加新功能，我打算采用有限状态机实现。相关程序如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"App_Alarm.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"USART1.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"diag/Trace.h"</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 相关常量定义 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ALARM_MUSIC_END 0      <span class="comment">// 闹钟音乐播放完毕</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_OK		0	   <span class="comment">// 格式正确</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> FORMAT_ERROR	(-1)   <span class="comment">// 格式错误</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输入信息定义</span></div><div class="line"> * 作为函数的返回值供函数 getInput() 使用</div><div class="line"> * getInput() 将获取并返回键盘或触摸屏等设备中输入的控制命令或闹钟时间值</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ERROR    (-1)    <span class="comment">// 输入格式错误</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_CANCEL   (-2)    <span class="comment">// 输入了「取消」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_SNOOZE   (-3)    <span class="comment">// 输入了「小睡」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> INPUT_ALARM_ON (-4)    <span class="comment">// 输入了「打开闹钟」命令</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> NO_INPUT	   (-10)   <span class="comment">// 没有输入</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 输出信息定义</span></div><div class="line"> * 作为为函数的参数供函数 displayMessege() 使用</div><div class="line"> * displayMessege() 用于在显示屏上显示相关的提示信息</div><div class="line"> */</div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_ALARM_TIME 	(0)  <span class="comment">// 提示：设置闹钟时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_CLEAR			(1)  <span class="comment">// 提示：已取消</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_ALARM_IS_ON		(2)  <span class="comment">// 提示：闹钟已打开</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_WAITING			(3)  <span class="comment">// 提示：等待闹钟响起</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_SET_SNOOZE_TIME	(4)  <span class="comment">// 提示：设置小睡时间</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MESSEGE_GET_UP			(5)  <span class="comment">// 提示：该起床了</span></span></div><div class="line"></div><div class="line"><span class="comment">/* 闹钟的状态 */</span></div><div class="line"><span class="keyword">enum</span> alarmStates</div><div class="line">&#123;</div><div class="line">	ALARM_OFF,				<span class="comment">// 闹钟关闭</span></div><div class="line">	SET_ALARM_TIME,			<span class="comment">// 设置闹钟时间</span></div><div class="line">	WATING_FOR_ALARM,		<span class="comment">// 等待闹钟响起</span></div><div class="line">	PLAY_ALARM_MUSIC,		<span class="comment">// 播放闹钟音乐</span></div><div class="line">	SET_SNOOZE_TIME			<span class="comment">// 设置贪睡时间</span></div><div class="line">&#125; alarmState = ALARM_OFF;	<span class="comment">// 默认状态：闹钟关闭</span></div><div class="line"></div><div class="line"><span class="comment">/* 相关函数的定义 */</span></div><div class="line"><span class="keyword">int16_t</span> getInput(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">displayMessege</span><span class="params">(<span class="keyword">uint8_t</span>)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setAlarm</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">int16_t</span> alarmTimeDiff(<span class="keyword">void</span>);</div><div class="line"><span class="keyword">int8_t</span> playAlarmMusic(<span class="keyword">void</span>);</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setSnooze</span><span class="params">(<span class="keyword">int16_t</span>)</span></span>;</div><div class="line"><span class="keyword">uint8_t</span> checkAlarmFormat(<span class="keyword">int16_t</span>);</div><div class="line"><span class="keyword">uint8_t</span> checkSnoozeFormat(<span class="keyword">int16_t</span>);</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 闹钟主程序，需要放入 while(1) 中循环调用</div><div class="line"> */</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">alarmApp</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int16_t</span> input;		<span class="comment">// 输入值暂存在这个变量中</span></div><div class="line">	<span class="keyword">switch</span> (alarmState) <span class="comment">// 获取闹钟状态，下面程序将根据闹钟的状态执行相应的任务</span></div><div class="line">	&#123;</div><div class="line">	<span class="comment">/* 状态：闹钟关闭</span></div><div class="line">	 * 在此状态中，将会不断检查是否打开闹钟，如果打开了闹钟，则会进入下一个状态：设置闹钟时间</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> ALARM_OFF:</div><div class="line">		<span class="keyword">if</span> (getInput() == INPUT_ALARM_ON)  <span class="comment">// 检查是否打开了闹钟</span></div><div class="line">		&#123;   <span class="comment">// 如果打开了闹钟</span></div><div class="line">			displayMessege(MESSEGE_SET_ALARM_TIME);	<span class="comment">// 在屏幕或串口上提示：请设置闹钟时间</span></div><div class="line">			alarmState = SET_ALARM_TIME;			<span class="comment">// 进入下一个状态：设置闹钟时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置闹钟时间</span></div><div class="line">	 * 在此状态中，将会检查输入值，</div><div class="line">	 * 如果</div><div class="line">	 * 		输入“取消”命令，则取消闹钟设置，返回到闹钟关闭的状态</div><div class="line">	 * 		输入闹钟时间格式错误，则状态不变，等待下一次重新输入</div><div class="line">	 * 		输入了正确的闹钟时间，则设置闹钟，显示闹钟设置成功，并进入下一状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_ALARM_TIME:</div><div class="line">		input = getInput();  		<span class="comment">// 获取输入值</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)	<span class="comment">// 如果输入了“取消”</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);  <span class="comment">// 显示“已取消”</span></div><div class="line">			alarmState = ALARM_OFF;			<span class="comment">// 进入状态：关闭闹钟</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkAlarmFormat(input) == FORMAT_OK)	<span class="comment">// 如果输入格式正确</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_ALARM_IS_ON); <span class="comment">// 显示“成功设置闹钟，闹钟已启动”</span></div><div class="line">			setAlarm(input); <span class="comment">// 根据输入值设置闹钟</span></div><div class="line">			alarmState = WATING_FOR_ALARM; <span class="comment">// 进入下一状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：等待闹钟响起</span></div><div class="line">	 * 在此状态中，将会检查是否到达闹钟时间，如果到达，则进入下一状态：播放闹钟音乐</div><div class="line">	 * 同时，在此状态中也会检查输入，如果输入了“取消”的命令，则进入闹钟关闭的状态</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> WATING_FOR_ALARM:</div><div class="line">		displayMessege(MESSEGE_WAITING); <span class="comment">// 显示等待闹钟响起的信息，例如离闹钟响起还有多长时间</span></div><div class="line">		<span class="keyword">if</span> (alarmTimeDiff() &lt;= <span class="number">0</span>) <span class="comment">// 检查离闹钟响起还有多少时间，如果时间小于等于零（到达闹钟时间）</span></div><div class="line">		&#123;</div><div class="line">			alarmState = PLAY_ALARM_MUSIC;  <span class="comment">// 进入下一个状态：播放闹钟音乐</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(getInput() == INPUT_CANCEL) <span class="comment">// 如果输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;      <span class="comment">// 进入闹钟关闭的状态</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：播放闹钟音乐</span></div><div class="line">	 * 在此状态中，将播放闹钟音乐，若播放完毕，进入闹钟关闭的状态</div><div class="line">	 * 同时，在此状态中也会检查输入，</div><div class="line">	 * 		如果输入了“小睡”的命令，则进入状态：设置小睡时间</div><div class="line">	 * 		如果输入了“取消”的命令，则进入状态：闹钟关闭</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> PLAY_ALARM_MUSIC:</div><div class="line">		displayMessege(MESSEGE_GET_UP);  <span class="comment">// 显示消息：“该起床了”</span></div><div class="line">		<span class="keyword">if</span>(playAlarmMusic() == ALARM_MUSIC_END) <span class="comment">// 播放闹钟音乐</span></div><div class="line">		&#123; <span class="comment">// 若音乐播放完毕</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF; <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		input = getInput();</div><div class="line">		<span class="keyword">if</span>(input == INPUT_SNOOZE) <span class="comment">// 若输入了“小睡”的命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_SET_SNOOZE_TIME); <span class="comment">// 显示消息：“请设置小睡时间”</span></div><div class="line">			alarmState = SET_SNOOZE_TIME; <span class="comment">// 进入状态：设置小睡时间</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL) <span class="comment">// 若输入了“取消”命令</span></div><div class="line">		&#123;</div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;   <span class="comment">// 进入状态：闹钟关闭</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="comment">/* 状态：设置小睡时间</span></div><div class="line">	 * 在此状态中，将从输入获取小睡时间，并将闹钟时间加上小睡时间，进入状态：等待闹钟响起</div><div class="line">	 */</div><div class="line">	<span class="keyword">case</span> SET_SNOOZE_TIME:</div><div class="line">		input = getInput(); <span class="comment">// 获取输入</span></div><div class="line">		<span class="keyword">if</span>(input == INPUT_CANCEL)</div><div class="line">		&#123;   <span class="comment">// 若输入“取消”，则进入“闹钟关闭”的状态</span></div><div class="line">			displayMessege(MESSEGE_CLEAR);</div><div class="line">			alarmState = ALARM_OFF;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(checkSnoozeFormat(input) == FORMAT_OK)</div><div class="line">		&#123;   <span class="comment">// 若输入格式正确</span></div><div class="line">			setSnooze(input);  <span class="comment">// 设置新的闹钟时间</span></div><div class="line">			alarmState = WATING_FOR_ALARM;  <span class="comment">// 进入状态：等待闹钟响起</span></div><div class="line">		&#125;</div><div class="line">		<span class="keyword">break</span>;</div><div class="line">	<span class="keyword">default</span>:</div><div class="line">		displayMessege(MESSEGE_CLEAR);</div><div class="line">		alarmState = ALARM_OFF;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>状态转移图如图所示：</p>
+<p><img src="/images/2015/02/fsm_alarm.jpg" alt="图 8  用状态机实现的闹钟"></p>
+<p></p><h1 id="toc_13">6. 后记</h1><br>在单片机编程时，如果遇到代码复杂、任务占用时间过长等问题，可以尝试通过有限状态机解决。<p></p>
+<p>之前写过一个<a href="https://blanboom.org/2013/arduino-task-scheduler-library">针对 Arduino 的合作式任务调度器</a>。配合有限状态机，更有利于多任务处理。</p>
+<p>另外，instructables 上的一篇文章通过三个实例演示了有限状态机在 Arduino 上的应用，如果感兴趣，可以通过这个链接阅读：<a href="http://www.instructables.com/id/Arduino-Finite-State-Machine/" target="_blank" rel="external">http://www.instructables.com/id/Arduino-Finite-State-Machine/</a></p>
+<p><br><br></p>
+<h4 id="备注："><a href="#备注：" class="headerlink" title="备注："></a>备注：</h4><div class="footnotes"><ol><li id="fn1">来源：<a href="http://zh.wikipedia.org/zh-cn/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA" target="_blank" rel="external">http://zh.wikipedia.org/zh-cn/有限状态机</a>&nbsp;<a href="#fnref1">&#8617;</a></li><li id="fn2">为了便于理解，此处描述的状态机及状态转移图省略了一些内容，例如没有标明开始状态&nbsp;<a href="#fnref2">&#8617;</a></li><li id="fn3">Programming Basics 针对初学者的互动编程学习网站，网址为：<a href="http://programmingbasics.org" target="_blank" rel="external">http://programmingbasics.org</a>&nbsp;<a href="#fnref3">&#8617;</a></li><li id="fn4">根据 <a href="http://www.ti.com/mcu/docs/litabsmultiplefilelist.tsp?sectionId=96&amp;tabId=1502&amp;literatureNumber=slaa402a&amp;docCategoryId=1&amp;familyId=342" target="_blank" rel="external">Finite State Machines for MSP430 (Rev. A)</a> 翻译&nbsp;<a href="#fnref4">&#8617;</a></li><li id="fn5">改编自<a href="http://book.douban.com/subject/3413850/" target="_blank" rel="external">《新概念51单片机C语言教程》</a>中相关内容&nbsp;<a href="#fnref5">&#8617;</a></li><li id="fn6">其实 MP3 播放程序也可以通过有限状态机实现，因为为了实现 MP3 播放持续时间较长（一首歌的时间），而且需要完成多个步骤（打开文件、读取文件、将数据发送到 MP3 解码芯片、告诉 MP3 解码芯片音乐播放完毕等）&nbsp;<a href="#fnref6">&#8617;</a></li></ol></div>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在单片机编程中，如果在不使用操作系统的情况下同时执行多个任务，可能会遇到下面这些情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个任务的&lt;strong&gt;执行时间过长&lt;/strong&gt;，导致其他任务无法及时执行&lt;/li&gt;
+&lt;li&gt;在一些任务中大量使用 delay() 等函数进行软件延时，这些&lt;strong&gt;延时函数占用过多时间&lt;/strong&gt;，影响其他任务的执行&lt;/li&gt;
+&lt;li&gt;一些复杂任务的程序&lt;strong&gt;逻辑不清晰&lt;/strong&gt;，不便于以后对程序进行维护，或添加新功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文介绍的有限状态机，可以做到将一个耗时较长的复杂任务&lt;strong&gt;分解为多个简单任务&lt;/strong&gt;，同时使代码&lt;strong&gt;逻辑更加清晰&lt;/strong&gt;，从而解决上述问题。&lt;/p&gt;
+&lt;h4 id=&quot;目录：&quot;&gt;&lt;a href=&quot;#目录：&quot; class=&quot;headerlink&quot; title=&quot;目录：&quot;&gt;&lt;/a&gt;目录：&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_0&quot;&gt;1. 什么是有限状态机&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_1&quot;&gt;2. 有限状态机的作用&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_2&quot;&gt;2.1 分解耗时过长的任务&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_3&quot;&gt;2.2 避免软件延时对 CPU 资源造成浪费&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_4&quot;&gt;2.3 使程序逻辑更加清晰&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_5&quot;&gt;3. 有限状态机的实现&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_6&quot;&gt;3.1 通过 switch - case 语句实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_7&quot;&gt;3.2 通过 Arduino 库实现&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_8&quot;&gt;3.3 其他方式&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_9&quot;&gt;4. 示例一：按键去抖动程序的优化&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_10&quot;&gt;4.1 传统的按键去抖动程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_11&quot;&gt;4.2 优化后的按键去抖动程序&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_12&quot;&gt;5. 示例二：通过有限状态机实现的闹钟程序&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;#toc_13&quot;&gt;6. 后记&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="https://blanboom.org/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="单片机" scheme="https://blanboom.org/tags/%E5%8D%95%E7%89%87%E6%9C%BA/"/>
+    
+      <category term="多任务" scheme="https://blanboom.org/tags/%E5%A4%9A%E4%BB%BB%E5%8A%A1/"/>
+    
+      <category term="有限状态机" scheme="https://blanboom.org/tags/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
+    
+      <category term="状态机" scheme="https://blanboom.org/tags/%E7%8A%B6%E6%80%81%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我常去的 DIY 网站</title>
+    <link href="https://blanboom.org/2014/diy-websites/"/>
+    <id>https://blanboom.org/2014/diy-websites/</id>
+    <published>2014-11-17T08:14:00.000Z</published>
+    <updated>2015-05-10T04:39:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="http://www.izheteng.com/" target="_blank" rel="external">爱折腾</a>：我接触的第一个 DIY 网站</p>
+<p><a href="http://www.guokr.com/site/diy/" target="_blank" rel="external">果壳网DIY主题站</a>：容易制作的趣味 DIY</p>
+<p><a href="http://www.instructables.com/" target="_blank" rel="external">Instructables</a>：著名的 DIY 作品分享网站，内容比较全面</p>
+<p><a href="http://makezine.com/projects/" target="_blank" rel="external">Make projects</a>：DIY 杂志《Make》（中文名《爱上制作》）的一个网站。杂志中的一些 DIY 教程，也可以在这里找到</p>
+<p><a href="http://blog.arduino.cc/" target="_blank" rel="external">Arduino Blog</a> | <a href="http://forum.arduino.cc" target="_blank" rel="external">Arduino Forum</a>：Arduino 的官方博客与论坛，内有许多 Arduino 项目和使用技巧</p>
+<p><a href="http://makerzone.mathworks.com/" target="_blank" rel="external">MAKERZONE</a>：MathWorks 的 DIY 项目分享社区，涉及 Arduino，Raspberry Pi，LEGO NXT</p>
+<a id="more"></a>
+<p><a href="http://www.geek-workshop.com/forum.php" target="_blank" rel="external">极客工坊</a> | <a href="http://www.arduino.cn" target="_blank" rel="external">Arduino中文社区</a> | <a href="http://www.hudo.it" target="_blank" rel="external">HUDO.IT</a> | <a href="http://arduino.tw/" target="_blank" rel="external">Arduino台灣使用者社群</a> : Arduino 论坛</p>
+<p><a href="http://www.roboticfan.com/" target="_blank" rel="external">RoboticFan机器人爱好者</a> | <a href="http://blog.sina.com.cn/robotbase" target="_blank" rel="external">奥松机器人的博客</a></p>
+<p><a href="http://hackaday.com/" target="_blank" rel="external">Hack a Day</a> | <a href="http://hacknmod.com/" target="_blank" rel="external">Hack N Mod</a> | <a href="http://hackedgadgets.com/" target="_blank" rel="external">Hacked Gadgets</a></p>
+<p><a href="http://www.chuangkoo.com" target="_blank" rel="external">创酷</a></p>
+<p><a href="http://bbs.kechuang.org" target="_blank" rel="external">科创论坛</a> | <a href="http://www.geekfans.com" target="_blank" rel="external">极客迷</a> | <a href="http://www.evilmadscientist.com/" target="_blank" rel="external">Evil Mad Scientist</a></p>
+<h4 id="DIY-爱好者的个人博客："><a href="#DIY-爱好者的个人博客：" class="headerlink" title="DIY 爱好者的个人博客："></a>DIY 爱好者的个人博客：</h4><p><a href="http://doyoung.net/" target="_blank" rel="external">杜洋工作室</a>：光立方、LED 点阵时钟、自制手表等。作品都比较精致</p>
+<p><a href="http://www.diy-robots.com/" target="_blank" rel="external">做做AI，造造人</a>：动力老男孩的博客，LEGO 爱好者，制作过魔方机器人</p>
+<p><a href="http://blog.sina.com.cn/u/1907350525" target="_blank" rel="external">老薛的博客</a>：一些科学小实验</p>
+<p><a href="http://aguegu.net/" target="_blank" rel="external">Agu’s Mill 古作坊</a>：aGuegu 的 DIY 作品</p>
+<p><a href="http://www.yfworld.com/" target="_blank" rel="external">云飞的机器人实验室</a>：「让机器充满智慧」，关注机器人和嵌入式技术</p>
+<p><a href="http://www.eefocus.com/zhang700309/blog/" target="_blank" rel="external">宜昌城老张的博客</a>：来自三峡大学的<br>Maker，对Arduino、LEGO、Labview和机器人、互动媒体感兴趣</p>
+<p><a href="http://blog.sina.com.cn/arduino" target="_blank" rel="external">Rebecca●Arduino极客</a>：关注 Arduino、相关模块及其应用</p>
+<p><a href="http://blog.sina.com.cn/shenjinxin2008" target="_blank" rel="external">奔跑的成长之路</a>：Arduino 与 LabVIEW 爱好者</p>
+<p><a href="http://www.nixieclock.org/" target="_blank" rel="external">Nixie Clock Home</a>：辉光管发烧友</p>
+<p><br><br><br></p>
+<p>如果喜欢这些网站，推荐使用 <a href="http://feedly.com/" target="_blank" rel="external">Feedly</a>, <a href="http://digg.com/reader" target="_blank" rel="external">Digg Reader</a> 或 <a href="http://theoldreader.com" target="_blank" rel="external">The Old Reader</a> 来订阅，并通过 <a href="http://reederapp.com" target="_blank" rel="external">Reeder</a> 或 <a href="https://play.google.com/store/apps/details?id=com.twentyfivesquares.press" target="_blank" rel="external">Press</a> 阅读，以获得最好的阅读体验。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;http://www.izheteng.com/&quot;&gt;爱折腾&lt;/a&gt;：我接触的第一个 DIY 网站&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.guokr.com/site/diy/&quot;&gt;果壳网DIY主题站&lt;/a&gt;：容易制作的趣味 DIY&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.instructables.com/&quot;&gt;Instructables&lt;/a&gt;：著名的 DIY 作品分享网站，内容比较全面&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://makezine.com/projects/&quot;&gt;Make projects&lt;/a&gt;：DIY 杂志《Make》（中文名《爱上制作》）的一个网站。杂志中的一些 DIY 教程，也可以在这里找到&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://blog.arduino.cc/&quot;&gt;Arduino Blog&lt;/a&gt; | &lt;a href=&quot;http://forum.arduino.cc&quot;&gt;Arduino Forum&lt;/a&gt;：Arduino 的官方博客与论坛，内有许多 Arduino 项目和使用技巧&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://makerzone.mathworks.com/&quot;&gt;MAKERZONE&lt;/a&gt;：MathWorks 的 DIY 项目分享社区，涉及 Arduino，Raspberry Pi，LEGO NXT&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="电子与制作" scheme="https://blanboom.org/categories/%E7%94%B5%E5%AD%90%E4%B8%8E%E5%88%B6%E4%BD%9C/"/>
+    
+    
+      <category term="DIY" scheme="https://blanboom.org/tags/DIY/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OmniFocus 快速收集脚本 v2</title>
+    <link href="https://blanboom.org/2014/omnifocus-quick-entry-applescript-v2/"/>
+    <id>https://blanboom.org/2014/omnifocus-quick-entry-applescript-v2/</id>
+    <published>2014-11-04T13:48:00.000Z</published>
+    <updated>2017-06-02T15:34:10.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前写过一个 <a href="./omnifocus-quick-entry-applescript.html">OmniFocus 快速收集脚本</a>，可以通过此脚本打开 OmniFocus 的 Quick Entry 窗口，快速将自己的灵感或者想做的事记录下来。但是，OmniFocus 的启动速度不是很快，第一次运行脚本后需要等上几秒钟，窗口才能出现，使用体验不是很好。</p>
+<p>刚刚对这个脚本进行了一点改进，执行脚本时，会弹出一个简单的对话框，在对话框中输入要保存的内容即可，无需等待 OmniFocus 启动。</p>
+<p><img src="/images/2014/11/OmniFocus-Script.png" alt="脚本运行截图"></p>
+<a id="more"></a>
+<p>AppleScript 代码如下，可以在 Automator 中保存为服务，用快捷键随时启动。或打包成 app, 通过 Spotlight 启动：</p>
+<pre><code>set tmp to display dialog &quot;What do you want to do?&quot; default answer &quot;&quot;
+set taskString to text returned of tmp
+
+set isRunning to false
+tell application &quot;System Events&quot;
+    if exists process &quot;OmniFocus&quot; then
+        set isRunning to true
+    end if
+end tell
+
+if isRunning is true then
+    tell application &quot;OmniFocus&quot;
+        tell front document
+            make new inbox task with properties {name:(taskString)}
+        end tell
+    end tell
+else
+    tell application &quot;OmniFocus&quot; to activate
+
+    tell application &quot;OmniFocus&quot;
+        tell front document
+            make new inbox task with properties {name:(taskString)}
+        end tell
+    end tell
+end if
+</code></pre><h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ol>
+<li><a href="http://www.alfredforum.com/topic/1041-create-new-task-in-omnifocus-inbox/" target="_blank" rel="external">Create new task in OmniFocus inbox</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前写过一个 &lt;a href=&quot;./omnifocus-quick-entry-applescript.html&quot;&gt;OmniFocus 快速收集脚本&lt;/a&gt;，可以通过此脚本打开 OmniFocus 的 Quick Entry 窗口，快速将自己的灵感或者想做的事记录下来。但是，OmniFocus 的启动速度不是很快，第一次运行脚本后需要等上几秒钟，窗口才能出现，使用体验不是很好。&lt;/p&gt;
+&lt;p&gt;刚刚对这个脚本进行了一点改进，执行脚本时，会弹出一个简单的对话框，在对话框中输入要保存的内容即可，无需等待 OmniFocus 启动。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2014/11/OmniFocus-Script.png&quot; alt=&quot;脚本运行截图&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="OmniFocus" scheme="https://blanboom.org/tags/OmniFocus/"/>
+    
+      <category term="AppleScript" scheme="https://blanboom.org/tags/AppleScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>QS30-1 辉光管时钟</title>
+    <link href="https://blanboom.org/2014/qs30-1-nixie-clock/"/>
+    <id>https://blanboom.org/2014/qs30-1-nixie-clock/</id>
+    <published>2014-08-20T15:46:00.000Z</published>
+    <updated>2017-06-02T15:29:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>用暑假的空闲时间，断断续续做了一个多月，辉光管时钟基本完成。</p>
+<p>辉光管使用了 QS30-1，通过四个氖灯显示时间的冒号。每个辉光管下面各安装一个全彩 LED，可控制其显示颜色。</p>
+<p>该时钟使用 MC34063，配合 MOS 管和电感等构成 DC-DC 升压电路，将 12V 电压升至 170V，供辉光管使用。通过 HV57708 驱动辉光管。LPD6803 用于控制全彩 LED。主控芯片采用 STC15F2K60S2，时钟芯片采用 SD2405ALPI，蓝牙模块采用 RF-BM-S02.</p>
+<p>程序源代码和 PCB 图都已上传至 GitHub：<a href="https://github.com/blanboom/NixieClock" target="_blank" rel="external">https://github.com/blanboom/NixieClock</a></p>
+<p><img src="/images/2014/08/NixieClock.jpg" alt="辉光管时钟照片"></p>
+<a id="more"></a>
+<p><img src="/images/2014/08/NixieClock_2.jpg" alt="辉光管时钟照片 2"></p>
+<p><img src="/images/2014/08/NixieClock_4.jpg" alt="辉光管时钟照片 3"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用暑假的空闲时间，断断续续做了一个多月，辉光管时钟基本完成。&lt;/p&gt;
+&lt;p&gt;辉光管使用了 QS30-1，通过四个氖灯显示时间的冒号。每个辉光管下面各安装一个全彩 LED，可控制其显示颜色。&lt;/p&gt;
+&lt;p&gt;该时钟使用 MC34063，配合 MOS 管和电感等构成 DC-DC 升压电路，将 12V 电压升至 170V，供辉光管使用。通过 HV57708 驱动辉光管。LPD6803 用于控制全彩 LED。主控芯片采用 STC15F2K60S2，时钟芯片采用 SD2405ALPI，蓝牙模块采用 RF-BM-S02.&lt;/p&gt;
+&lt;p&gt;程序源代码和 PCB 图都已上传至 GitHub：&lt;a href=&quot;https://github.com/blanboom/NixieClock&quot;&gt;https://github.com/blanboom/NixieClock&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2014/08/NixieClock.jpg&quot; alt=&quot;辉光管时钟照片&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="电子与制作" scheme="https://blanboom.org/categories/%E7%94%B5%E5%AD%90%E4%B8%8E%E5%88%B6%E4%BD%9C/"/>
+    
+    
+      <category term="时钟" scheme="https://blanboom.org/tags/%E6%97%B6%E9%92%9F/"/>
+    
+      <category term="辉光管" scheme="https://blanboom.org/tags/%E8%BE%89%E5%85%89%E7%AE%A1/"/>
+    
+      <category term="蓝牙" scheme="https://blanboom.org/tags/%E8%93%9D%E7%89%99/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一些反人类的界面设计</title>
+    <link href="https://blanboom.org/2014/some-ui-designs/"/>
+    <id>https://blanboom.org/2014/some-ui-designs/</id>
+    <published>2014-08-01T15:05:00.000Z</published>
+    <updated>2017-06-02T15:33:44.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在使用软件的过程中，常常回发现：一些软件在界面设计上，总会有一两个细节让人眼前一亮，给人带来惊喜；而另一些则会让人觉得用起来很不舒服。</p>
+<p>下面这些是我在使用软件的过程中，遇到的一些优秀的，或者「反人类」的界面设计。</p>
+<a id="more"></a>
+<h1 id="第一部分：「反人类」的界面设计"><a href="#第一部分：「反人类」的界面设计" class="headerlink" title="第一部分：「反人类」的界面设计"></a>第一部分：「反人类」的界面设计</h1><h2 id="Windows-照片库的剪裁功能"><a href="#Windows-照片库的剪裁功能" class="headerlink" title="Windows 照片库的剪裁功能"></a>Windows 照片库的剪裁功能</h2><p>Windows 照片库是 Windows 下一款不错的照片管理工具。美中不足的是，照片剪裁功能设计得似乎不太合理：在使用剪裁功能，单击「剪裁」，选择照片中需要裁剪的部分后，却找不到一个明显按钮来应用修改。而是需要单击「剪裁」下面的箭头，再在下拉菜单中选择「应用剪裁」才可以。</p>
+<p><img src="/images/2014/08/WindowsGallery.png" alt="Windows 照片库"></p>
+<h2 id="Reeder-的界面布局"><a href="#Reeder-的界面布局" class="headerlink" title="Reeder 的界面布局"></a>Reeder 的界面布局</h2><p>Reeder 被人称作最好用的 RSS 阅读器。但是，我一致没能习惯它的三栏式布局：左边和中间两栏占用了较大的空间，阅读时，视线必须向右移动……</p>
+<p><img src="/images/2014/08/Reeder.png" alt="Reeder"></p>
+<h2 id="MindManager-for-OS-X-的菜单栏"><a href="#MindManager-for-OS-X-的菜单栏" class="headerlink" title="MindManager for OS X 的菜单栏"></a>MindManager for OS X 的菜单栏</h2><p>OS X 顶部菜单栏的文字和图标都是风格统一的黑色，MindManager 却冒出了一个彩色的东西。尤其是在没有登录的情况下，红色的叉号看起来实在不舒服。</p>
+<p><img src="/images/2014/08/MindManager.png" alt="MindManager"></p>
+<h2 id="OS-X-迁移助手"><a href="#OS-X-迁移助手" class="headerlink" title="OS X 迁移助手"></a>OS X 迁移助手</h2><p><a href="https://twitter.com/NetPuter/status/437113795719098368/" target="_blank" rel="external">https://twitter.com/NetPuter/status/437113795719098368/</a></p>
+<p><img src="/images/2014/08/OSXMA.png" alt="OS X 迁移助手"></p>
+<h2 id="DEVONthink-Newsletter-邮件订阅"><a href="#DEVONthink-Newsletter-邮件订阅" class="headerlink" title="DEVONthink Newsletter 邮件订阅"></a>DEVONthink Newsletter 邮件订阅</h2><p>DEVONthink 的欢迎页面中，有邮件订阅的功能。当我在输入邮箱地址后，右下角出现了一个绿色的对号。这样的对号在许多网站注册账户的时候，代表着输入格式正确。但在这个软件中，却代表着「确定」。估计会有人因为找不到确定按钮而放弃订阅。</p>
+<p><img src="/images/2014/08/DEVONthink.png" alt="DEVINthink"></p>
+<h1 id="第二部分：优秀的界面设计"><a href="#第二部分：优秀的界面设计" class="headerlink" title="第二部分：优秀的界面设计"></a>第二部分：优秀的界面设计</h1><h2 id="JetBrains-的软件下载页面"><a href="#JetBrains-的软件下载页面" class="headerlink" title="JetBrains 的软件下载页面"></a>JetBrains 的软件下载页面</h2><p>使用手机访问 JetBrains 的软件下载页面，由于使用手机不方便下载，页面中的下载按钮变成了「添加到 Dropbox」。这样以来，当用户打开电脑，软件就会自动同步到电脑中。这一细节对 Dropbox 用户来说十分方便。</p>
+<p><img src="/images/2014/08/JetBrains.png" alt="PyCharm 下载页面"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在使用软件的过程中，常常回发现：一些软件在界面设计上，总会有一两个细节让人眼前一亮，给人带来惊喜；而另一些则会让人觉得用起来很不舒服。&lt;/p&gt;
+&lt;p&gt;下面这些是我在使用软件的过程中，遇到的一些优秀的，或者「反人类」的界面设计。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="设计" scheme="https://blanboom.org/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+      <category term="UI" scheme="https://blanboom.org/tags/UI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>OmniFocus 快速收集脚本</title>
+    <link href="https://blanboom.org/2014/omnifocus-quick-entry-applescript/"/>
+    <id>https://blanboom.org/2014/omnifocus-quick-entry-applescript/</id>
+    <published>2014-06-28T15:21:00.000Z</published>
+    <updated>2017-06-02T13:33:33.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>刚刚换用微软的一款无线键盘，键盘上有 5 个快速启动按键，按下按键即可运行指定的程序。配合这一脚本使用，就能做到<strong>一键打开 OmniFocus 的快速收集窗口</strong>，实现随时记录与收集。</p>
+<a id="more"></a>
+<p><strong>Update: <a href="https://blanboom.org/2014/omnifocus-quick-entry-applescript-v2">OmniFocus 快速收集脚本 v2</a></strong></p>
+<p>AppleScript 代码如下：</p>
+<pre><code>set isRunning to false
+
+tell application &quot;System Events&quot;
+    if exists process &quot;OmniFocus&quot; then
+        set isRunning to true
+    end if
+end tell
+
+if isRunning is true then
+    tell application &quot;System Events&quot;
+        keystroke &quot; &quot; using {control down, option down}
+        -- 按下 Qiuck Entry 快捷键
+    end tell
+else
+    tell application &quot;OmniFocus&quot; to activate
+
+    tell application &quot;OmniFocus&quot;
+        set miniaturized of window 1 to true
+    end tell
+
+    tell application &quot;System Events&quot;
+        keystroke &quot; &quot; using {control down, option down}
+        -- 按下 Qiuck Entry 快捷键
+    end tell
+end if
+</code></pre><p>顺便推荐下 <a href="https://github.com/jbtule/cdto" target="_blank" rel="external">cd to…</a>，这个 App 可以<strong>在 Finder 的当前目录中打开终端</strong>。和键盘上的快速启动按键一起使用，更加方便。</p>
+<p>对于 Alfred 2 用户，也可以直接使用 <a href="http://www.alfredforum.com/topic/1041-create-new-task-in-omnifocus-inbox/" target="_blank" rel="external">OmniFocus Inbox Task Workflow</a>，功能与本脚本类似。</p>
+<p> <br><br> <br><br> <br></p>
+<h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ol>
+<li><a href="http://blog.xcodev.com/archives/auto-key-press-using-appscript/" target="_blank" rel="external">用AppleScript在Mac系统下实现按键精灵的功能以及在游戏中的运用</a></li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;刚刚换用微软的一款无线键盘，键盘上有 5 个快速启动按键，按下按键即可运行指定的程序。配合这一脚本使用，就能做到&lt;strong&gt;一键打开 OmniFocus 的快速收集窗口&lt;/strong&gt;，实现随时记录与收集。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="软件与工具" scheme="https://blanboom.org/categories/%E8%BD%AF%E4%BB%B6%E4%B8%8E%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="OmniFocus" scheme="https://blanboom.org/tags/OmniFocus/"/>
+    
+      <category term="AppleScript" scheme="https://blanboom.org/tags/AppleScript/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《写给大家看的设计书》读书笔记</title>
+    <link href="https://blanboom.org/2014/the-non-designer-design-book-reading-notes/"/>
+    <id>https://blanboom.org/2014/the-non-designer-design-book-reading-notes/</id>
+    <published>2014-06-28T15:03:00.000Z</published>
+    <updated>2017-06-02T15:33:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在大学里设计似乎与每个人都有关系：作业和论文的排版、演讲和答辩时用的 PPT、社团中的海报和宣传单等等。</p>
+<p><a href="http://book.douban.com/subject/3323633/" target="_blank" rel="external">《写给大家看的设计书》</a>是我上大学后看的第一本书，前段时间重读，仍有不少收获。这本书能使每个人在短时间内避免设计上的误区，使自己的作品看起来更加舒服。</p>
+<a id="more"></a>
+<p><img src="/images/2014/06/the-non-designer-design-book-reading-notes-mindmap.png" alt="《写给大家看的设计书》读书笔记"></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在大学里设计似乎与每个人都有关系：作业和论文的排版、演讲和答辩时用的 PPT、社团中的海报和宣传单等等。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://book.douban.com/subject/3323633/&quot;&gt;《写给大家看的设计书》&lt;/a&gt;是我上大学后看的第一本书，前段时间重读，仍有不少收获。这本书能使每个人在短时间内避免设计上的误区，使自己的作品看起来更加舒服。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://blanboom.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="设计" scheme="https://blanboom.org/tags/%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用 Eclipse 和 ARM GCC 搭建 STM32 开发环境</title>
+    <link href="https://blanboom.org/2014/stm32-with-osx/"/>
+    <id>https://blanboom.org/2014/stm32-with-osx/</id>
+    <published>2014-04-30T10:58:00.000Z</published>
+    <updated>2017-06-02T15:33:14.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>虽然 IAR 和 MDK 可以方便地进行 STM32 的开发，但这些软件是商业软件，而且仅支持 Windows. 另外，两者的代码编辑功能似乎都不太强大。</p>
+<p>使用 Eclipse 与 GCC 则可解决这个问题：两者均为开源软件，可以自由使用，并支持 Windows，Linux，OS X 等多个平台。同时还可以通过各种插件拓展其功能，例如 EGit.</p>
+<p>前一段时间开始使用 OS X，这是在 OS X 平台配置 Eclipse 的步骤。其他平台方法应该类似。</p>
+<a id="more"></a>
+<h1 id="一、相关工具的安装"><a href="#一、相关工具的安装" class="headerlink" title="一、相关工具的安装"></a>一、相关工具的安装</h1><h2 id="1-安装-J-Link-驱动"><a href="#1-安装-J-Link-驱动" class="headerlink" title="1. 安装 J-Link 驱动"></a>1. 安装 J-Link 驱动</h2><p>在 <a href="http://www.segger.com/jlink-software.html" target="_blank" rel="external">J-Link 官网</a> 下载驱动并安装，支持 Windows，OS X，Linux，Linux ARM.</p>
+<h2 id="2-安装-GNU-Tools-for-ARM-Embedded-Processors"><a href="#2-安装-GNU-Tools-for-ARM-Embedded-Processors" class="headerlink" title="2. 安装 GNU Tools for ARM Embedded Processors"></a>2. 安装 GNU Tools for ARM Embedded Processors</h2><p>这是由 ARM 维护的一套工具，包括 GCC 编译器，GDB 调试工具等，在 <a href="https://launchpad.net/gcc-arm-embedded/+download" target="_blank" rel="external">此处</a> 可以下载和安装。对于 OS X 和 Linux，可直接解压至一个目录，例如 <code>/usr/local/arm-none-eabi-gcc</code></p>
+<p>另外，OS X 用户还可以使用 Homebrew 安装，安装方法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew tap blanboom/homebrew-mcu-devtools</div><div class="line">brew install gcc-arm-none-eabi</div></pre></td></tr></table></figure>
+<h2 id="3-安装-Eclipse-及插件"><a href="#3-安装-Eclipse-及插件" class="headerlink" title="3. 安装 Eclipse 及插件"></a>3. 安装 Eclipse 及插件</h2><p><a href="http://www.eclipse.org/downloads/" target="_blank" rel="external">下载 Eclipse CDT</a> 并安装，然后单击菜单栏中的 Help -&gt; Install New Software… ，添加站点 <a href="http://gnuarmeclipse.sourceforge.net/updates" target="_blank" rel="external">http://gnuarmeclipse.sourceforge.net/updates</a> ，并从中安装 CDT GNU Cross Development Tools.</p>
+<h1 id="二、创建工程"><a href="#二、创建工程" class="headerlink" title="二、创建工程"></a>二、创建工程</h1><h2 id="新建工程"><a href="#新建工程" class="headerlink" title="新建工程"></a>新建工程</h2><p>进入 Eclipse，单击 File -&gt; New -&gt; C Project ，在左侧的 Executable 中可看到 STM32 Project，选择对应的工程，单击 Next.</p>
+<p><img src="/images/2014/04/eclipse-new-project-1.png" alt=""></p>
+<p>选择芯片种类，我用的是 STM32F103ZET6，所以选择了 STM32f10x High Density. 其中 Content 默认为 Blinky，是一个 LED 闪烁的测试程序。</p>
+<p><img src="/images/2014/04/eclipse-new-project-2.png" alt=""></p>
+<p>继续单击 Next，会有文件目录和项目配置等，一般保持默认即可，在最后一步中，需要选择之前下载的 GNU ARM Toolchain 的 bin 文件夹所在位置。</p>
+<p><img src="/images/2014/04/eclipse-new-project-3.png" alt=""></p>
+<p>单击 Finish，工程创建完毕。其中 STM32 的官方固件库也已经被自动添加到工程目录。单击工具栏上的 Build 按钮，一般情况下可以正常编译。</p>
+<p><img src="/images/2014/04/eclipse-window.png" alt=""></p>
+<h2 id="设置调试工具"><a href="#设置调试工具" class="headerlink" title="设置调试工具"></a>设置调试工具</h2><p>单击菜单栏中的 Run -&gt; Debug Configurations… 双击左侧的 GDB SEGGER J-Link Debugging，在右边 C/C++ Application 处输入工程中的可执行文件（在 Debug 目录）。</p>
+<p><img src="/images/2014/04/eclipse-debug-setting-1.png" alt=""></p>
+<p>进入 Debugger 选项卡，输入 J-Link GDB Server 所在目录：/Applications/SEGGER/JLink/JLinkGDBServer ，并输入芯片名称，例如 STM32F103ZE.</p>
+<p><img src="/images/2014/04/eclipse-debug.png" alt=""></p>
+<p>单击 Apply，关闭窗口。</p>
+<p>然后单击工具栏中的 Debug 按钮旁边的箭头，在 Organize Favorites… 中添加之前的调试配置。连接好 J-Link 与单片机的电源，再单击该箭头，并选择菜单中的第一项，程序即可自动下载至单片机，并启动调试。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><a href="http://www.baeyens.it/eclipse/" target="_blank" rel="external">Arduino Eclipse 插件，包含串口助手和串口示波器</a></li>
+<li><a href="http://kqwd.blog.163.com/blog/static/41223448201211118445588/" target="_blank" rel="external">在Mac下搭建基于Eclipse+GCC+OpenOCD+ICDI的STM32开发环境</a></li>
+<li><a href="http://www.davidrojas.co.uk/stm32f3discovery-on-mac-os-x-using-eclipse-gcc-arm-and-openocd/" target="_blank" rel="external">STM32F3DISCOVERY on Mac OS X using Eclipse, GCC ARM and OpenOCD</a></li>
+<li><a href="http://blog.csdn.net/smarxx/article/details/8486052" target="_blank" rel="external">Ubuntu下使用OpenOCD通过Jlink烧写HEX到STM32</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;虽然 IAR 和 MDK 可以方便地进行 STM32 的开发，但这些软件是商业软件，而且仅支持 Windows. 另外，两者的代码编辑功能似乎都不太强大。&lt;/p&gt;
+&lt;p&gt;使用 Eclipse 与 GCC 则可解决这个问题：两者均为开源软件，可以自由使用，并支持 Windows，Linux，OS X 等多个平台。同时还可以通过各种插件拓展其功能，例如 EGit.&lt;/p&gt;
+&lt;p&gt;前一段时间开始使用 OS X，这是在 OS X 平台配置 Eclipse 的步骤。其他平台方法应该类似。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习笔记" scheme="https://blanboom.org/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="STM32" scheme="https://blanboom.org/tags/STM32/"/>
+    
+      <category term="Eclipse" scheme="https://blanboom.org/tags/Eclipse/"/>
+    
+      <category term="OS X" scheme="https://blanboom.org/tags/OS-X/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《宅兹中国》读书笔记</title>
+    <link href="https://blanboom.org/2014/zhai-zi-zhong-guo-reading-notes/"/>
+    <id>https://blanboom.org/2014/zhai-zi-zhong-guo-reading-notes/</id>
+    <published>2014-04-24T08:08:00.000Z</published>
+    <updated>2017-06-02T13:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>《<a href="http://book.douban.com/subject/5988185/" target="_blank" rel="external">宅兹中国</a>》由作者的一系列论文重新编排而成，主要讨论了关于中国认同、东亚认同、学术研究等方面的问题。</p>
+<p>作为一个之前很少接触历史的工科生，不知道是否完全理解了葛兆光先生的观点。</p>
+<p><a href="/images/2014/04/zhai-zi-zhong-guo-mindmap-large.png">单击此处查看完整笔记</a></p>
+<p><a href="/images/2014/04/zhai-zi-zhong-guo-mindmap.png-large"><img src="/images/2014/04/zhai-zi-zhong-guo-mindmap-preview.jpg"></a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;《&lt;a href=&quot;http://book.douban.com/subject/5988185/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;宅兹中国&lt;/a&gt;》由作者的一系列论文重新编排而成，主要讨论了关于中国认同、东亚认同、学术研究等方面的问题。&lt;/
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://blanboom.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="历史" scheme="https://blanboom.org/tags/%E5%8E%86%E5%8F%B2/"/>
+    
+      <category term="中国" scheme="https://blanboom.org/tags/%E4%B8%AD%E5%9B%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>《失控》读书笔记</title>
+    <link href="https://blanboom.org/2014/out-of-control-reading-notes/"/>
+    <id>https://blanboom.org/2014/out-of-control-reading-notes/</id>
+    <published>2014-02-10T10:32:19.000Z</published>
+    <updated>2014-04-01T04:36:41.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>用了差不多三个月的时间看完了《<a href="http://book.douban.com/subject/5375620/" target="_blank" rel="external">失控</a>》，书中主要讲了随着时间的推移，人造物与生物之间的界限正在逐步缩小：生物逻辑不断注入到人造物中，使得人造物具有更多的生物特性，最终具有「生命」，融合进现有的生态系统中，和现有生命共同进化；同时，生命也将变得越来越工程化。</p>
+<p>这本书涉及的内容很广泛，包括社会、经济、互联网等可进化的复杂系统。虽然成书于上个世纪，书中的许多观点依然给我带来了许多启发；其中的一些预言，已经变成了现实或正逐步成为现实（包括最近流行的比特币和 3D 打印）。</p>
+<a id="more"></a>
+<h1 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h1><p>书里面有不少关于计算机、生物等方面的我感兴趣的内容，这些是我在网上找到的这些内容的相关资料。</p>
+<h2 id="生物圈二号是否失败？"><a href="#生物圈二号是否失败？" class="headerlink" title="生物圈二号是否失败？"></a>生物圈二号是否失败？</h2><p>在初中的生物课本上，关于生物圈的描述只有简单的几句话，最终结论是生物圈二号失败。《失控》中的描述又激发了我对生物圈二号的兴趣。</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Biosphere_2" target="_blank" rel="external">Biosphere 2 - Wikipedia</a><br><br>注意其中的 Second mission, 在第二阶段的实验中，生物圈二号已经做了改进，而且能够产生足量食物。最后由于管理上的问题，这一阶段的实验没有顺利完成。</li>
+<li><a href="http://www.zhihu.com/question/20050461" target="_blank" rel="external">人类能否成功的运作“生物圈三号”？</a></li>
+<li><a href="http://www.guokr.com/article/437316/" target="_blank" rel="external">生物圈2号重生</a></li>
+<li><a href="http://blog.sciencenet.cn/blog-2440-472881.html" target="_blank" rel="external">生物圈2号的成与败（访美见闻之二）</a></li>
+<li><a href="http://b2science.org" target="_blank" rel="external">生物圈二号官网</a></li>
+</ul>
+<h2 id="将任意多的数据存入有限空间的算法"><a href="#将任意多的数据存入有限空间的算法" class="headerlink" title="将任意多的数据存入有限空间的算法"></a>将任意多的数据存入有限空间的算法</h2><blockquote>
+<p>1974年，计算机科学家彭蒂·卡内尔瓦提出了类似的数学网络模型。借助这个模型，长字符串的数据能随机地储存在计算机内存中。卡内尔瓦的算法是一种将有限数量的数据点储存进非常巨大的潜在的内存空间的绝妙方法。</p>
+</blockquote>
+<ul>
+<li><a href="http://www.zhihu.com/question/19820020" target="_blank" rel="external">什么是《失控》中说的“稀疏分布式网络”？</a></li>
+<li><a href="http://zh.wikipedia.org/wiki/分散式雜湊表" target="_blank" rel="external">分布式散列表</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Sparse_distributed_memory" target="_blank" rel="external">Sparse distributed memory</a></li>
+<li><a href="https://github.com/ironwallaby/sdm" target="_blank" rel="external">Kanerva’s Sparse Distributed Memory implemented in JavaScript</a></li>
+</ul>
+<h2 id="镜子上的变色龙，颜色如何变化"><a href="#镜子上的变色龙，颜色如何变化" class="headerlink" title="镜子上的变色龙，颜色如何变化"></a>镜子上的变色龙，颜色如何变化</h2><p>书中提到了许多科学家的猜测，作者也用安乐蜥（与真正的变色龙相比，变色范围窄）做过实验，最后会变成绿色。</p>
+<p>Youtube 也有许多相关视频（<a href="http://www.youtube.com/watch?v=Io6TFFd9Kas" target="_blank" rel="external">例如这个</a>），似乎颜色都没有明显的变化。如果把镜子换成一大块能自动识别变色龙颜色并和其颜色保持一致的显示屏，又会是什么现象？</p>
+<p>另附<a href="http://www.guokr.com/question/154768/" target="_blank" rel="external">果壳网上的两个搞笑回答</a>：</p>
+<ul>
+<li>变成跟镜子一样全反射的，然后慢慢消失在四维空间</li>
+<li>变色,变着变着,程序崩溃了</li>
+</ul>
+<h2 id="「炼金术」及其相关历史"><a href="#「炼金术」及其相关历史" class="headerlink" title="「炼金术」及其相关历史"></a>「炼金术」及其相关历史</h2><p>炼金术是中世纪的一种化学哲学的思想和始祖，是当代化学的雏形。其目标是通过化学方法将一些基本金属转变为黄金，制造万灵药及制备长生不老药。现在的科学表明这种方法是行不通的。但是直到19世纪之前，炼金术尚未被科学证据所否定。包括艾萨克·牛顿在内的一些著名科学家都曾进行过炼金术尝试。现代化学的出现才使人们对炼金术的可能性产生了怀疑。（<a href="http://zh.wikipedia.org/wiki/炼金术" target="_blank" rel="external">来自维基百科</a>）</p>
+<h2 id="生态球"><a href="#生态球" class="headerlink" title="生态球"></a>生态球</h2><p>其实跟生物课本上介绍的「生态瓶」是一个东西，不过书中写的一些人把生态球放上足够长的时间，所发生的现象引起了我的兴趣。有空再尝试下。</p>
+<ul>
+<li>Wikipedia 上的介绍：<a href="http://en.wikipedia.org/wiki/Ecosphere_(aquarium\" target="_blank" rel="external">Ecosphere (aquarium)
+</a>)</li>
+<li><a href="http://www.eco-sphere.com/index.html" target="_blank" rel="external">官方网站</a></li>
+<li><a href="http://item.taobao.com/item.htm?spm=a230r.1.14.21.1mnQAo&amp;id=25053500691" target="_blank" rel="external">淘宝代购链接</a> (1299 - 3499 元，略贵…)</li>
+<li>Make(爱上制作) 杂志上也有一个生态球的制作教程（<a href="http://cdn.makezine.com/make/wp_aquanaut.pdf）" target="_blank" rel="external">http://cdn.makezine.com/make/wp_aquanaut.pdf）</a></li>
+</ul>
+<h2 id="生物形态王国-Biomorph-Land"><a href="#生物形态王国-Biomorph-Land" class="headerlink" title="生物形态王国(Biomorph Land)"></a>生物形态王国(Biomorph Land)</h2><blockquote>
+<p>第一个合成的博尔赫斯世界的图书馆员是英国动物学家理查德·道金斯。1985年，道金斯发明了一个他称之为“生物形态王国”的“大千”。“生物形态王国”是一个由可能的生物形状组成的空间，这些生物形状由短直线和分叉线构成。它是第一个由计算机生成的可能形式库，并且可以用繁殖的方法进行搜索。</p>
+</blockquote>
+<p>网上找到的资料不多，就找到一个视频：<a href="http://www.youtube.com/watch?v=0EjZw7A3ii8" target="_blank" rel="external">http://www.youtube.com/watch?v=0EjZw7A3ii8</a></p>
+<h2 id="连接机"><a href="#连接机" class="headerlink" title="连接机"></a>连接机</h2><p>20 世纪 80 年代早期的一种超级计算机，与普通计算机的不同之处在于，这一款计算机由大量简单的 CPU 相互连接，进行并行运算，而不是通过单独一个 CPU 进行运算。</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Connection_Machine" target="_blank" rel="external">Wikipedia 上对连接机的介绍</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Thinking_Machines_Corporation" target="_blank" rel="external">生产连接机的公司：Thinking Machines Corporation</a></li>
+<li><a href="http://longnow.org/essays/richard-feynman-connection-machine/" target="_blank" rel="external">Richard Feynman and The Connection Machine</a></li>
+<li><a href="ftp://ftp.deas.harvard.edu/techreports/tr-09-93.ps.gz" target="_blank" rel="external">一篇关于连接机的论文：The Connection Machine Systems CM-5 - Harvard University</a></li>
+<li><a href="http://www.youtube.com/watch?v=blvC0DA96dI" target="_blank" rel="external">Youtube 上有一段关于连接机 CM-5 的视频</a></li>
+</ul>
+<p>连接机在就没怎么被人提起了，Thinking Machines Corporation 这家公司也渐渐没落。关于连接机的历史和优缺点，我还要再找一些资料了解一下。不过，似乎类似的并行计算在个人电脑上又渐渐流行，例如现在的显卡和多核 CPU.</p>
+<h2 id="汤姆·雷的电进化机"><a href="#汤姆·雷的电进化机" class="headerlink" title="汤姆·雷的电进化机"></a>汤姆·雷的电进化机</h2><blockquote>
+<p>汤姆·雷刚把编写好的小玩意儿放进计算机，它就迅速繁殖起来，直到几百个副本占满了可用的存储空间。雷的小玩意儿勉强算是个试验性的计算机病毒，因为一旦离开他的计算机便不能再复制，所以它没什么危险。他只是想看看，如果病毒必须在一个有限空间里互相竞争，会有什么结果。</p>
+</blockquote>
+<ul>
+<li><a href="http://life.ou.edu/tierra/" target="_blank" rel="external">该程序的主页，内有源代码、可执行程序和相关信息</a></li>
+</ul>
+<h2 id="霍兰德机"><a href="#霍兰德机" class="headerlink" title="霍兰德机"></a>霍兰德机</h2><ul>
+<li>相关论文：<a href="http://www.computer.org/csdl/proceedings/afips/1959/5055/00/50550108.pdf" target="_blank" rel="external">A universal computer capable of executing an arbitrary number of sub-programs simultaneously</a> (能同时执行任意数量子程序的通用计算机)</li>
+</ul>
+<h2 id="由长度可变基因组成的人工世界"><a href="#由长度可变基因组成的人工世界" class="headerlink" title="由长度可变基因组成的人工世界"></a>由长度可变基因组成的人工世界</h2><blockquote>
+<p>形成开放基因组的方法不止一种。1990年，卡尔·西姆斯利用二代连接机（CM2）的超级计算能力设计了一个由长度可变基因组成的新型人工世界，比他设计的植物图像世界更为先进。西姆斯的妙招是创造一个由小方程而非长串数码组成的基因组。他原来的基因库中每个固定长度的基因各控制着植物的一个视觉参数；这个新基因库则拥有长度不定且可自由扩展的方程，籍此绘制各种曲线、色彩和形状。</p>
+</blockquote>
+<ul>
+<li>应该就是这篇论文，没看太懂：<a href="http://www.karlsims.com/papers/ParticlesSiggraph90.pdf" target="_blank" rel="external">Particle Animation and Rendering. Using Data Parallel Computation</a></li>
+</ul>
+<h2 id="托勒密的嵌套圆形轨道模型"><a href="#托勒密的嵌套圆形轨道模型" class="headerlink" title="托勒密的嵌套圆形轨道模型"></a>托勒密的嵌套圆形轨道模型</h2><blockquote>
+<p>在天文学的早期，也就是在牛顿的f=ma出现之前，天体事件的预测都是根据托勒密的嵌套圆形轨道模型作出的——一环套一环。由于建立托勒密理论的核心前提（即所有的天体都绕着地球转）是错误的，所以每当新的天文观察提供了某个星体更精确的运动数据时，都需要修正这个模型。不过，嵌套的复杂结构惊人地坚固，足以应付层出不穷的修修补补。每次有了更好的数据，人们就会在圆环套圆环的模型里面再加一层圆环，用这种方法来调整模型。尽管有各种严重的错误，这个巴洛克风格的模拟装置仍然行的通，而且还会“学习”。托勒密的这个头脑简单的体系，为日历的调节，为天象的实际预测，整整服务了一千四百年！</p>
+</blockquote>
+<ul>
+<li>Wikipedia 相关条目：<a href="http://en.wikipedia.org/wiki/Celestial_spheres" target="_blank" rel="external">Celestial spheres</a></li>
+</ul>
+<h1 id="部分书摘"><a href="#部分书摘" class="headerlink" title="部分书摘"></a>部分书摘</h1><ol>
+<li>网络逻辑是违反直觉的。比如说，你要铺设连接一些城市的电话电缆。以堪萨斯城、圣地亚哥和西雅图这三个城市为例，连接这三座城市的电话线总长为3000英里。根据常识，如果要在电话网络中加上第四个城市，那么电话线的长度就必将增加。然而，网络逻辑给出的答案截然相反。如果将第四个城市作为中心（让我们以盐湖城为例），其他城市都通过盐湖城相连，电缆总长就可以减少至2850英里，比原来的3000英里减少了5％。由此，网络的总展开长度在增加节点后反而得以缩短！</li>
+<li>这就使我们更想知道，蜜蜂体内还裹藏着什么别的东西是我们还没见过的？或者，蜂巢内部还裹藏着什么，因为没有足够的蜂巢同时展示，所以还没有显露出来？就此而言，又有什么潜藏在人类个体中没有涌现出来，除非所有的人都通过人际交流或政治管理联系起来？在这种类似于蜂巢的仿生超级思维中，一定酝酿着某种最出人意料的东西。（想到了文革…）</li>
+<li>我们知道，与其说眼睛像照相机，还不如说它更像大脑。眼球拥有超级计算机般的海量处理能力。我们的许多视觉感知在光线刚刚触及纤薄的视网膜时就发生了，比中枢大脑形成景象要早得多。我们的脊髓不只是一捆传输大脑指令的电话线，它也在思考。当我们把手按在胸口（而非额头），为我们的行为做出保证时，我们更接近于事情的真相。我们的体内流淌着荷尔蒙和多肽构成的浓汤，我们的情感漫游其中。脑垂体分泌的激素，释放出爱的念头（也许还有些可爱的想法）。这类荷尔蒙也处理信息。科学家们的最新推断表明，我们的免疫系统是一台神奇的并行分布式感知机，它能辨识并记住数以百万计的不同分子。</li>
+<li>对抗甚至可能转变成一种共生协作</li>
+<li>由此说到机器，有一个违反直觉但却很明确的规则：复杂的机器必定是逐步地、而且往往是间接地完善的。别指望通过一次华丽的组装就能完成整个功能系统。你必须首先制作一个可运行的系统，作为你真正想完成的系统的工作平台。要想形成机械思维，你需要制作一只机械“拇指”——这是很少有人欣赏的迂回前进的方式。在组装复杂机械过程中，收益递增是通过多次不断的尝试才获得的——也即人们常说的“成长”过程。</li>
+<li>没有完全发展成熟或没有完全适应外界多样性就投入使用的机械系统，必然会遭到众口一致的诟病。用不了多久，再听到“时机成熟，再把我们的硬件投放市场”时就不会觉着可笑了。</li>
+<li>最终得出了一个古怪的结论，相对于其他事物都有一个平衡点来说，意识、生命、智力、共同进化都是失衡的、意外的、甚至是无法理喻的。我们之所以看到智力和生命的不可捉摸之处，正是因为他们维持着一个远离平衡态的不稳定状态。</li>
+<li>海洋浮游生物释放出一种气体（二甲基硫），经氧化后产生亚微观的硫酸盐气雾，形成云中水滴凝聚的凝结核。如此说来，甚至云层雨水也是由生物的活动产生的。</li>
+<li>因为进化是这样一个充满符号信息的过程，所以我们现在能人为创造并加以控制，但因为生态变化受到有机体本体的约束，只有当我们能更容易地模拟出生物躯体和更丰富的人工环境时，才能加以合成。</li>
+<li>想要得到和生命真正类似的行为，不是设法创造出真正复杂的生物，而是给简单的生物提供一个极其丰饶的变异环境。”</li>
+<li>形成网络的复杂性会逆转事物间通常的可靠性关系。举例来说，现代照相机中的单个开关件可能有百分之九十的可靠性。把数百个开关凑合着连成一个序列，如果不按分布式排列，这数百个开关作为一个整体，其可靠性就会大大降低——就算它们有百分之七十五的可靠性吧。而如果连接得当——每一个开关都把信息传给其他开关——比如在先进的小型数码相机中，与直觉相反，照相机整体的可靠性可上升至百分之九十九，超出了每个个体部件的可靠性。</li>
+<li>死亡就都是独一无二的</li>
+<li>首先，哥白尼排除了地球和物理宇宙其他部分之间的间断。接着，达尔文排除了人类和有机世界其他部分之间的间断，最后，弗洛伊德排除了自我的理性世界和无意识的非理性世界之间的间断。但是正如历史学家和心理学家布鲁斯·马兹利士所指出的，我们依然面对着第四个间断，人类和机器之间的间断。</li>
+<li>当反馈控制的观念跟电子电路的灵活性完美组合之后，它们就结合成一件任何人都可以使用的工具。</li>
+<li>礼堂里每个人都有自己的音量控制器。音量往往要么过大，要么过小；大家都像投票似地使用自己口袋里的控制器。声音最终定格在一个平均值上</li>
+<li>我们不该把它们叫做“计算机”，而应该把它们称作“联结器”。</li>
+<li>如果只有你有传真机，那它就是废物。但是，这个世界上每多一台传真机，每个人手里的传真机就越有价值。这就是网络的逻辑，也叫做“收益递增定律”。</li>
+<li>互联网说，“连接”。密码则相反，说“断开”。如果没有一些隔断的力量，整个世界就会冻结成一团超载的、由没有私密性的联结和没有过滤的信息组成的乱麻。</li>
+<li>当搜索空间足够大时，有效的搜索流程就与真正的创造并无二致了。</li>
+<li>我们在工程中引以为傲的东西——精密性、可预测性、准确性以及正确性——都将为进化所淡化。</li>
+<li>“正确”是水中月，是小系统的特性。在巨大的变化面前，”正确”将被”生存能力”所取代。</li>
+<li>控制的未来是：伙伴关系，协同控制，人机混合控制。所有这些都意味着，创造者必须和他的创造物一起共享控制权，而且要同呼吸共命运。</li>
+<li>科学包含两个方面：理论和实验。一个理论会构造出一个实验，同样实验则会证实或证伪这种理论。 但是，在计算机那里却诞生出了第三种进行科学工作的方式：仿真。</li>
+<li>一个系统要想进化成某种新的东西，唯一的途径就是要有一个柔性结构。小蝌蚪可以变成青蛙，而一架747喷气式飞机即使只增加六英寸的长度，也会把它变成残废。</li>
+</ol>
+<h1 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h1><p>第一遍阅读，还有许多地方没读懂。混沌理论是穿插在本书中的线索之一，再将来的重读之前，打算了解一些关于混沌理论的知识。</p>
+<p>豆瓣上<a href="http://book.douban.com/subject/5375620/discussion/46843449/" target="_blank" rel="external">有人推荐</a> <a href="http://movie.douban.com/subject/4271541/" target="_blank" rel="external">BBC The Secret Life of Chaos 神秘的混沌理论</a>。另外牛津通识读本里的 <a href="http://www.amazon.com/Chaos-A-Very-Short-Introduction/dp/0192853783" target="_blank" rel="external">Chaos: A Very Short Introduction</a> 应该也不错。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用了差不多三个月的时间看完了《&lt;a href=&quot;http://book.douban.com/subject/5375620/&quot;&gt;失控&lt;/a&gt;》，书中主要讲了随着时间的推移，人造物与生物之间的界限正在逐步缩小：生物逻辑不断注入到人造物中，使得人造物具有更多的生物特性，最终具有「生命」，融合进现有的生态系统中，和现有生命共同进化；同时，生命也将变得越来越工程化。&lt;/p&gt;
+&lt;p&gt;这本书涉及的内容很广泛，包括社会、经济、互联网等可进化的复杂系统。虽然成书于上个世纪，书中的许多观点依然给我带来了许多启发；其中的一些预言，已经变成了现实或正逐步成为现实（包括最近流行的比特币和 3D 打印）。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="https://blanboom.org/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="分布式" scheme="https://blanboom.org/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="生物" scheme="https://blanboom.org/tags/%E7%94%9F%E7%89%A9/"/>
+    
+      <category term="生态系统" scheme="https://blanboom.org/tags/%E7%94%9F%E6%80%81%E7%B3%BB%E7%BB%9F/"/>
+    
+      <category term="人工智能" scheme="https://blanboom.org/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我眼中的2013</title>
+    <link href="https://blanboom.org/2013/2013-in-my-eye/"/>
+    <id>https://blanboom.org/2013/2013-in-my-eye/</id>
+    <published>2013-12-31T15:26:59.000Z</published>
+    <updated>2017-06-02T13:03:02.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前的一门课上，做了一份关于 2013 的 PPT，总结了 2013 年发生的一些大事，现在稍加整理，算是对这一年进行一个再次的回顾。</p>
+<p><img src="/images/2013/12/2013-0.png" alt=""></p>
+<a id="more"></a>
+<p><img src="/images/2013/12/2013-1.png" alt=""></p>
+<h1 id="1-硬件复兴"><a href="#1-硬件复兴" class="headerlink" title="1. 硬件复兴"></a>1. 硬件复兴</h1><p><img src="/images/2013/12/2013-2-hardware.png" alt=""></p>
+<p>互联网的发展，加上硬件成本的下降，使得「硬件」成为 2013 年的一个关键词。各个厂商纷纷推出智能眼镜、手环、手表…… 当这些产品真正成熟并普及，我们的生活方式，应该和之前有又许多不同。</p>
+<h1 id="2-创客"><a href="#2-创客" class="headerlink" title="2. 创客"></a>2. 创客</h1><p><img src="/images/2013/12/2013-3-makers.png" alt=""></p>
+<p>在我看来，「创客」其实就是 DIY 爱好者（这个词源自英文 Maker，本身就是 「制作者」的意思）。所有对任何类型的制作感兴趣的人都可以被称之为创客。当然，在 Arduino、3D 打印机等设备，以及各地纷纷成立的创客空间的帮助下，更多人加入了「创客」这一行列。</p>
+<p>不过，由于媒体的炒作，以及有关「创客引领下一次工业革命」的说法，好像使这个词失去了本身的含义，与「创业」、「创新」等联系起来（例如这篇文章：<a href="http://www.leiphone.com/chuangke-vs-shanzhai.html" target="_blank" rel="external">华尔街日报：厉害的中国“创客”都是“富二代”！</a>，而更重要的「兴趣」，却被忽略了。这可能不是一个好的现象。</p>
+<p>好在越来越多的人也意识到了这一点：</p>
+<blockquote>
+<p><a href="http://www.leiphone.com/maker-renren.html" target="_blank" rel="external">创客不是创富、创业，创新和动手才是根本</a></p>
+<p><a href="http://www.leiphone.com/chuangkekongjian-dongwuyuan.html" target="_blank" rel="external">快被玩坏的创客</a></p>
+</blockquote>
+<p>以及 <a href="http://www.weibo.com/tonghuix" target="_blank" rel="external">@tonghuix</a> 的这几篇文章：</p>
+<blockquote>
+<p><a href="http://www.leiphone.com/wanbuhuai-maker-chuangke.html" target="_blank" rel="external">玩不坏的创客，失不掉的乐趣</a></p>
+<p><a href="http://tonghuix.blogspot.com/2012/12/blog-post.html" target="_blank" rel="external">黑客、极客和创客</a> （Blocked）</p>
+<p><a href="http://tonghuix.blog.51cto.com/2169773/1123197" target="_blank" rel="external">也谈“创客文化”</a></p>
+<p><a href="http://tonghuix.blog.51cto.com/2169773/1280261" target="_blank" rel="external">再谈中国的“创客世界”</a></p>
+<p><a href="http://tonghuix.blogspot.com/2012/05/blog-post.html" target="_blank" rel="external">神奇土地上的创客联谊 ——创客嘉年华见闻</a> （Blocked）</p>
+</blockquote>
+<h1 id="3-比特币"><a href="#3-比特币" class="headerlink" title="3. 比特币"></a>3. 比特币</h1><p><img src="/images/2013/12/2013-4-bitcoin.png" alt=""></p>
+<p>无论是支持，还是反对比特币的人，都应该会承认：这一新兴的 P2P 电子货币，在 2013 年，确实赚足了人们的眼球。</p>
+<p>比特币的未来，确实难说，因为里面涉及到了太多技术、社会、经济等知识。单纯靠经济学家、计算机科学家、密码学家，应该也很难对比特币的发展做出一个准确的预测。不过，我相信不论比特币是否成功，未来的货币也一定会是基于网络、去中心化和分布式的。</p>
+<h1 id="4-新版-iPhone-的发布"><a href="#4-新版-iPhone-的发布" class="headerlink" title="4. 新版 iPhone 的发布"></a>4. 新版 iPhone 的发布</h1><p><img src="/images/2013/12/2013-5-iphone.png" alt=""></p>
+<p>iPhone 5s 的发布，一度使「土豪金」成为流行语。iPhone 上的创新之处，不比乔布斯时的 iPhone 4 少。</p>
+<p>不过在各个网站上，却充斥着：「苹果失去创新能力」之类的新闻。为什么会有这种现象？我感觉这两篇文章解释得不错：</p>
+<blockquote>
+<p><a href="http://www.mac52ipod.cn/post/why-chinese-always-say-apple-innovation-died-with-steven-jobs.php" target="_blank" rel="external">乔布斯一死，苹果失去创新能力了？</a></p>
+<p><a href="http://www.mac52ipod.cn/post/samsung-is-not-apple-killer.php" target="_blank" rel="external">为什么我一点也不担心苹果会被三星灭掉</a></p>
+</blockquote>
+<p>引用作者的一句话：</p>
+<blockquote>
+<p>另外再想想，就算您不是果黑不是屌丝，下面两个标题您更想点击哪个？《苹果新产品受到好评》、《苹果新产品出现重大缺陷》</p>
+</blockquote>
+<h1 id="5-棱镜计划"><a href="#5-棱镜计划" class="headerlink" title="5. 棱镜计划"></a>5. 棱镜计划</h1><p><img src="/images/2013/12/2013-6-prism.png" alt=""></p>
+<p>棱镜计划再次引发了人们对于隐私、互联网自由、政府监视等种种问题的讨论。现在我只想说一句：「公民的隐私权，在任何国家中，在任何社会制度下，都不能被侵犯。」</p>
+<h1 id="6-Windows-8-8-1"><a href="#6-Windows-8-8-1" class="headerlink" title="6. Windows 8/8.1"></a>6. Windows 8/8.1</h1><p><img src="/images/2013/12/2013-7-win8.png" alt=""></p>
+<p>Windows 8 销量不怎么样，许多消费者对这一操作系统的评价也不是很高。之所以我关注 Windows 8，是因为我在 Windows 8 和其他一些操作系统、应用软件中看除了一些有趣的发展趋势:</p>
+<p>软件生产商为了<strong>提升用户体验</strong>，同时也取得对软件更大的<strong>控制权</strong>，推广自己的服务，导致在这些操作系统中，用户自由定制的机会更小。例如在 Windows 8 中，捆绑多个微软自己的服务，难以同时安装其他操作系统等等。</p>
+<p>无缝的用户体验 与 自由，在操作系统中，似乎是一对矛盾……</p>
+<p>或许，这个时候，开源软件显得更加重要了。</p>
+<h1 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h1><p><img src="/images/2013/12/2013-8-more.png" alt=""></p>
+<p>2013 发生的远远不止这些，上面几个只是我关注的话题中的一部分。从 Wikipedia、Google 上，你可以了解更多。</p>
+<blockquote>
+<p><a href="http://www.shortlist.com/cool-stuff/design/all-of-2013-in-one-image" target="_blank" rel="external">一张图总结2013</a></p>
+<p><a href="https://www.google.com/trends/topcharts?zg=full" target="_blank" rel="external">Google Zeitgeist 2013</a> （视频在国内不能正常观看，不过优酷上能找到）</p>
+<p><a href="http://zh.wikipedia.org/zh/2013年" target="_blank" rel="external">Wikipedia词条：2013年</a></p>
+</blockquote>
+<h1 id="素材来源"><a href="#素材来源" class="headerlink" title="素材来源"></a>素材来源</h1><blockquote>
+<p><a href="https://www.iconfinder.com/icons/193072/fissing_light_optical_optics_prism_rainbow_range_rays_spectrum_split_icon" target="_blank" rel="external">https://www.iconfinder.com/icons/193072/fissing_light_optical_optics_prism_rainbow_range_rays_spectrum_split_icon</a><br><a href="http://www.geekpark.net/read/view/185241" target="_blank" rel="external">http://www.geekpark.net/read/view/185241</a><br><a href="http://thenounproject.com/term/responsive-design/23095/" target="_blank" rel="external">http://thenounproject.com/term/responsive-design/23095/</a><br><a href="http://dribbble.com/shots/1112195-Illustrator-iPhone-5-Wireframe-Mockup" target="_blank" rel="external">http://dribbble.com/shots/1112195-Illustrator-iPhone-5-Wireframe-Mockup</a><br><a href="http://commons.wikimedia.org/wiki/File:Apple_gray_logo.png" target="_blank" rel="external">http://commons.wikimedia.org/wiki/File:Apple_gray_logo.png</a><br><a href="http://bitcoin.org/en/" target="_blank" rel="external">http://bitcoin.org/en/</a><br><a href="http://www.colourbox.com/vector/people-icon-set-vector-4782231" target="_blank" rel="external">http://www.colourbox.com/vector/people-icon-set-vector-4782231</a><br><a href="http://lubbockmakerfaire.com/" target="_blank" rel="external">http://lubbockmakerfaire.com/</a><br><a href="http://memexposed.com/?lang=en" target="_blank" rel="external">http://memexposed.com/?lang=en</a><br><a href="http://www.iconpng.com/png/pictograms/watch.png" target="_blank" rel="external">http://www.iconpng.com/png/pictograms/watch.png</a><br><a href="http://www.iconspedia.com/icon/usb-drive-alt-icon-43524.html" target="_blank" rel="external">http://www.iconspedia.com/icon/usb-drive-alt-icon-43524.html</a><br><a href="http://www.wpclipart.com/transportation/car/icons_BW/car_BW_icon.png.html" target="_blank" rel="external">http://www.wpclipart.com/transportation/car/icons_BW/car_BW_icon.png.html</a><br><a href="http://icons8.com/" target="_blank" rel="external">http://icons8.com/</a></p>
+</blockquote>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;之前的一门课上，做了一份关于 2013 的 PPT，总结了 2013 年发生的一些大事，现在稍加整理，算是对这一年进行一个再次的回顾。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2013/12/2013-0.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="日记" scheme="https://blanboom.org/categories/%E6%97%A5%E8%AE%B0/"/>
+    
+    
+  </entry>
+  
+</feed>
