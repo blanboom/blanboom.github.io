@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blanboom.org/"/>
-  <updated>2017-11-30T14:37:45.161Z</updated>
+  <updated>2017-11-30T14:38:36.552Z</updated>
   <id>https://blanboom.org/</id>
   
   <author>
@@ -16,11 +16,11 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>AirTerminal: 用于 Raspberry Pi 等设备的蓝牙终端</title>
+    <title>AirTerminal: 用于 Raspberry Pi 等嵌入式设备的蓝牙终端</title>
     <link href="https://blanboom.org/2017/airterminal/"/>
     <id>https://blanboom.org/2017/airterminal/</id>
     <published>2017-11-30T14:04:00.000Z</published>
-    <updated>2017-11-30T14:37:45.161Z</updated>
+    <updated>2017-11-30T14:38:36.552Z</updated>
     
     <content type="html"><![CDATA[<p>AirTerminal 是我近期完成的一个 iOS App 作品，能够通过蓝牙 4.0 BLE 连接蓝牙串口透传模块，访问 Raspberry Pi 等设备的串口终端。该 App 可在没有 Wi-Fi 或 SSH 连接的情况下访问嵌入式设备，方便对设备进行操作或调试。</p>
 <p>经历了 Apple 谜一样的审核流程（等待审核状态持续了 45 天，然后只用了不到 45 分钟就审核通过😂），AirTerminal 已在 App Store 上架，下载链接：<a href="https://itunes.apple.com/cn/app/id1296588408" target="_blank" rel="external">https://itunes.apple.com/cn/app/id1296588408</a></p>
